@@ -7,8 +7,11 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 ## Key Files
 
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all shortcuts
-- `scripts/generate_cheatsheet.py` - Generates visual cheat sheet from config
+- `scripts/generate_cheatsheet.py` - Generates SVG cheat sheet from config
+- `scripts/generate_cheatsheet_ai.py` - AI-generated synthwave-style cheat sheet (Nano Banana Pro)
 - `docs/cheatsheet.svg` - Visual reference of all shortcuts
+- `docs/superwhisper_integration.md` - SuperWhisper vocabulary/replacements reference
+- `docs/xbox_button_reference.md` - Xbox controller button mappings
 - `.claude/commands/analyze-shortcuts.md` - Slash command for analyzing message history
 
 ## Keyboard Layout
@@ -51,6 +54,31 @@ The script:
 4. **Regenerate the cheat sheet** (see rule above)
 5. Commit both the JSON and the updated cheatsheet.svg
 
+## Deploying New Mapping Files
+
+**Standard procedure**: Use symlinks to Karabiner's complex_modifications folder.
+
+```bash
+ln -sf ~/Projects/karabiner-mods/mods/YOUR_FILE.json ~/.config/karabiner/assets/complex_modifications/
+```
+
+This allows:
+- Version control of all mappings in this repo
+- Immediate effect when editing files (no manual reimport)
+- Clean separation between mapping clusters (keyboard, mouse, controller)
+
+After creating the symlink, open Karabiner-Elements → Complex Modifications → Add rule → Enable the new rules.
+
+### Current Symlinks
+```
+~/.config/karabiner/assets/complex_modifications/
+├── keyboard_text_shortcuts.json → mods/keyboard_text_shortcuts.json
+├── xbox_zed_claude.json → mods/xbox_zed_claude.json
+├── dictation_toggle.json → mods/dictation_toggle.json
+├── mouse_browser_navigation.json → mods/mouse_browser_navigation.json
+└── mouse_safari_navigation.json → mods/mouse_safari_navigation.json
+```
+
 ### Shell Command Pattern
 
 All shortcuts use clipboard+paste with restoration:
@@ -83,3 +111,45 @@ Use `/analyze-shortcuts` to analyze historical Claude Code messages and suggest 
 3. **Combo Phrases** - Multi-step instructions (x, r, n)
 4. **Testing & Research** - Run tests, search online (t, ö)
 5. **Semantic Actions** - Wait, summarize, fix, explain (w, å, f, h)
+6. **Slash Commands** - Claude Code slash commands (m, k, i, b, l, o, q)
+   - m → /recall (memory)
+   - k → /capture (keep)
+   - i → /significance (important)
+   - b → /debug-session (bug)
+   - l → /ui-prototype (layout)
+   - o → /consensus-consult (opinions)
+   - q → /docs-review (quality)
+
+## Xbox Controller Integration
+
+See `docs/xbox_button_reference.md` for full documentation including visual layout and session learnings.
+
+### Current Mappings (December 2025)
+
+| Label | Button | Code | Action |
+|-------|--------|------|--------|
+| **ENTER** | L-Stick | button14 | Enter key |
+| **YES** | View | button11 | "Yes! Ultrathink " |
+| **DICT** | Menu | button12 | SuperWhisper (non_us_backslash) |
+| **NO** | Guide | button13 | Escape |
+| **SPECS** | B | button2 | "Sit rep. Ultrathink " |
+| **STANDUP** | A | button1 | "What's next according to the plan? Ultrathink " |
+| *(none)* | X | button4 | "Read up on the relevant docs..." |
+| *(none)* | Y | button5 | "Make sure key docs are up to date..." |
+| *(none)* | LB | button7 | "Don't make changes. Explore..." |
+| *(none)* | RB | button8 | "Put a subagent on researching..." |
+| *(none)* | R-Stick | button15 | "Commit everything in logical groups. Then push." |
+
+### Xbox Controller Files
+- `mods/xbox_zed_claude.json` - Main controller mappings (global, works in any app)
+- `mods/dictation_toggle.json` - DICT button (button12) → SuperWhisper
+- `mods/app_specific_actions.json` - **DEPRECATED** (disable in Karabiner)
+
+## SuperWhisper Integration
+
+See `docs/superwhisper_integration.md` for complete reference including:
+- Vocabulary vs Replacements (when to use each)
+- File locations (`~/Documents/superwhisper/settings/settings.json`)
+- ISO keyboard considerations (`non_us_backslash` for Swedish)
+- Recommended vocabulary aligned with keyboard/controller shortcuts
+- Slash command trigger replacements
