@@ -231,6 +231,72 @@
               "value": 1
             }
           ]
+        },
+        {
+          "type": "basic",
+          "description": "Caps+x → Git workflow finisher (Svorak x = QWERTY b)",
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in logical groups. Then push. Ultrathink\"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "description": "Caps+r → Context refresh (Svorak r = QWERTY o)",
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read up on the relevant docs to refresh your memory first. Ultrathink\"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "description": "Caps+n → Plan progress check (Svorak n = QWERTY l)",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? Ultrathink\\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
         }
       ]
     }
