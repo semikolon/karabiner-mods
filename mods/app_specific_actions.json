@@ -1,0 +1,370 @@
+{
+    "title": "Xbox Controller - App-Specific Actions",
+    "rules": [
+        {
+            "description": "Xbox X Button (button4) -> Focus Editor and Previous Change",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button4"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"k\" using option down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox Y Button (button5) -> Focus Editor and Next Change",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button5"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"j\" using option down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox Guide Button (button13) -> Focus Composer and Cancel Generation",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button13"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"i\" using command down' -e 'delay 0.2' -e 'keystroke (ASCII character 8) using command down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox LB Button (button7) -> Previous Tab (Cmd+Alt+Left)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button7"
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_arrow",
+                            "modifiers": ["left_command", "left_option"]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox RB Button (button8) -> Next Tab (Cmd+Alt+Right)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button8"
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_arrow",
+                            "modifiers": ["left_command", "left_option"]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox A Button (button1) -> Focus Composer, Type STANDUP, Accept",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button1"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"i\" using command down' -e 'delay 0.2' -e 'keystroke \"STANDUP\"' -e 'delay 0.1' -e 'keystroke return using command down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox B Button (button2) -> Focus Composer, Type SPECS, Accept",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button2"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"i\" using command down' -e 'delay 0.2' -e 'keystroke \"SPECS\"' -e 'delay 0.1' -e 'keystroke return using command down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox View Button (button11) -> Focus Composer and Accept (Cmd+Enter)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button11"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"i\" using command down' -e 'delay 0.2' -e 'keystroke return using command down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox D-pad Left -> Focus Editor and Previous File with Edits",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "generic_desktop": "dpad_left"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"h\" using option down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox D-pad Right -> Focus Editor and Next File with Edits",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "generic_desktop": "dpad_right"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"l\" using option down' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox Left Stick Click (button14) -> Send Enter in Composer",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button14"
+                    },
+                    "to": [
+                        {
+                            "key_code": "return_or_enter"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.todesktop\\.230313mzl4w4u92$"
+                            ]
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+} 

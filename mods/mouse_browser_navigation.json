@@ -1,0 +1,99 @@
+{
+  "title": "Mouse Back/Forward for browsers & Finder (Razer)",
+  "rules": [
+    {
+      "description": "Mouse4/8 → ⌘[ (Back)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "pointing_button": "button4" },
+          "to": [ { "key_code": "open_bracket", "modifiers": ["command"] } ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Safari$",
+                "^com\\.apple\\.finder$",
+                "^com\\.google\\.Chrome$",
+                "^org\\.mozilla\\.firefox$",
+                "^company\\.thebrowser\\.Browser$"
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [ { "vendor_id": 5426 } ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "pointing_button": "button8" },
+          "to": [ { "key_code": "open_bracket", "modifiers": ["command"] } ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Safari$",
+                "^com\\.apple\\.finder$",
+                "^com\\.google\\.Chrome$",
+                "^org\\.mozilla\\.firefox$",
+                "^company\\.thebrowser\\.Browser$"
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [ { "vendor_id": 5426 } ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Mouse5/9 → ⌘] (Forward)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "pointing_button": "button5" },
+          "to": [ { "key_code": "close_bracket", "modifiers": ["command"] } ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Safari$",
+                "^com\\.apple\\.finder$",
+                "^com\\.google\\.Chrome$",
+                "^org\\.mozilla\\.firefox$",
+                "^company\\.thebrowser\\.Browser$"
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [ { "vendor_id": 5426 } ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "pointing_button": "button9" },
+          "to": [ { "key_code": "close_bracket", "modifiers": ["command"] } ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Safari$",
+                "^com\\.apple\\.finder$",
+                "^com\\.google\\.Chrome$",
+                "^org\\.mozilla\\.firefox$",
+                "^company\\.thebrowser\\.Browser$"
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [ { "vendor_id": 5426 } ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

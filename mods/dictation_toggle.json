@@ -1,0 +1,32 @@
+{
+    "title": "Xbox Controller - Dictation Toggle",
+    "rules": [
+        {
+            "description": "Xbox Menu Button (button12) -> Focus Composer and Toggle Dictation",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button12"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'key code 53' -e 'delay 0.1' -e 'key code 53' -e 'delay 0.1' -e 'keystroke \"i\" using command down' -e 'delay 0.2' -e 'key code 59' -e 'key code 59' -e 'end tell'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+} 
