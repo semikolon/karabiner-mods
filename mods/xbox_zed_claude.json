@@ -1,35 +1,8 @@
 {
-    "title": "Xbox Controller - Zed & Claude Code Actions",
+    "title": "Xbox Controller - Claude Code Text Shortcuts",
     "rules": [
         {
-            "description": "Xbox Menu Button (button12) -> SuperWhisper Global Dictation (grave_accent_and_tilde)",
-            "manipulators": [
-                {
-                    "type": "basic",
-                    "from": {
-                        "pointing_button": "button12"
-                    },
-                    "to": [
-                        {
-                            "key_code": "grave_accent_and_tilde"
-                        }
-                    ],
-                    "conditions": [
-                        {
-                            "type": "device_if",
-                            "identifiers": [
-                                {
-                                    "vendor_id": 1118,
-                                    "product_id": 2835
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "description": "Xbox A Button (button1) -> Claude: /docs-review command",
+            "description": "Xbox A Button (button1) STANDUP → What's next according to the plan?",
             "manipulators": [
                 {
                     "type": "basic",
@@ -38,16 +11,10 @@
                     },
                     "to": [
                         {
-                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'keystroke \"/docs-review\"' -e 'delay 0.1' -e 'keystroke return' -e 'end tell'"
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -62,7 +29,7 @@
             ]
         },
         {
-            "description": "Xbox B Button (button2) -> Claude: /total-recap command",
+            "description": "Xbox B Button (button2) SPECS → Sit rep",
             "manipulators": [
                 {
                     "type": "basic",
@@ -71,16 +38,10 @@
                     },
                     "to": [
                         {
-                            "shell_command": "osascript -e 'tell application \"System Events\"' -e 'keystroke \"/total-recap\"' -e 'delay 0.1' -e 'keystroke return' -e 'end tell'"
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Sit rep. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -95,7 +56,7 @@
             ]
         },
         {
-            "description": "Xbox X Button (button4) -> Open Command Palette (Cmd+Shift+P)",
+            "description": "Xbox X Button (button4) → Context refresh (read docs)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -104,17 +65,10 @@
                     },
                     "to": [
                         {
-                            "key_code": "p",
-                            "modifiers": ["left_command", "left_shift"]
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read up on the relevant docs to refresh your memory first. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -129,7 +83,7 @@
             ]
         },
         {
-            "description": "Xbox Y Button (button5) -> Open Agent Panel (Cmd+?)",
+            "description": "Xbox Y Button (button5) → Doc coherence check",
             "manipulators": [
                 {
                     "type": "basic",
@@ -138,17 +92,10 @@
                     },
                     "to": [
                         {
-                            "key_code": "slash",
-                            "modifiers": ["left_command", "left_shift"]
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -163,7 +110,7 @@
             ]
         },
         {
-            "description": "Xbox LB Button (button7) -> Previous Tab (Cmd+Shift+[)",
+            "description": "Xbox LB Button (button7) → Explore without changing",
             "manipulators": [
                 {
                     "type": "basic",
@@ -172,17 +119,10 @@
                     },
                     "to": [
                         {
-                            "key_code": "open_bracket",
-                            "modifiers": ["left_command", "left_shift"]
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -197,7 +137,7 @@
             ]
         },
         {
-            "description": "Xbox RB Button (button8) -> Next Tab (Cmd+Shift+])",
+            "description": "Xbox RB Button (button8) → Delegate to subagent",
             "manipulators": [
                 {
                     "type": "basic",
@@ -206,17 +146,10 @@
                     },
                     "to": [
                         {
-                            "key_code": "close_bracket",
-                            "modifiers": ["left_command", "left_shift"]
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -231,7 +164,7 @@
             ]
         },
         {
-            "description": "Xbox View Button (button11) -> Accept Claude Code suggestion (Enter)",
+            "description": "Xbox View Button (button11) YES → Yes! Ultrathink",
             "manipulators": [
                 {
                     "type": "basic",
@@ -240,16 +173,10 @@
                     },
                     "to": [
                         {
-                            "key_code": "return_or_enter"
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Yes! Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -264,7 +191,7 @@
             ]
         },
         {
-            "description": "Xbox Guide Button (button13) -> Cancel/Escape",
+            "description": "Xbox Guide Button (button13) NO → Escape",
             "manipulators": [
                 {
                     "type": "basic",
@@ -278,12 +205,6 @@
                     ],
                     "conditions": [
                         {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
-                        {
                             "type": "device_if",
                             "identifiers": [
                                 {
@@ -297,7 +218,7 @@
             ]
         },
         {
-            "description": "Xbox Left Stick Click (button14) -> Search Project (Cmd+Shift+F)",
+            "description": "Xbox Left Stick Click (button14) ENTER → Enter key",
             "manipulators": [
                 {
                     "type": "basic",
@@ -306,17 +227,10 @@
                     },
                     "to": [
                         {
-                            "key_code": "f",
-                            "modifiers": ["left_command", "left_shift"]
+                            "key_code": "return_or_enter"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -331,7 +245,7 @@
             ]
         },
         {
-            "description": "Xbox Right Stick Click (button15) -> Find Symbol (Cmd+T)",
+            "description": "Xbox Right Stick Click (button15) → Git workflow finisher",
             "manipulators": [
                 {
                     "type": "basic",
@@ -340,17 +254,10 @@
                     },
                     "to": [
                         {
-                            "key_code": "t",
-                            "modifiers": ["left_command"]
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in logical groups. Then push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
-                        {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^dev\\.zed\\.Zed$"
-                            ]
-                        },
                         {
                             "type": "device_if",
                             "identifiers": [

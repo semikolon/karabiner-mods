@@ -143,6 +143,20 @@ We ultimately want an environment where the Xbox Wireless Controller can facilit
 
 ## Additional Controller Mappings
 
+> **📋 Complete Reference**: See [`docs/xbox_button_reference.md`](docs/xbox_button_reference.md) for the definitive mapping between physical labels, button descriptions, and Karabiner codes.
+
+### Physical Labels on Controller
+
+| Label | Physical Button | Karabiner Code | Intended Action |
+|-------|-----------------|----------------|-----------------|
+| **ENTER** | Left Stick Click | button14 | Confirm/submit |
+| **YES** | View (⧉ two windows) | button11 | Quick affirmation |
+| **DICT** | Menu (☰ three lines) | button12 | Dictation toggle |
+| **NO** | Guide (Xbox logo) | button13 | Cancel/escape |
+| **SPECS** | B (red) | button2 | Status report |
+| **STANDUP** | A (green) | button1 | Progress check |
+| **<** / **>** | D-pad Left/Right | *unreliable* | Navigation |
+
 ### Reliable/Usable Buttons
 1. **A Button**: button1  
 2. **B Button**: button2  
