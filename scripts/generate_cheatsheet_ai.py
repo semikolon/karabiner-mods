@@ -168,37 +168,50 @@ def build_prompt(shortcuts: list[dict]) -> str:
 
     shortcut_content = "\n".join(content_lines)
 
-    prompt = f"""Create a stunning SYNTHWAVE/RETROWAVE style infographic cheat sheet for keyboard shortcuts.
+    prompt = f"""Create a MINIMAL, REFINED synthwave-style infographic for keyboard shortcuts.
 
-TITLE: "Karabiner Text Shortcuts"
-SUBTITLE: "Hold Caps Lock + Key (Svorak Layout)"
+NO TITLE - maximize space for content.
 
 CONTENT TO DISPLAY:
 {shortcut_content}
 
-DESIGN REQUIREMENTS - SYNTHWAVE AESTHETIC:
-- Dark background with deep purple/magenta gradient (#1a1a2e → #2d1b4e)
-- NEON GLOW effects on text and borders - hot pink, electric cyan, sunset orange
-- 80s retro-futuristic vibe with chrome/metallic accents
-- Sun/horizon motif or grid lines in background (subtle)
-- Each tier section with distinct NEON accent color:
-  - Quick Responses: Electric Teal (#4ecca3) with glow
-  - Workflow Patterns: Neon Gold (#ffc93c) with glow
-  - Combo Phrases: Hot Pink/Coral (#ff6b6b) with glow
-  - Testing & Research: Neon Purple (#a855f7) with glow
-  - Semantic Actions: Electric Cyan (#38bdf8) with glow
-  - Slash Commands: Sunset Orange (#ff8c42) with glow
-- Keys in glowing rounded badge style with neon borders
-- Bold stylized typography - think 80s chrome lettering for title
-- Use monospace font for keys, bold sans-serif for descriptions
-- Resolution: 2K quality
-- Aspect ratio: 3:4 (portrait)
-- All text must be perfectly legible and spelled correctly
-- Dripping/glitch effects optional on headers
+DESIGN - INSPIRED BY KIMONO KITTENS DASHBOARD (minimalist synthwave):
 
-Think: Kimono Kittens band poster meets developer cheat sheet. Outrun aesthetic meets productivity tool.
+EXACT COLORS TO USE:
+- Background: Dark navy #1a1a2e
+- Card backgrounds: Subtle purple-tinted panels with fine 1px borders
+- Primary accent: Coral/orange #ff8c42 (for tier headers, highlights)
+- Secondary: Soft purple gradient for decorative elements
+- Text: Clean white #eaeaea for content, muted #a0a0a0 for labels
 
-Make it VISUALLY STRIKING and memorable while keeping all information clearly readable."""
+TYPOGRAPHY:
+- Tier headers: Stylized scratchy/distressed synthwave font (like "HUSET", "KLIMAT")
+- Keys: Clean monospace in small rounded badges with fine borders
+- Output text: Regular sans-serif, smaller than headers
+
+LAYOUT STYLE:
+- Clean card-based layout with subtle transparency
+- Fine lines, NOT thick neon borders
+- Subtle gradients, NOT intense glow effects
+- Minimalist - lots of breathing room
+- Two-column layout to fit all 25 shortcuts efficiently
+
+VISUAL ELEMENTS:
+- NO sun/horizon motif
+- NO chrome/metallic effects
+- NO dripping/glitch effects
+- Subtle purple gradient swoosh in background (like the "12:19" time display)
+- Fine hairline borders on cards
+
+Each tier gets its own card/section with:
+- Coral-colored tier name in stylized font
+- Clean list of shortcuts below
+
+Resolution: 2K quality
+Aspect ratio: 3:4 (portrait)
+All text must be perfectly legible and spelled correctly.
+
+Think: Modern dashboard UI meets subtle synthwave aesthetic. Clean, functional, beautiful."""
 
     return prompt
 

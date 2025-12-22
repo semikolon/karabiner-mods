@@ -3,13 +3,12 @@
 > **Purpose**: Definitive mapping between physical controller buttons, their labels, and Karabiner codes.
 >
 > **Controller**: Xbox Wireless Controller (Vendor ID: 1118, Product ID: 2835)
-> **Last Updated**: December 21, 2025
+> **Last Updated**: December 22, 2025
 
 ## Complete Button Mapping
 
 | Physical Label | Physical Button | Icon/Description | Karabiner Code | Current Action |
 |----------------|-----------------|------------------|----------------|----------------|
-| **ENTER** | Left Stick Click | Press down on left joystick | `button14` | Enter key |
 | **YES** | View Button | Two overlapping rectangles | `button11` | "Yes! Ultrathink " |
 | **DICT** | Menu Button | Three horizontal lines | `button12` | SuperWhisper (non_us_backslash) |
 | **NO** | Guide Button | Glowing Xbox logo | `button13` | Escape |
@@ -19,6 +18,9 @@
 | *(unlabeled)* | Y Button | Yellow "Y" on face | `button5` | "Make sure key docs are up to date..." (doc check) |
 | *(unlabeled)* | LB | Left Bumper | `button7` | "Don't make changes. Explore..." |
 | *(unlabeled)* | RB | Right Bumper | `button8` | "Put a subagent on researching..." |
+| *(unlabeled)* | D-pad Left | Left arrow on D-pad | `generic_desktop: dpad_left` | Undo (Cmd+Z) |
+| *(unlabeled)* | D-pad Right | Right arrow on D-pad | `generic_desktop: dpad_right` | Enter key |
+| *(unlabeled)* | Left Stick Click | Press down on left joystick | `button14` | /total-recap (session recovery) |
 | *(unlabeled)* | Right Stick Click | Press down on right joystick | `button15` | "Commit everything in logical groups. Then push." |
 
 ## Visual Layout
@@ -32,9 +34,9 @@
           [ⓧ button13]←NO                             |
     YES→[⧉ button11]   |                              |
                        |   [Left Stick]  [Right Stick]|
-        ENTER→(click)↗ |      ↑              ↑←Git    |
-                       |    ←[D-pad]→    (unreliable) |
-                        \     ↓                      /
+   /total-recap→(click)|      ↑              ↑←Git    |
+                       |  Undo←[D-pad]→Enter          |
+                        \     ↓ (avoid)              /
                          ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 ```
 
@@ -43,9 +45,8 @@
 ### Labeled Buttons (physical labels on controller)
 | Label | Button | Action | Notes |
 |-------|--------|--------|-------|
-| ENTER | button14 | Enter key | Direct confirm action |
 | YES | button11 | "Yes! Ultrathink " | Quick confirmation with thinking |
-| DICT | button12 | SuperWhisper | Via `grave_accent_and_tilde` key |
+| DICT | button12 | SuperWhisper | Via `non_us_backslash` (ISO keyboards) |
 | NO | button13 | Escape | Cancel/interrupt (requires firm press) |
 | SPECS | button2 | "Sit rep. Ultrathink " | Status report request |
 | STANDUP | button1 | "What's next according to the plan? Ultrathink " | Progress check |
@@ -57,6 +58,9 @@
 | Y (button5) | Doc coherence check | Documentation |
 | LB (button7) | Explore without changes | Research |
 | RB (button8) | Delegate to subagent | Delegation |
+| D-pad Left | Undo (Cmd+Z) | Recovery |
+| D-pad Right | Enter key | Confirmation |
+| L-Stick (button14) | /total-recap | Session recovery |
 | R-Stick (button15) | Git workflow finisher | Git |
 
 ## Reliability Notes
@@ -71,13 +75,48 @@
 - `button11` (View) - YES
 - `button12` (Menu) - DICT
 - `button13` (Guide) - NO (requires firmer press)
-- `button14` (Left Stick Click) - ENTER
+- `button14` (Left Stick Click)
 - `button15` (Right Stick Click)
+- **D-pad Left/Right** - Reliable when pressed individually (use `generic_desktop` syntax)
 
 ### Unreliable/Unmappable (avoid for critical workflows)
-- **D-pad**: Directional presses are unreliable. "Up" often registers as "Right", multiple directions fire simultaneously.
+- **D-pad Up/Down**: Unreliable. "Up" often registers as "Right", simultaneous presses cause confusion.
 - **LT/RT Triggers**: Not detectable by Karabiner-EventViewer.
-- **Share Button**: Reserved by macOS system settings.
+- **Share Button**: Captured by macOS `gamecontrollerd` before reaching Karabiner - completely invisible to EventViewer.
+
+## D-pad Technical Details
+
+### What Works
+- **Left and Right are reliable on their own** (tested December 2025)
+- Use `generic_desktop` syntax instead of `pointing_button`:
+  ```json
+  "from": {
+      "generic_desktop": "dpad_left"
+  }
+  ```
+
+### What Doesn't Work
+- **Up frequently registers as Right**
+- **Down alone seems okay, but combined with Left/Right gets confused**
+- Multiple directions firing simultaneously when pressing diagonally
+
+### Recommendation
+Only use D-pad Left and D-pad Right for non-critical, recoverable actions (like Undo).
+
+## Share Button Limitation
+
+The Xbox Share button is **completely invisible to Karabiner-Elements**.
+
+### Root Cause
+macOS captures the Share button at the system level via `gamecontrollerd` before it reaches user-space applications. This is a macOS limitation, not a Karabiner bug.
+
+### Workarounds (not tested)
+1. **Wired USB-C connection**: May bypass Bluetooth HID handling
+2. **Third-party tools**: Enjoyable, Joystick Doctor, or Contanki (Anki controller plugin)
+3. **Xbox Accessories app**: May allow remapping at firmware level
+
+### Current Status
+Share button remains unmapped. If you need Undo functionality, use D-pad Left instead.
 
 ## File Configuration
 

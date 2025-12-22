@@ -218,7 +218,62 @@
             ]
         },
         {
-            "description": "Xbox Left Stick Click (button14) ENTER → Enter key",
+            "description": "Xbox D-pad Left → Undo (Cmd+Z)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "generic_desktop": "dpad_left"
+                    },
+                    "to": [
+                        {
+                            "key_code": "z",
+                            "modifiers": ["command"]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox D-pad Right → Enter key",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "generic_desktop": "dpad_right"
+                    },
+                    "to": [
+                        {
+                            "key_code": "return_or_enter"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Xbox Left Stick Click (button14) → /total-recap (session recovery)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -227,7 +282,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "return_or_enter"
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/total-recap \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
