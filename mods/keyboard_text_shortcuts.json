@@ -353,7 +353,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Wait. Don't act yet. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't act on anything before I've made any important decisions that need to be made about where to go. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
