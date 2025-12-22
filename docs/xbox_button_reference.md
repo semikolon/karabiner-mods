@@ -18,7 +18,7 @@
 | *(unlabeled)* | Y Button | Yellow "Y" on face | `button5` | "Make sure key docs are up to date..." (doc check) |
 | *(unlabeled)* | LB | Left Bumper | `button7` | "Don't make changes. Explore..." |
 | *(unlabeled)* | RB | Right Bumper | `button8` | "Put a subagent on researching..." |
-| *(unlabeled)* | D-pad Left | Left arrow on D-pad | `generic_desktop: dpad_left` | Undo (Cmd+Z) |
+| *(unlabeled)* | D-pad Left | Left arrow on D-pad | `generic_desktop: dpad_left` | Delete Word (Opt+Backspace) |
 | *(unlabeled)* | D-pad Right | Right arrow on D-pad | `generic_desktop: dpad_right` | Enter key |
 | *(unlabeled)* | Left Stick Click | Press down on left joystick | `button14` | /total-recap (session recovery) |
 | *(unlabeled)* | Right Stick Click | Press down on right joystick | `button15` | "Commit everything in logical groups. Then push." |
@@ -35,7 +35,7 @@
     YES→[⧉ button11]   |                              |
                        |   [Left Stick]  [Right Stick]|
    /total-recap→(click)|      ↑              ↑←Git    |
-                       |  Undo←[D-pad]→Enter          |
+                       |DelWord←[D-pad]→Enter         |
                         \     ↓ (avoid)              /
                          ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 ```
@@ -58,7 +58,7 @@
 | Y (button5) | Doc coherence check | Documentation |
 | LB (button7) | Explore without changes | Research |
 | RB (button8) | Delegate to subagent | Delegation |
-| D-pad Left | Undo (Cmd+Z) | Recovery |
+| D-pad Left | Delete Word (Opt+Backspace) | Recovery |
 | D-pad Right | Enter key | Confirmation |
 | L-Stick (button14) | /total-recap | Session recovery |
 | R-Stick (button15) | Git workflow finisher | Git |
@@ -101,7 +101,14 @@
 - Multiple directions firing simultaneously when pressing diagonally
 
 ### Recommendation
-Only use D-pad Left and D-pad Right for non-critical, recoverable actions (like Undo).
+Only use D-pad Left and D-pad Right for non-critical, recoverable actions.
+
+### Why Opt+Backspace instead of Cmd+Z?
+**Cmd+Z doesn't work in terminals** (Ghostty, Terminal.app, etc.) - terminals use different undo semantics. Option+Backspace (delete word) works universally across:
+- Terminal emulators (Ghostty, where Claude Code often runs)
+- GUI editors (Zed, VS Code)
+- Text fields in browsers
+- Any macOS text input
 
 ## Share Button Limitation
 
@@ -116,7 +123,7 @@ macOS captures the Share button at the system level via `gamecontrollerd` before
 3. **Xbox Accessories app**: May allow remapping at firmware level
 
 ### Current Status
-Share button remains unmapped. If you need Undo functionality, use D-pad Left instead.
+Share button remains unmapped. D-pad Left provides Delete Word as a quick recovery action.
 
 ## File Configuration
 

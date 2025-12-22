@@ -218,7 +218,7 @@
             ]
         },
         {
-            "description": "Xbox D-pad Left → Undo (Cmd+Z)",
+            "description": "Xbox D-pad Left → Delete Word (Opt+Backspace)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -227,8 +227,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "z",
-                            "modifiers": ["command"]
+                            "key_code": "delete_or_backspace",
+                            "modifiers": ["option"]
                         }
                     ],
                     "conditions": [
