@@ -303,7 +303,7 @@ sqlite3 ~/Library/Application\ Support/superwhisper/database/superwhisper.sqlite
 
 - `docs/xbox_button_reference.md` - Controller button mappings including DICT
 - `CLAUDE.md` - Project overview with shortcut tiers
-- `docs/cheatsheet.svg` - Visual keyboard shortcut reference
+- `docs/cheatsheet_ai.png` - AI-generated visual keyboard shortcut reference
 - `~/.claude/CLAUDE.md` - Global Claude Code rules (TTS daemon, contextual intelligence)
 
 ## Version History
@@ -311,3 +311,4 @@ sqlite3 ~/Library/Application\ Support/superwhisper/database/superwhisper.sqlite
 | Date | Changes |
 |------|---------|
 | 2025-12-21 | Initial documentation. ISO keyboard fix (`non_us_backslash`). Vocabulary rationalization analysis. Added "run" prefix pattern for slash command voice triggers. |
+| 2025-12-22 | Note: SuperWhisper auto-punctuation adds trailing periods to slash commands. No reliable fix found - manual removal required. |

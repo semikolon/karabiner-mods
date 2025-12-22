@@ -130,15 +130,18 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 ### Active Configuration Files
 | File | Purpose | Status |
 |------|---------|--------|
-| `mods/xbox_zed_claude.json` | Main controller mappings (10 buttons) | **ENABLE THIS** |
-| `mods/dictation_toggle.json` | DICT button (button12) only | **ENABLE THIS** |
+| `mods/xbox_zed_claude.json` | Main controller mappings (13 inputs) | **ACTIVE** |
+| `mods/dictation_toggle.json` | DICT button (button12) only | **ACTIVE** |
+| `mods/keyboard_text_shortcuts.json` | Caps+key text shortcuts | **ACTIVE** |
 
 ### Deprecated/Disabled Files
 | File | Purpose | Status |
 |------|---------|--------|
-| `mods/app_specific_actions.json` | Old Cursor-specific mappings | **DISABLE** |
+| `mods/app_specific_actions.json` | Old Cursor-specific mappings | **DISABLED** |
+| `mods/mouse_browser_navigation.json` | Mouse button browser nav (broken) | **DISABLED** |
+| `mods/mouse_safari_navigation.json` | Mouse button Safari nav (broken) | **DISABLED** |
 
-**Note**: `dictation_toggle.json` and `xbox_zed_claude.json` don't conflict - dictation_toggle handles button12 exclusively, while xbox_zed_claude handles all other buttons.
+**Note**: `dictation_toggle.json` and `xbox_zed_claude.json` don't conflict - dictation_toggle handles button12 exclusively, while xbox_zed_claude handles all other buttons plus D-pad.
 
 ## Karabiner JSON Pattern
 
@@ -186,6 +189,35 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 }
 ```
 
+### D-pad Input (uses generic_desktop, not pointing_button)
+```json
+{
+    "type": "basic",
+    "from": {
+        "generic_desktop": "dpad_left"
+    },
+    "to": [
+        {
+            "key_code": "delete_or_backspace",
+            "modifiers": ["option"]
+        }
+    ],
+    "conditions": [
+        {
+            "type": "device_if",
+            "identifiers": [
+                {
+                    "vendor_id": 1118,
+                    "product_id": 2835
+                }
+            ]
+        }
+    ]
+}
+```
+
+**Important**: D-pad uses `generic_desktop` key, not `pointing_button`. Valid values: `dpad_left`, `dpad_right`, `dpad_up`, `dpad_down`.
+
 ## Session Learnings (December 21, 2025)
 
 ### SuperWhisper Integration
@@ -211,3 +243,21 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 - Use **Karabiner-EventViewer** to verify button codes
 - Guide button (button13) requires a firm press - light taps may not register
 - If a button shows in EventViewer but action doesn't fire, check for conflicting rules in other JSON files
+
+## Session Learnings (December 22, 2025)
+
+### D-pad Left/Right Are Usable
+- **Discovery**: Despite earlier notes about D-pad unreliability, Left and Right work reliably when pressed individually
+- **Syntax**: Must use `generic_desktop: dpad_left` (NOT `pointing_button`)
+- **Limitation**: Up/Down remain unreliable (Up often registers as Right)
+- **Best practice**: Only bind D-pad Left/Right to recoverable, non-critical actions
+
+### Terminal Compatibility
+- **Issue**: Cmd+Z (Undo) doesn't work in terminals (Ghostty, Terminal.app)
+- **Solution**: Use Opt+Backspace (Delete Word) instead - works universally
+- **Context**: Primary Claude Code usage is in Ghostty terminal, not GUI editors
+
+### Configuration Cleanup
+- Removed deprecated `app_specific_actions.json` (old Cursor-specific mappings)
+- Removed broken `mouse_browser_navigation.json` and `mouse_safari_navigation.json`
+- Active configs now: `xbox_zed_claude.json`, `dictation_toggle.json`, `keyboard_text_shortcuts.json`

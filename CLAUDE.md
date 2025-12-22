@@ -6,12 +6,13 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 
 ## Key Files
 
-- `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all shortcuts
-- `scripts/generate_cheatsheet.py` - Generates SVG cheat sheet from config
-- `scripts/generate_cheatsheet_ai.py` - AI-generated synthwave-style cheat sheet (Nano Banana Pro)
-- `docs/cheatsheet.svg` - Visual reference of all shortcuts
+- `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
+- `mods/xbox_zed_claude.json` - Xbox controller mappings (global)
+- `mods/dictation_toggle.json` - DICT button → SuperWhisper
+- `scripts/generate_cheatsheet_ai.py` - AI-generated synthwave-style cheat sheet (Gemini 3 Pro Image)
+- `docs/cheatsheet_ai.png` - Visual reference of all shortcuts (KK dashboard style)
 - `docs/superwhisper_integration.md` - SuperWhisper vocabulary/replacements reference
-- `docs/xbox_button_reference.md` - Xbox controller button mappings
+- `docs/xbox_button_reference.md` - Xbox controller button mappings + technical details
 - `.claude/commands/analyze-shortcuts.md` - Slash command for analyzing message history
 
 ## Keyboard Layout
@@ -35,7 +36,7 @@ QWERTY: z x c v b n m , . /
 **After ANY modification to `mods/keyboard_text_shortcuts.json`, you MUST regenerate the cheat sheet:**
 
 ```bash
-python3 scripts/generate_cheatsheet.py
+python3 scripts/generate_cheatsheet_ai.py
 ```
 
 This ensures the visual documentation stays in sync with the actual shortcuts.
@@ -43,8 +44,10 @@ This ensures the visual documentation stays in sync with the actual shortcuts.
 The script:
 1. Reads all shortcuts from the JSON config
 2. Extracts key mappings and output text
-3. Groups by tier (Quick/Workflow/Combo/Testing/Semantic)
-4. Generates `docs/cheatsheet.svg`
+3. Groups by tier (Quick/Workflow/Combo/Testing/Semantic/Slash Commands)
+4. Generates `docs/cheatsheet_ai.png` using Gemini 3 Pro Image (Nano Banana Pro)
+
+**Requires**: `GEMINI_API_KEY` environment variable
 
 ## Adding New Shortcuts
 
@@ -52,7 +55,7 @@ The script:
 2. Look up the QWERTY equivalent using the mapping above
 3. Add the manipulator to `keyboard_text_shortcuts.json`
 4. **Regenerate the cheat sheet** (see rule above)
-5. Commit both the JSON and the updated cheatsheet.svg
+5. Commit both the JSON and the updated `docs/cheatsheet_ai.png`
 
 ## Deploying New Mapping Files
 
@@ -69,15 +72,18 @@ This allows:
 
 After creating the symlink, open Karabiner-Elements → Complex Modifications → Add rule → Enable the new rules.
 
-### Current Symlinks
+### Current Symlinks (December 2025)
 ```
 ~/.config/karabiner/assets/complex_modifications/
 ├── keyboard_text_shortcuts.json → mods/keyboard_text_shortcuts.json
 ├── xbox_zed_claude.json → mods/xbox_zed_claude.json
-├── dictation_toggle.json → mods/dictation_toggle.json
-├── mouse_browser_navigation.json → mods/mouse_browser_navigation.json
-└── mouse_safari_navigation.json → mods/mouse_safari_navigation.json
+└── dictation_toggle.json → mods/dictation_toggle.json
 ```
+
+**Disabled** (removed from Karabiner):
+- `app_specific_actions.json` - Old Cursor-specific mappings
+- `mouse_browser_navigation.json` - Broken
+- `mouse_safari_navigation.json` - Broken
 
 ### Shell Command Pattern
 
@@ -128,7 +134,6 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 
 | Label | Button | Code | Action |
 |-------|--------|------|--------|
-| **ENTER** | L-Stick | button14 | Enter key |
 | **YES** | View | button11 | "Yes! Ultrathink " |
 | **DICT** | Menu | button12 | SuperWhisper (non_us_backslash) |
 | **NO** | Guide | button13 | Escape |
@@ -138,12 +143,16 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 | *(none)* | Y | button5 | "Make sure key docs are up to date..." |
 | *(none)* | LB | button7 | "Don't make changes. Explore..." |
 | *(none)* | RB | button8 | "Put a subagent on researching..." |
+| *(none)* | D-pad Left | generic_desktop | Delete Word (Opt+Backspace) |
+| *(none)* | D-pad Right | generic_desktop | Enter key |
+| *(none)* | L-Stick | button14 | /total-recap (session recovery) |
 | *(none)* | R-Stick | button15 | "Commit everything in logical groups. Then push." |
 
 ### Xbox Controller Files
-- `mods/xbox_zed_claude.json` - Main controller mappings (global, works in any app)
+- `mods/xbox_zed_claude.json` - Main controller mappings (13 inputs, global)
 - `mods/dictation_toggle.json` - DICT button (button12) → SuperWhisper
-- `mods/app_specific_actions.json` - **DEPRECATED** (disable in Karabiner)
+
+**Note**: D-pad uses `generic_desktop: dpad_left` syntax, not `pointing_button`. See `docs/xbox_button_reference.md` for details.
 
 ## SuperWhisper Integration
 
