@@ -9,7 +9,7 @@
 
 | Physical Label | Physical Button | Icon/Description | Karabiner Code | Current Action |
 |----------------|-----------------|------------------|----------------|----------------|
-| **YES** | View Button | Two overlapping rectangles | `button11` | "Yes! Ultrathink " |
+| **YES** | View Button | Two overlapping rectangles | `button11` | " Ultrathink " (suffix) |
 | **DICT** | Menu Button | Three horizontal lines | `button12` | SuperWhisper (non_us_backslash) |
 | **NO** | Guide Button | Glowing Xbox logo | `button13` | Escape |
 | **SPECS** | B Button | Red "B" on face | `button2` | "Sit rep. Ultrathink " |
@@ -45,7 +45,7 @@
 ### Labeled Buttons (physical labels on controller)
 | Label | Button | Action | Notes |
 |-------|--------|--------|-------|
-| YES | button11 | "Yes! Ultrathink " | Quick confirmation with thinking |
+| YES | button11 | " Ultrathink " (suffix) | Append to any message/dictation |
 | DICT | button12 | SuperWhisper | Via `non_us_backslash` (ISO keyboards) |
 | NO | button13 | Escape | Cancel/interrupt (requires firm press) |
 | SPECS | button2 | "Sit rep. Ultrathink " | Status report request |
@@ -261,3 +261,67 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 - Removed deprecated `app_specific_actions.json` (old Cursor-specific mappings)
 - Removed broken `mouse_browser_navigation.json` and `mouse_safari_navigation.json`
 - Active configs now: `xbox_zed_claude.json`, `dictation_toggle.json`, `keyboard_text_shortcuts.json`
+
+## Analog Stick Mapping (Word Navigation)
+
+### The Goal
+Use analog stick directional movement for word-by-word cursor navigation (Opt+Left/Right arrows).
+
+### Karabiner Limitation
+**Karabiner-Elements does not support analog stick → keyboard mapping.**
+
+The "XY stick" settings in Karabiner's Devices → Gamepad dialog are for **mouse cursor movement only**:
+- The formulas (`cos(radian) * m`, `sin(radian) * m`) convert stick position to X/Y mouse movement
+- Settings like deadzone, delta magnitude, continued movement interval affect mouse cursor behavior
+- **Cannot output keyboard keys** (like Opt+Left/Right for word navigation)
+
+Karabiner only handles:
+- Discrete button events (`pointing_button`, `generic_desktop`)
+- Stick-to-mouse cursor conversion (via XY stick settings)
+
+### Third-Party Solutions Required
+
+| App | Price | Apple Silicon | Xbox Support | Notes |
+|-----|-------|---------------|--------------|-------|
+| **Joystick Mapper** | $4.99 | Via Rosetta 2 | ✅ Yes | **Best option** - mature, Xbox-compatible |
+| **JoyKeyMapper** | Free | ✅ Native | ❌ No | Nintendo controllers only (Joy-Con, Pro) |
+| **Gamepad Mapper** | $4.99 | Via Rosetta 2 | ✅ Yes | Similar to Joystick Mapper |
+| **Enjoyable** | Free | ❌ No support | N/A | Abandoned (2015), doesn't work on M1/M2 |
+
+**Winner: [Joystick Mapper](https://joystickmapper.com/)** ($4.99, one-time purchase)
+- Explicitly supports Xbox controllers
+- Can map analog stick directions independently
+- Adjustable repeat rate per direction
+
+### Expected Behavior
+Analog sticks are treated as **threshold-based digital directions**:
+- Push stick right → triggers Opt+Right repeatedly (word skip right)
+- Push stick left → triggers Opt+Left repeatedly (word skip left)
+- Release → stops
+
+This is hold-to-repeat behavior, not proportional speed control.
+
+### Coexistence with Karabiner - RISK ASSESSMENT
+
+**Status**: Uncertain - potential HID-level conflict (December 2025)
+
+**The Goal**: Karabiner handles buttons, Joystick Mapper handles analog sticks only.
+
+**Why It Might Work**:
+- Karabiner sees buttons as `pointing_button` events but does NOT see analog axis data
+- Joystick Mapper can selectively map only specific inputs
+- They intercept different input types from the same device
+
+**Why It Might Conflict**:
+- Both apps work at HID input level
+- [OpenEmu wiki](https://github.com/OpenEmu/OpenEmu/wiki/Troubleshooting:-Input-problems) lists BOTH as "known problematic software" for input conflicts
+- Joystick Mapper FAQ warns: "Other similar apps may prevent Joystick Mapper from operating correctly"
+- HID device "grabbing" - one app might claim exclusive access
+
+**Recommended Test Plan**:
+1. Install Joystick Mapper ($4.99)
+2. Configure ONLY left stick horizontal axis → Opt+Left / Opt+Right
+3. Test if Karabiner button mappings (A, B, X, Y, etc.) still work
+4. If conflict: Consider migrating ALL Xbox mappings to Joystick Mapper
+
+**Fallback Option**: If coexistence fails, Joystick Mapper can handle both buttons AND sticks - could replace Karabiner for Xbox controller entirely (keep Karabiner for keyboard shortcuts only).

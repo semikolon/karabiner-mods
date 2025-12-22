@@ -164,7 +164,7 @@
             ]
         },
         {
-            "description": "Xbox View Button (button11) YES → Yes! Ultrathink",
+            "description": "Xbox View Button (button11) YES → Ultrathink suffix",
             "manipulators": [
                 {
                     "type": "basic",
@@ -173,7 +173,7 @@
                     },
                     "to": [
                         {
-                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Yes! Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \" Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
                         }
                     ],
                     "conditions": [
