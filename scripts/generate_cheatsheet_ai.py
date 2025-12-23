@@ -80,6 +80,7 @@ TIER_ASSIGNMENTS = {
     "å": 5,
     "f": 5,
     "h": 5,
+    "j": 5,  # Document insight
     # Slash commands (Tier 6)
     "m": 6,  # /recall (memory)
     "k": 6,  # /capture (keep)

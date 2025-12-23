@@ -432,6 +432,28 @@
         },
         {
           "type": "basic",
+          "description": "Caps+j → Document insight (Svorak j = QWERTY c)",
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Document this insight in the best-fit file. List 20 recent related .md docs to pick from. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
           "description": "Caps+m → /recall (Svorak m = QWERTY m)",
           "from": {
             "key_code": "m",
