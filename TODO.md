@@ -15,24 +15,38 @@
 
 ## Active / Recent
 
-11. **Keyboard Text Shortcuts** *(Dec 2025)*
+11. **Xbox Controller Modifier Combos** *(Dec 2025)* ✅ IMPLEMENTED
+    - [x] Discovered: Xbox buttons CAN be used as modifiers (LB+A, RB+B, etc.)
+    - [x] Documented in `docs/xbox_button_reference.md` → "Button Modifier Combos" section
+    - [x] Ran `/analyze-shortcuts` with ~5,000 message history (Dec 28)
+    - [x] Identified semantic groupings: LB = Exploration/Comprehension, RB = Execution/Action
+    - [x] Implemented 10 combo actions:
+      - **LB+ layer**: A=ZoomOut, B=Research, X=Fix, Y=Summarize, D-Left=PrevWin, D-Right=NextWin
+      - **RB+ layer**: A=Key1, B=Key2, X=Key3 (CC prompts), Y=PullPush
+    - [x] JSON implemented with `set_variable`/`variable_if` pattern
+    - [ ] **TEST**: Verify all combos work as expected
+
+12. **Window Management & Couch Mode** *(Dec 2025)*
+    - [x] Created `docs/window_management.md` with full analysis
+    - [x] Added LB+D-pad Left/Right for window switching (Cmd+Shift+`/Cmd+`)
+    - [ ] **TEST**: LB+D-pad window switching may have ISO keyboard issue
+      - Uses `grave_accent_and_tilde` key code - same key that's problematic for keyboard Cmd+`
+      - If it doesn't work, may need to remap in System Settings OR use different key_code
+    - [ ] Test D-pad Up/Down reliability (skip for now - known unreliable)
+    - [ ] Consider Hammerspoon integration for complex window management
+
+13. **Keyboard Text Shortcuts** *(Dec 2025)* - **31 shortcuts total**
     - [x] Create `keyboard_text_shortcuts.json` for typing common prompts
     - [x] Add Caps Lock dual-purpose: tap=Escape, hold+key=text shortcuts
     - [x] Handle Svorak 6 layout (map to QWERTY physical keys)
-    - [x] **Tier 1 shortcuts implemented:**
-      - Caps+u → "Ultrathink"
-      - Caps+c → "Continue. Ultrathink"
-      - Caps+y → "Yes! Ultrathink"
-      - Caps+p → "Proceed. Ultrathink"
-      - Caps+s → "Sit rep. Ultrathink"
-      - Caps+g → "What's the git state? Ultrathink"
-    - [x] **Tier 2 shortcuts implemented** (Dec 21, 2025):
-      - Caps+d → "Make sure key docs are up to date and congruent with our progress. Ultrathink"
-      - Caps+e → "Don't make changes. Explore and report back. Ultrathink"
-      - Caps+a → "Put a subagent on researching this thoroughly. Report back with findings. Ultrathink"
+    - [x] **All Svorak keys now mapped** (Dec 28, 2025)
     - [x] Fixed spacing bug (switched from AppleScript to native `text` field)
+    - [x] Added safety: Caps+Enter → Shift+Enter
+    - [x] Final 3 shortcuts added (Dec 28): Caps+. (pull+push), Caps+v (research), Caps+z (/total-recap)
     - [ ] Test all shortcuts in Ghostty/Zed
-    
+
+    **Full mapping**: See `docs/cheatsheet_ai.png` for visual reference
+
     **Analysis reports created:**
     - `KEYBOARD_SHORTCUTS_REPORT.md` - Quantitative analysis (1,117 messages)
     - `QUALITATIVE_ANALYSIS.md` - Intent-based analysis and recommendations
