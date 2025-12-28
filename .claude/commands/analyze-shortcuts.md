@@ -15,11 +15,28 @@ Read the current shortcuts from `mods/keyboard_text_shortcuts.json` to understan
 
 ## Step 2: Extract Historical User Messages
 
-Search through Claude Code transcript files in `~/.claude/projects/` to extract user messages. Focus on the last 6-12 months of activity.
+Search through Claude Code transcript files in `~/.claude/projects/` to extract user messages.
+
+**Data availability note**:
+- **JSONL transcripts**: November 26, 2025+ (~191 files)
+- **Cache JSON files**: September 2025+ (full history preserved despite v2.0.49 breaking change)
+- **History.jsonl**: 5,024 entries, September 2025+
 
 ```bash
-# Extract user messages from JSONL transcripts
-find ~/.claude/projects -name "*.jsonl" -mtime -180 -exec grep -h '"type":"user"' {} \; 2>/dev/null | head -2000
+# PRIMARY: Extract from JSONL transcripts (Nov 26+)
+find ~/.claude/projects -name "*.jsonl" -type f -exec grep -h '"type":"user"' {} \; 2>/dev/null | head -5000
+
+# EXTENDED: Extract from cache JSON files (Sept 2025+ - older data!)
+find ~/.claude/projects -path "*/cache/*.json" -type f -exec cat {} \; 2>/dev/null | grep -o '"content":"[^"]*"' | head -3000
+
+# HISTORY: Extract from history.jsonl (all prompts, Sept 2025+)
+grep -o '"prompt":"[^"]*"' ~/.claude/history.jsonl 2>/dev/null | head -3000
+
+# Count total messages available
+find ~/.claude/projects -name "*.jsonl" -type f -exec grep -c '"type":"user"' {} \; 2>/dev/null | awk '{s+=$1} END {print "JSONL user messages:", s}'
+
+# Filter by project if needed
+find ~/.claude/projects -path "*dotfiles*" -name "*.jsonl" -exec grep -h '"type":"user"' {} \; 2>/dev/null
 ```
 
 ## Step 3: Pattern Analysis
@@ -98,6 +115,42 @@ For approved shortcuts, show the JSON snippet that would be added:
   "conditions": [{ "type": "variable_if", "name": "caps_lock_held", "value": 1 }]
 }
 ```
+
+---
+
+## Step 7: Xbox Controller Combo Analysis (NEW)
+
+When analyzing for Xbox controller LB+/RB+ modifier combos, consider:
+
+### Semantic Layer Discovery
+Don't assume "Research vs Action" division. Let the data reveal natural groupings:
+- What verbs/intents cluster together?
+- What workflows have clear phases (investigate → decide → execute)?
+- What's complementary to existing keyboard shortcuts?
+
+### Existing Coverage Check
+Before suggesting new combos, verify they don't duplicate:
+- 26 keyboard shortcuts (Caps+key)
+- 12 base Xbox buttons (A, B, X, Y, LB, RB, View, Menu, Guide, D-pad, Sticks)
+
+### Couch Mode Considerations
+Identify phrases useful when away from keyboard/mouse:
+- Navigation commands (spaces, windows, apps)
+- Status checks (can trigger without typing follow-up)
+- Confirmation/approval (lazy couch agreement)
+
+### Modifier Layer Candidates
+For each promising phrase, suggest:
+- **LB+ (Layer 1)**: [semantic meaning TBD by data]
+- **RB+ (Layer 2)**: [semantic meaning TBD by data]
+- **Neither**: Better as keyboard shortcut or base button
+
+### Output Format for Xbox Combos
+
+| Phrase | Layer | Button | Rationale |
+|--------|-------|--------|-----------|
+| "Analyze this..." | LB+ | A | Investigation intent |
+| "Commit and push..." | RB+ | A | Execution intent |
 
 ---
 
