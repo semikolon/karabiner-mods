@@ -248,13 +248,14 @@ def build_prompt(keyboard_shortcuts: list[dict], xbox_mappings: list[dict]) -> s
             tiers[tier] = {"name": s["tier_name"], "shortcuts": []}
         tiers[tier]["shortcuts"].append(s)
 
-    # Build keyboard content
-    keyboard_lines = ["KEYBOARD (Caps Lock + key):"]
+    # Build keyboard content - just key → output, no "Caps+" prefix on each line
+    keyboard_lines = ["KEYBOARD SHORTCUTS (all use Caps Lock + key):"]
     for tier_num in sorted(tiers.keys()):
         tier = tiers[tier_num]
         keyboard_lines.append(f"\n  {tier['name']}:")
         for s in tier["shortcuts"]:
-            output = s["output"][:40] + "..." if len(s["output"]) > 40 else s["output"]
+            # Allow longer text - prioritize showing full content
+            output = s["output"][:60] + "..." if len(s["output"]) > 60 else s["output"]
             keyboard_lines.append(f"    {s['key']} → {output}")
 
     # Group Xbox mappings by category
@@ -274,23 +275,35 @@ def build_prompt(keyboard_shortcuts: list[dict], xbox_mappings: list[dict]) -> s
             for m in xbox_cats[cat]["mappings"]:
                 btn = m["button"]
                 label = f" ({m['label']})" if m["label"] else ""
-                output = m["output"][:35] + "..." if len(m["output"]) > 35 else m["output"]
+                # Allow longer text - prioritize showing full content
+                output = m["output"][:55] + "..." if len(m["output"]) > 55 else m["output"]
                 xbox_lines.append(f"    {btn}{label} → {output}")
 
     keyboard_content = "\n".join(keyboard_lines)
     xbox_content = "\n".join(xbox_lines)
 
-    prompt = f"""Create a MINIMAL, REFINED synthwave-style infographic for AI workflow shortcuts.
+    prompt = f"""Create a MINIMAL, REFINED synthwave-style infographic for workflow shortcuts.
 
-TITLE: "Claude Code Shortcuts" (small, at top)
+NO TITLE - maximize space for content.
 
 TWO SECTIONS - LEFT AND RIGHT:
 
 LEFT COLUMN - KEYBOARD SHORTCUTS:
 {keyboard_content}
 
+IMPORTANT FOR KEYBOARD SECTION:
+- State "Caps +" ONCE as a header/legend (e.g., "KEYBOARD (Caps + key)")
+- DO NOT repeat "Caps Lock" on each individual shortcut badge - wasteful!
+- Each shortcut should show just the key letter in a small badge, then the output text
+- Example: [u] → Ultrathink   (NOT [Caps Lock] [u] → Ultrathink)
+
 RIGHT COLUMN - XBOX CONTROLLER:
 {xbox_content}
+
+CRITICAL FOR XBOX SECTION:
+- MUST include a visual diagram/illustration of an Xbox controller
+- Show button positions on the actual controller shape
+- This controller diagram is REQUIRED - always include it
 
 DESIGN - INSPIRED BY KIMONO KITTENS DASHBOARD (minimalist synthwave):
 
@@ -303,8 +316,8 @@ EXACT COLORS TO USE:
 
 TYPOGRAPHY:
 - Section headers: Stylized scratchy/distressed synthwave font
-- Keys/buttons: Clean monospace in small rounded badges with fine borders
-- Output text: Regular sans-serif, smaller than headers
+- Keys/buttons: Clean monospace in SMALL rounded badges with fine borders
+- Output text: Regular sans-serif, readable size
 - ALL TEXT MUST BE PERFECTLY LEGIBLE AND CORRECTLY SPELLED
 
 LAYOUT:
@@ -314,18 +327,24 @@ LAYOUT:
 - Subtle gradients, NOT intense glow effects
 - Group related items in subsections
 
+VISUAL REAL ESTATE PRIORITY:
+- Use saved space to show MORE of the shortcut output text
+- Minimize truncation - show as much of each phrase as possible
+- Compact key badges, generous space for output text
+- The user needs to see what each shortcut types BEFORE pressing it
+
 VISUAL ELEMENTS:
 - NO sun/horizon motif, NO chrome effects, NO dripping/glitch effects
 - Subtle purple gradient swoosh in background
 - Fine hairline borders on cards
 - Small keyboard icon for left section header
-- Small controller icon for right section header
+- Xbox controller diagram for right section (REQUIRED)
 
 Resolution: 2K quality
 Aspect ratio: 16:10 (landscape to fit both columns)
 
 Think: Modern dashboard UI meets subtle synthwave aesthetic. Clean, functional, beautiful.
-CRITICAL: Every single shortcut must be readable. Prioritize legibility over decoration."""
+CRITICAL: Every single shortcut must be readable. Prioritize legibility and content over decoration."""
 
     return prompt
 
