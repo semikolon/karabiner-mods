@@ -343,6 +343,11 @@ VISUAL ELEMENTS:
 Resolution: 2K quality
 Aspect ratio: 16:10 (landscape to fit both columns)
 
+CRITICAL - NO WHITE BORDERS:
+- The image must have NO white margins, borders, or padding around the edges
+- The dark navy background (#1a1a2e) must extend to ALL edges of the image
+- Content should go edge-to-edge (with reasonable internal padding)
+
 Think: Modern dashboard UI meets subtle synthwave aesthetic. Clean, functional, beautiful.
 CRITICAL: Every single shortcut must be readable. Prioritize legibility and content over decoration."""
 
