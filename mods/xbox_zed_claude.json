@@ -1,6 +1,414 @@
 {
-    "title": "Xbox Controller - Claude Code Text Shortcuts",
+    "title": "Xbox Controller - Claude Code Text Shortcuts with LB/RB Modifiers",
     "rules": [
+        {
+            "description": "LB (button7) as modifier + tap action",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button7"
+                    },
+                    "to": [
+                        {
+                            "set_variable": {
+                                "name": "lb_held",
+                                "value": 1
+                            }
+                        }
+                    ],
+                    "to_after_key_up": [
+                        {
+                            "set_variable": {
+                                "name": "lb_held",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "RB (button8) as modifier + tap action",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button8"
+                    },
+                    "to": [
+                        {
+                            "set_variable": {
+                                "name": "rb_held",
+                                "value": 1
+                            }
+                        }
+                    ],
+                    "to_after_key_up": [
+                        {
+                            "set_variable": {
+                                "name": "rb_held",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "LB + A → Zoom out / open loops check",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button1"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "LB + B → Research extensively online",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button2"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Research this extensively online. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "LB + X → Fix this",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button4"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Fix this. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "LB + Y → Summarize briefly",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button5"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Summarize briefly. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "LB + D-pad Left → Previous window (Cmd+Shift+`)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "generic_desktop": "dpad_left"
+                    },
+                    "to": [
+                        {
+                            "key_code": "grave_accent_and_tilde",
+                            "modifiers": ["command", "shift"]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "LB + D-pad Right → Next window (Cmd+`)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "generic_desktop": "dpad_right"
+                    },
+                    "to": [
+                        {
+                            "key_code": "grave_accent_and_tilde",
+                            "modifiers": ["command"]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "RB + A → CC prompt: 1 (allow)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button1"
+                    },
+                    "to": [
+                        {
+                            "key_code": "1"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "RB + B → CC prompt: 2 (allow + remember)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button2"
+                    },
+                    "to": [
+                        {
+                            "key_code": "2"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "RB + X → CC prompt: 3 (custom response)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button4"
+                    },
+                    "to": [
+                        {
+                            "key_code": "3"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "RB + Y → Pull and push",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button5"
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Pull and push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 1
+                        },
+                        {
+                            "type": "device_if",
+                            "identifiers": [
+                                {
+                                    "vendor_id": 1118,
+                                    "product_id": 2835
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "description": "Xbox A Button (button1) STANDUP → What's next according to the plan?",
             "manipulators": [
@@ -15,6 +423,16 @@
                         }
                     ],
                     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 0
+                        },
+                        {
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 0
+                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -43,6 +461,16 @@
                     ],
                     "conditions": [
                         {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 0
+                        },
+                        {
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 0
+                        },
+                        {
                             "type": "device_if",
                             "identifiers": [
                                 {
@@ -69,6 +497,16 @@
                         }
                     ],
                     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 0
+                        },
+                        {
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 0
+                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -97,59 +535,15 @@
                     ],
                     "conditions": [
                         {
-                            "type": "device_if",
-                            "identifiers": [
-                                {
-                                    "vendor_id": 1118,
-                                    "product_id": 2835
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "description": "Xbox LB Button (button7) → Explore without changing",
-            "manipulators": [
-                {
-                    "type": "basic",
-                    "from": {
-                        "pointing_button": "button7"
-                    },
-                    "to": [
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 0
+                        },
                         {
-                            "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
-                        }
-                    ],
-                    "conditions": [
-                        {
-                            "type": "device_if",
-                            "identifiers": [
-                                {
-                                    "vendor_id": 1118,
-                                    "product_id": 2835
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "description": "Xbox RB Button (button8) → Delegate to subagent",
-            "manipulators": [
-                {
-                    "type": "basic",
-                    "from": {
-                        "pointing_button": "button8"
-                    },
-                    "to": [
-                        {
-                            "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
-                        }
-                    ],
-                    "conditions": [
+                            "type": "variable_if",
+                            "name": "rb_held",
+                            "value": 0
+                        },
                         {
                             "type": "device_if",
                             "identifiers": [
@@ -218,7 +612,7 @@
             ]
         },
         {
-            "description": "Xbox D-pad Left → Delete Word (Opt+Backspace)",
+            "description": "Xbox D-pad Left → Delete Word (Opt+Backspace) [no modifier]",
             "manipulators": [
                 {
                     "type": "basic",
@@ -233,6 +627,11 @@
                     ],
                     "conditions": [
                         {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 0
+                        },
+                        {
                             "type": "device_if",
                             "identifiers": [
                                 {
@@ -246,7 +645,7 @@
             ]
         },
         {
-            "description": "Xbox D-pad Right → Enter key",
+            "description": "Xbox D-pad Right → Enter key [no modifier]",
             "manipulators": [
                 {
                     "type": "basic",
@@ -259,6 +658,11 @@
                         }
                     ],
                     "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "lb_held",
+                            "value": 0
+                        },
                         {
                             "type": "device_if",
                             "identifiers": [
