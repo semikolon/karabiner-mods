@@ -36,7 +36,7 @@ QWERTY: z x c v b n m , . /
 **After ANY modification to `mods/keyboard_text_shortcuts.json`, you MUST regenerate the cheat sheet:**
 
 ```bash
-python3 scripts/generate_cheatsheet_ai.py
+.venv/bin/python scripts/generate_cheatsheet_ai.py
 ```
 
 This ensures the visual documentation stays in sync with the actual shortcuts.
@@ -48,6 +48,8 @@ The script:
 4. Generates `docs/cheatsheet_ai.png` using Gemini 3 Pro Image (Nano Banana Pro)
 
 **Requires**: `GEMINI_API_KEY` environment variable
+
+**Python Environment**: Uses project venv at `.venv/` with `google-genai` installed. If missing: `python3 -m venv .venv && .venv/bin/pip install google-genai`
 
 ## Adding New Shortcuts
 
