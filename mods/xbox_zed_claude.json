@@ -188,13 +188,12 @@
                 },
                 {
                     "type": "basic",
-                    "description": "Menu (DICT) → End SuperWhisper with suffix space",
+                    "description": "Menu (DICT) → End SuperWhisper with prefix space",
                     "from": { "pointing_button": "button12" },
                     "to": [
                         { "set_variable": { "name": "dictation_active", "value": 0 } },
-                        { "key_code": "non_us_backslash" },
                         { "key_code": "spacebar" },
-                        { "key_code": "left_arrow" }
+                        { "key_code": "non_us_backslash" }
                     ],
                     "conditions": [
                         { "type": "variable_if", "name": "dictation_active", "value": 1 },
