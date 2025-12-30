@@ -39,7 +39,7 @@ SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 KEYBOARD_CONFIG_PATH = PROJECT_ROOT / "mods" / "keyboard_text_shortcuts.json"
 XBOX_CONFIG_PATH = PROJECT_ROOT / "mods" / "xbox_zed_claude.json"
-DICTATION_CONFIG_PATH = PROJECT_ROOT / "mods" / "dictation_toggle.json"
+# Note: DICT button is now merged into xbox_zed_claude.json (Dec 2025)
 OUTPUT_DIR = PROJECT_ROOT / "docs"
 OUTPUT_KEYBOARD = OUTPUT_DIR / "cheatsheet_keyboard.png"
 OUTPUT_XBOX = OUTPUT_DIR / "cheatsheet_xbox.png"
@@ -118,10 +118,11 @@ def extract_keyboard_shortcuts(config_path: Path) -> list[dict]:
     return sorted(shortcuts, key=lambda x: (x["tier"], x["key"]))
 
 
-def extract_xbox_mappings(config_path: Path, dictation_path: Path) -> dict:
-    """Extract Xbox controller mappings from Karabiner configs.
+def extract_xbox_mappings(config_path: Path) -> dict:
+    """Extract Xbox controller mappings from Karabiner config.
 
     Returns dict with 'standalone' and 'combos' keys for structured display.
+    Note: DICT button is now included in the main xbox_zed_claude.json file.
     """
     # Button label mappings (physical labels on controller)
     BUTTON_LABELS = {
@@ -149,97 +150,86 @@ def extract_xbox_mappings(config_path: Path, dictation_path: Path) -> dict:
         config = json.load(f)
 
     for rule in config["rules"]:
-        desc = rule.get("description", "")
-        manipulator = rule["manipulators"][0]
+        # Iterate over ALL manipulators in the rule (important for merged configs)
+        for manipulator in rule["manipulators"]:
+            desc = manipulator.get("description", "") or rule.get("description", "")
 
-        # Get button from pointing_button or generic_desktop
-        from_key = manipulator["from"]
-        if "pointing_button" in from_key:
-            button = from_key["pointing_button"]
-        elif "generic_desktop" in from_key:
-            button = from_key["generic_desktop"]
-        else:
-            continue
-
-        # Check for combo vs standalone
-        conditions = manipulator.get("conditions", [])
-        is_lb_combo = any(c.get("name") == "lb_held" and c.get("value") == 1 for c in conditions)
-        is_rb_combo = any(c.get("name") == "rb_held" and c.get("value") == 1 for c in conditions)
-
-        # Extract output text or key action
-        to_action = manipulator["to"][0] if manipulator.get("to") else None
-        to_if_alone = manipulator.get("to_if_alone", [{}])[0] if manipulator.get("to_if_alone") else None
-
-        # For modifier buttons, use to_if_alone for the tap action
-        if to_if_alone and "shell_command" in to_if_alone:
-            shell_cmd = to_if_alone["shell_command"]
-            text_match = re.search(r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd)
-            if text_match:
-                tap_output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
+            # Get button from pointing_button or generic_desktop
+            from_key = manipulator["from"]
+            if "pointing_button" in from_key:
+                button = from_key["pointing_button"]
+            elif "generic_desktop" in from_key:
+                button = from_key["generic_desktop"]
             else:
-                tap_output = desc.split("→")[-1].strip() if "→" in desc else desc
-        else:
-            tap_output = None
+                continue
 
-        if to_action:
-            if "shell_command" in to_action:
-                shell_cmd = to_action["shell_command"]
+            # Check for combo vs standalone
+            conditions = manipulator.get("conditions", [])
+            is_lb_combo = any(c.get("name") == "lb_held" and c.get("value") == 1 for c in conditions)
+            is_rb_combo = any(c.get("name") == "rb_held" and c.get("value") == 1 for c in conditions)
+
+            # Extract output text or key action
+            to_action = manipulator["to"][0] if manipulator.get("to") else None
+            to_if_alone = manipulator.get("to_if_alone", [{}])[0] if manipulator.get("to_if_alone") else None
+
+            # For modifier buttons, use to_if_alone for the tap action
+            if to_if_alone and "shell_command" in to_if_alone:
+                shell_cmd = to_if_alone["shell_command"]
                 text_match = re.search(r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd)
                 if text_match:
-                    output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
+                    tap_output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
                 else:
-                    output = desc.split("→")[-1].strip() if "→" in desc else desc
-            elif "key_code" in to_action:
-                key = to_action["key_code"]
-                modifiers = to_action.get("modifiers", [])
-                if modifiers:
-                    output = f"[{'+'.join(modifiers)}+{key}]"
+                    tap_output = desc.split("→")[-1].strip() if "→" in desc else desc
+            else:
+                tap_output = None
+
+            if to_action:
+                if "shell_command" in to_action:
+                    shell_cmd = to_action["shell_command"]
+                    text_match = re.search(r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd)
+                    if text_match:
+                        output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
+                    else:
+                        output = desc.split("→")[-1].strip() if "→" in desc else desc
+                elif "key_code" in to_action:
+                    key = to_action["key_code"]
+                    modifiers = to_action.get("modifiers", [])
+                    if modifiers:
+                        output = f"[{'+'.join(modifiers)}+{key}]"
+                    else:
+                        output = f"[{key}]"
+                elif "set_variable" in to_action:
+                    # This is a modifier definition, use tap action
+                    output = tap_output or "modifier"
                 else:
-                    output = f"[{key}]"
-            elif "set_variable" in to_action:
-                # This is a modifier definition, use tap action
-                output = tap_output or "modifier"
+                    output = desc
             else:
                 output = desc
-        else:
-            output = desc
 
-        button_info = BUTTON_LABELS.get(button, (button, None))
-        button_name = button_info[0]
-        label = button_info[1]
+            button_info = BUTTON_LABELS.get(button, (button, None))
+            button_name = button_info[0]
+            label = button_info[1]
 
-        mapping = {
-            "button": button_name,
-            "label": label,
-            "output": output,
-            "desc": desc,
-        }
-
-        if is_lb_combo:
-            lb_combos.append(mapping)
-        elif is_rb_combo:
-            rb_combos.append(mapping)
-        elif "set_variable" in (to_action or {}):
-            # Modifier button - add to standalone with tap action
-            mapping["output"] = tap_output or "modifier"
-            mapping["is_modifier"] = True
-            standalone.append(mapping)
-        else:
-            standalone.append(mapping)
-
-    # Read dictation config for DICT button
-    if dictation_path.exists():
-        with open(dictation_path) as f:
-            dictation_config = json.load(f)
-
-        for rule in dictation_config["rules"]:
-            desc = rule.get("description", "")
-            standalone.append({
-                "button": "Menu",
-                "label": "DICT",
-                "output": "SuperWhisper (dictation)",
+            mapping = {
+                "button": button_name,
+                "label": label,
+                "output": output,
                 "desc": desc,
-            })
+            }
+
+            if is_lb_combo:
+                lb_combos.append(mapping)
+            elif is_rb_combo:
+                rb_combos.append(mapping)
+            elif "set_variable" in (to_action or {}):
+                # Modifier button - add to standalone with tap action
+                mapping["output"] = tap_output or "modifier"
+                mapping["is_modifier"] = True
+                standalone.append(mapping)
+            else:
+                standalone.append(mapping)
+
+    # Note: DICT button is now in main config, extracted above
 
     return {
         "standalone": standalone,
@@ -433,9 +423,9 @@ def main():
     keyboard_shortcuts = extract_keyboard_shortcuts(KEYBOARD_CONFIG_PATH)
     print(f"Found {len(keyboard_shortcuts)} keyboard shortcuts")
 
-    # Extract Xbox mappings (including dictation)
-    print(f"Reading Xbox configs: {XBOX_CONFIG_PATH}, {DICTATION_CONFIG_PATH}")
-    xbox_mappings = extract_xbox_mappings(XBOX_CONFIG_PATH, DICTATION_CONFIG_PATH)
+    # Extract Xbox mappings (DICT button now included in main config)
+    print(f"Reading Xbox config: {XBOX_CONFIG_PATH}")
+    xbox_mappings = extract_xbox_mappings(XBOX_CONFIG_PATH)
     total_xbox = len(xbox_mappings["standalone"]) + len(xbox_mappings["lb_combos"]) + len(xbox_mappings["rb_combos"])
     print(f"Found {total_xbox} Xbox mappings ({len(xbox_mappings['standalone'])} standalone, {len(xbox_mappings['lb_combos'])} LB+, {len(xbox_mappings['rb_combos'])} RB+)")
 

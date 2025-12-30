@@ -7,8 +7,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 ## Key Files
 
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
-- `mods/xbox_zed_claude.json` - Xbox controller mappings (global)
-- `mods/dictation_toggle.json` - DICT button → SuperWhisper
+- `mods/xbox_zed_claude.json` - Xbox controller mappings (all in one rule: standalone + LB/RB combos + DICT)
 - `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
 - `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
 - `docs/cheatsheet_xbox.png` - Xbox controller mappings visual reference
@@ -44,7 +43,7 @@ This ensures the visual documentation stays in sync with the actual shortcuts.
 
 The script generates TWO separate images:
 1. `docs/cheatsheet_keyboard.png` - Keyboard shortcuts (from `keyboard_text_shortcuts.json`)
-2. `docs/cheatsheet_xbox.png` - Xbox controller (from `xbox_zed_claude.json` + `dictation_toggle.json`)
+2. `docs/cheatsheet_xbox.png` - Xbox controller (from `xbox_zed_claude.json`)
 
 **Requires**: `GEMINI_API_KEY` environment variable
 
@@ -77,8 +76,7 @@ After creating the symlink, open Karabiner-Elements → Complex Modifications �
 ```
 ~/.config/karabiner/assets/complex_modifications/
 ├── keyboard_text_shortcuts.json → mods/keyboard_text_shortcuts.json
-├── xbox_zed_claude.json → mods/xbox_zed_claude.json
-└── dictation_toggle.json → mods/dictation_toggle.json
+└── xbox_zed_claude.json → mods/xbox_zed_claude.json
 ```
 
 **Disabled** (removed from Karabiner):
@@ -169,9 +167,8 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 | *(none)* | L-Stick | button14 | /total-recap (session recovery) |
 | *(none)* | R-Stick | button15 | "Commit everything in logical groups. Then push." |
 
-### Xbox Controller Files
-- `mods/xbox_zed_claude.json` - Main controller mappings (13 inputs, global)
-- `mods/dictation_toggle.json` - DICT button (button12) → SuperWhisper
+### Xbox Controller File
+- `mods/xbox_zed_claude.json` - All controller mappings in one rule (23 manipulators: standalone + LB/RB combos + DICT)
 
 **Note**: D-pad uses `generic_desktop: dpad_left` syntax, not `pointing_button`. See `docs/xbox_button_reference.md` for details.
 

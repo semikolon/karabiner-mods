@@ -41,12 +41,11 @@ This repository contains Karabiner-Elements configurations for supercharging dev
 
 | File | Description |
 |------|-------------|
-| `keyboard_text_shortcuts.json` | **NEW** - Keyboard shortcuts for typing common text (Fn+u → "Ultrathink") |
-| `app_specific_actions.json` | Cursor-specific Xbox controller mappings |
-| `xbox_zed_claude.json` | Zed-specific Xbox controller mappings for Claude Code |
-| `dictation_toggle.json` | Xbox Menu button → dictation toggle |
-| `mouse_browser_navigation.json` | Mouse buttons for browser back/forward |
-| `mouse_safari_navigation.json` | Safari-specific mouse navigation |
+| `keyboard_text_shortcuts.json` | Caps+key shortcuts for typing common text (31 shortcuts) |
+| `xbox_zed_claude.json` | Xbox controller mappings - all in one rule (23 mappings incl. DICT) |
+| `app_specific_actions.json` | *(deprecated)* Old Cursor-specific Xbox mappings |
+| `mouse_browser_navigation.json` | *(broken)* Mouse buttons for browser back/forward |
+| `mouse_safari_navigation.json` | *(broken)* Safari-specific mouse navigation |
 
 ---
 
@@ -236,15 +235,11 @@ All these mappings only trigger when Cursor is the active application.
    - **Left Stick Click (button14)**: Send Enter in composer (without Cmd modifier)
 
 ### Global Actions
-These mappings work in any application.
+These mappings work in any application (now all in `mods/xbox_zed_claude.json`).
 
-1. **Dictation (mods/dictation_toggle.json)**
-   - **Menu Button (button12)**: Focus composer and toggle dictation (Escape → Escape → Cmd+I → Ctrl+Ctrl)
-   - This sequence ensures dictation starts in the composer:
-     1. First Escape cancels any active dictation
-     2. Second Escape focuses the editor
-     3. Cmd+I focuses the composer
-     4. Ctrl+Ctrl starts dictation
+1. **Dictation (Menu/DICT Button)**
+   - **Menu Button (button12)**: Triggers SuperWhisper with trailing space workaround
+   - Sequence: `space → left_arrow → non_us_backslash` so dictated text ends with a space
 
 ### Zed-Specific Actions (mods/xbox_zed_claude.json)
 All these mappings only trigger when Zed is the active application.

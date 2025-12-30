@@ -133,18 +133,18 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 ### Active Configuration Files
 | File | Purpose | Status |
 |------|---------|--------|
-| `mods/xbox_zed_claude.json` | Main controller mappings (13 inputs) | **ACTIVE** |
-| `mods/dictation_toggle.json` | DICT button (button12) only | **ACTIVE** |
+| `mods/xbox_zed_claude.json` | All controller mappings (23 manipulators in one rule) | **ACTIVE** |
 | `mods/keyboard_text_shortcuts.json` | Caps+key text shortcuts | **ACTIVE** |
 
 ### Deprecated/Disabled Files
 | File | Purpose | Status |
 |------|---------|--------|
+| `mods/dictation_toggle.json` | Merged into xbox_zed_claude.json | **MERGED** |
 | `mods/app_specific_actions.json` | Old Cursor-specific mappings | **DISABLED** |
 | `mods/mouse_browser_navigation.json` | Mouse button browser nav (broken) | **DISABLED** |
 | `mods/mouse_safari_navigation.json` | Mouse button Safari nav (broken) | **DISABLED** |
 
-**Note**: `dictation_toggle.json` and `xbox_zed_claude.json` don't conflict - dictation_toggle handles button12 exclusively, while xbox_zed_claude handles all other buttons plus D-pad.
+**Note**: All Xbox mappings now consolidated in one file with one rule for easier enable/disable in Karabiner.
 
 ## Karabiner JSON Pattern
 
@@ -221,14 +221,15 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 
 **Important**: D-pad uses `generic_desktop` key, not `pointing_button`. Valid values: `dpad_left`, `dpad_right`, `dpad_up`, `dpad_down`.
 
-## Session Learnings (December 21, 2025)
+## Session Learnings (December 21-30, 2025)
 
 ### SuperWhisper Integration
 - **Issue**: button12 was detected in EventViewer but SuperWhisper didn't activate
-- **Root Cause 1**: `dictation_toggle.json` was sending `Ctrl+Ctrl` (macOS dictation)
+- **Root Cause 1**: Originally was sending `Ctrl+Ctrl` (macOS dictation)
 - **Root Cause 2**: Then tried `grave_accent_and_tilde`, but on ISO keyboards (Swedish), that's the wrong key!
 - **Solution**: SuperWhisper uses `carbonKeyCode: 50` which maps to `non_us_backslash` on ISO keyboards (the § key above Tab)
-- **Fix**: Updated `dictation_toggle.json` to send `non_us_backslash`
+- **Fix**: Now in `xbox_zed_claude.json` - sends `non_us_backslash`
+- **Trailing space workaround**: DICT button outputs `space → left_arrow → trigger` so dictated text ends up with a trailing space
 - **Config location**: `~/Library/Preferences/com.superduper.superwhisper.plist`
 
 ### ISO vs ANSI Keyboard Key Codes
@@ -263,7 +264,8 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 ### Configuration Cleanup
 - Removed deprecated `app_specific_actions.json` (old Cursor-specific mappings)
 - Removed broken `mouse_browser_navigation.json` and `mouse_safari_navigation.json`
-- Active configs now: `xbox_zed_claude.json`, `dictation_toggle.json`, `keyboard_text_shortcuts.json`
+- Merged `dictation_toggle.json` into `xbox_zed_claude.json` (one rule, one toggle in Karabiner)
+- Active configs now: `xbox_zed_claude.json`, `keyboard_text_shortcuts.json`
 
 ## Button Modifier Combos (IMPLEMENTED - December 2025)
 
