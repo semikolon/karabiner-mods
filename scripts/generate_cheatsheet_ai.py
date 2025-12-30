@@ -149,6 +149,7 @@ def extract_xbox_mappings(config_path: Path) -> dict:
     standalone = []
     lb_combos = []
     rb_combos = []
+    seen_standalone_buttons = set()  # Track buttons to avoid duplicates (e.g., DICT has 2 manipulators)
 
     # Read main Xbox config
     with open(config_path) as f:
@@ -204,27 +205,33 @@ def extract_xbox_mappings(config_path: Path) -> dict:
             else:
                 tap_output = None
 
-            if to_action:
-                if "shell_command" in to_action:
-                    output = extract_text_from_shell(to_action["shell_command"])
-                    if not output:
-                        output = desc.split("→")[-1].strip() if "→" in desc else desc
-                elif "key_code" in to_action:
-                    key = to_action["key_code"]
+            # Look through ALL actions in 'to' array, not just first
+            to_actions = manipulator.get("to", [])
+            output = None
+
+            for action in to_actions:
+                if "shell_command" in action:
+                    extracted = extract_text_from_shell(action["shell_command"])
+                    if extracted:
+                        output = extracted
+                        break
+                elif "key_code" in action:
+                    key = action["key_code"]
                     key_name = KEY_NAMES.get(key, key)
-                    modifiers = to_action.get("modifiers", [])
+                    modifiers = action.get("modifiers", [])
                     if modifiers:
                         mod_str = "+".join(m.title() for m in modifiers)
                         output = f"{mod_str}+{key_name}"
                     else:
                         output = key_name
-                elif "set_variable" in to_action:
-                    # This is a modifier definition, use tap action
+                    # Don't break - shell_command takes priority if found later
+
+            # If still no output, check if it's a modifier with tap action
+            if not output:
+                if any("set_variable" in a for a in to_actions):
                     output = tap_output or "modifier"
                 else:
-                    output = desc
-            else:
-                output = desc
+                    output = desc.split("→")[-1].strip() if "→" in desc else desc
 
             button_info = BUTTON_LABELS.get(button, (button, None))
             button_name = button_info[0]
@@ -241,12 +248,21 @@ def extract_xbox_mappings(config_path: Path) -> dict:
                 lb_combos.append(mapping)
             elif is_rb_combo:
                 rb_combos.append(mapping)
-            elif "set_variable" in (to_action or {}):
-                # Modifier button - add to standalone with tap action
-                mapping["output"] = tap_output or "modifier"
-                mapping["is_modifier"] = True
-                standalone.append(mapping)
             else:
+                # Skip if we've already seen this button (e.g., DICT has start + end manipulators)
+                if button_name in seen_standalone_buttons:
+                    continue
+                seen_standalone_buttons.add(button_name)
+
+                # Check if this is a PURE modifier (only set_variable, no other action)
+                # DICT has set_variable + key_code, so it's NOT a pure modifier
+                is_pure_modifier = (
+                    any("set_variable" in a for a in to_actions) and
+                    not any("key_code" in a or "shell_command" in a for a in to_actions)
+                )
+                if is_pure_modifier:
+                    mapping["output"] = tap_output or "modifier"
+                    mapping["is_modifier"] = True
                 standalone.append(mapping)
 
     # Note: DICT button is now in main config, extracted above
@@ -361,10 +377,16 @@ STYLE: Minimalist synthwave, dark navy background, cyan accents
 
 CONTROLLER PHYSICAL LAYOUT (use this for accurate button positions):
 - Face buttons (RIGHT side, diamond pattern): Y=top yellow, X=left blue, B=right red, A=bottom green
-- Shoulder buttons (TOP edge): LB=left bumper, RB=right bumper
-- D-pad (LEFT side): directional cross
-- Center buttons: View (left, two squares), Xbox logo (center), Menu (right, three lines)
-- Analog sticks: L-Stick (left), R-Stick (right) - both clickable
+- Shoulder buttons (TOP edge of controller): LB=left bumper, RB=right bumper
+- D-pad (LEFT-LOWER area): the cross-shaped directional pad
+- L-Stick (LEFT-UPPER area): the LEFT ANALOG JOYSTICK - the round stick you push, ABOVE and LEFT of D-pad
+- R-Stick (RIGHT-LOWER area): the RIGHT ANALOG JOYSTICK - the round stick below the face buttons
+- View button (CENTER-LEFT of the three small center buttons): two overlapping squares icon
+- Share button (ABSOLUTE CENTER - the tiny button BETWEEN View and Menu): DO NOT LABEL THIS - it cannot be mapped!
+- Menu button (CENTER-RIGHT of the three small center buttons): three horizontal lines icon - THIS is where SuperWhisper/DICT goes
+- Guide button (TOP-CENTER): the large GLOWING XBOX LOGO "X" between LB and RB at the TOP of the controller
+
+CRITICAL: The Share button in the absolute center is NOT mappable and should have NO label pointing to it!
 
 EXACT DATA TO DISPLAY:
 
