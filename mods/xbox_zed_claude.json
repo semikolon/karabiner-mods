@@ -188,14 +188,12 @@
                 },
                 {
                     "type": "basic",
-                    "description": "Menu (DICT) → End SuperWhisper with suffix space (delete-forward cleanup)",
+                    "description": "Menu (DICT) → End SuperWhisper with delayed suffix space",
                     "from": { "pointing_button": "button12" },
                     "to": [
                         { "set_variable": { "name": "dictation_active", "value": 0 } },
                         { "key_code": "non_us_backslash" },
-                        { "key_code": "delete_forward" },
-                        { "key_code": "spacebar" },
-                        { "key_code": "left_arrow" }
+                        { "shell_command": "sleep 1 && osascript -e 'tell application \"System Events\" to keystroke \" \"'" }
                     ],
                     "conditions": [
                         { "type": "variable_if", "name": "dictation_active", "value": 1 },
