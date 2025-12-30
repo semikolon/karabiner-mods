@@ -193,7 +193,8 @@
                     "to": [
                         { "set_variable": { "name": "dictation_active", "value": 0 } },
                         { "key_code": "non_us_backslash" },
-                        { "key_code": "spacebar" }
+                        { "key_code": "spacebar" },
+                        { "key_code": "left_arrow" }
                     ],
                     "conditions": [
                         { "type": "variable_if", "name": "dictation_active", "value": 1 },
