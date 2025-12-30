@@ -1,22 +1,20 @@
 #!/usr/bin/env python3
 """
-Generate a visual cheat sheet for Karabiner keyboard shortcuts using Nano Banana Pro.
-(Gemini 3 Pro Image - Google's state-of-the-art infographic generation model)
+Generate visual cheat sheets for Karabiner keyboard and Xbox controller shortcuts.
+Uses Nano Banana Pro (Gemini 3 Pro Image) for AI-generated infographics.
 
-Reads shortcuts from the JSON config and produces a beautiful AI-generated infographic.
+Generates TWO separate images for clarity:
+- docs/cheatsheet_keyboard.png - Keyboard shortcuts only
+- docs/cheatsheet_xbox.png - Xbox controller mappings only
 
 Usage:
     python3 scripts/generate_cheatsheet_ai.py
-
-Output:
-    docs/cheatsheet_ai.png
 
 Requires:
     - GEMINI_API_KEY environment variable
     - pip install google-genai pillow
 """
 
-import base64
 import json
 import os
 import re
@@ -41,8 +39,10 @@ SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 KEYBOARD_CONFIG_PATH = PROJECT_ROOT / "mods" / "keyboard_text_shortcuts.json"
 XBOX_CONFIG_PATH = PROJECT_ROOT / "mods" / "xbox_zed_claude.json"
+DICTATION_CONFIG_PATH = PROJECT_ROOT / "mods" / "dictation_toggle.json"
 OUTPUT_DIR = PROJECT_ROOT / "docs"
-OUTPUT_PNG = OUTPUT_DIR / "cheatsheet_ai.png"
+OUTPUT_KEYBOARD = OUTPUT_DIR / "cheatsheet_keyboard.png"
+OUTPUT_XBOX = OUTPUT_DIR / "cheatsheet_xbox.png"
 
 # Tier configuration for keyboard shortcuts
 KEYBOARD_TIER_NAMES = {
@@ -54,50 +54,16 @@ KEYBOARD_TIER_NAMES = {
     6: "Slash Commands",
 }
 
-# Xbox controller categories
-XBOX_CATEGORIES = {
-    "labeled": "Labeled Buttons",
-    "workflow": "Workflow Actions",
-    "utility": "Utility",
-}
-
 TIER_ASSIGNMENTS = {
-    "u": 1,
-    "c": 1,
-    "y": 1,
-    "p": 1,
-    "s": 1,
-    "g": 1,
-    "d": 2,
-    "e": 2,
-    "a": 2,
-    "x": 3,
-    "r": 3,
-    "n": 3,
-    "t": 4,
-    "ö": 4,
-    "w": 5,
-    "å": 5,
-    "f": 5,
-    "h": 5,
-    "j": 5,  # Document insight
-    # Slash commands (Tier 6)
-    "m": 6,  # /recall (memory)
-    "k": 6,  # /capture (keep)
-    "i": 6,  # /significance (important)
-    "b": 6,  # /debug-session (bug)
-    "l": 6,  # /ui-prototype (layout)
-    "o": 6,  # /consensus-consult (opinions)
-    "q": 6,  # /docs-review (quality)
+    "u": 1, "c": 1, "y": 1, "p": 1, "s": 1, "g": 1,
+    "d": 2, "e": 2, "a": 2,
+    "x": 3, "r": 3, "n": 3,
+    "t": 4, "ö": 4,
+    "w": 5, "å": 5, "f": 5, "h": 5, "j": 5, "ä": 5,
+    "m": 6, "k": 6, "i": 6, "b": 6, "l": 6, "o": 6, "q": 6,
+    # New shortcuts
+    ".": 2, "v": 4, "z": 6,
 }
-
-# Visual style reference images (for AI prompt context)
-STYLE_REFERENCES = [
-    "/Users/fredrikbranstrom/Design/kimonokittens-arts-crafts.png",
-    "/Users/fredrikbranstrom/Design/kimonokittens-game-night.png",
-    "/Users/fredrikbranstrom/Design/kimonokittens-horror-night.png",
-    "/Users/fredrikbranstrom/Design/dreams-come-true.jpg",
-]
 
 
 def extract_keyboard_shortcuts(config_path: Path) -> list[dict]:
@@ -142,23 +108,21 @@ def extract_keyboard_shortcuts(config_path: Path) -> list[dict]:
 
         tier = TIER_ASSIGNMENTS.get(svorak_key, 1)
 
-        shortcuts.append(
-            {
-                "key": svorak_key,
-                "output": output_text.strip(),
-                "tier": tier,
-                "tier_name": KEYBOARD_TIER_NAMES.get(tier, f"Tier {tier}"),
-            }
-        )
+        shortcuts.append({
+            "key": svorak_key,
+            "output": output_text.strip(),
+            "tier": tier,
+            "tier_name": KEYBOARD_TIER_NAMES.get(tier, f"Tier {tier}"),
+        })
 
     return sorted(shortcuts, key=lambda x: (x["tier"], x["key"]))
 
 
-def extract_xbox_mappings(config_path: Path) -> list[dict]:
-    """Extract Xbox controller mappings from Karabiner config."""
-    with open(config_path) as f:
-        config = json.load(f)
+def extract_xbox_mappings(config_path: Path, dictation_path: Path) -> dict:
+    """Extract Xbox controller mappings from Karabiner configs.
 
+    Returns dict with 'standalone' and 'combos' keys for structured display.
+    """
     # Button label mappings (physical labels on controller)
     BUTTON_LABELS = {
         "button1": ("A", "STANDUP"),
@@ -176,7 +140,13 @@ def extract_xbox_mappings(config_path: Path) -> list[dict]:
         "dpad_right": ("D-Right", None),
     }
 
-    mappings = []
+    standalone = []
+    lb_combos = []
+    rb_combos = []
+
+    # Read main Xbox config
+    with open(config_path) as f:
+        config = json.load(f)
 
     for rule in config["rules"]:
         desc = rule.get("description", "")
@@ -191,24 +161,46 @@ def extract_xbox_mappings(config_path: Path) -> list[dict]:
         else:
             continue
 
+        # Check for combo vs standalone
+        conditions = manipulator.get("conditions", [])
+        is_lb_combo = any(c.get("name") == "lb_held" and c.get("value") == 1 for c in conditions)
+        is_rb_combo = any(c.get("name") == "rb_held" and c.get("value") == 1 for c in conditions)
+
         # Extract output text or key action
-        to_action = manipulator["to"][0]
-        if "shell_command" in to_action:
-            shell_cmd = to_action["shell_command"]
-            text_match = re.search(
-                r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd
-            )
+        to_action = manipulator["to"][0] if manipulator.get("to") else None
+        to_if_alone = manipulator.get("to_if_alone", [{}])[0] if manipulator.get("to_if_alone") else None
+
+        # For modifier buttons, use to_if_alone for the tap action
+        if to_if_alone and "shell_command" in to_if_alone:
+            shell_cmd = to_if_alone["shell_command"]
+            text_match = re.search(r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd)
             if text_match:
-                output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
+                tap_output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
             else:
-                output = desc.split("→")[-1].strip() if "→" in desc else desc
-        elif "key_code" in to_action:
-            key = to_action["key_code"]
-            modifiers = to_action.get("modifiers", [])
-            if modifiers:
-                output = f"[{'+'.join(modifiers)}+{key}]"
+                tap_output = desc.split("→")[-1].strip() if "→" in desc else desc
+        else:
+            tap_output = None
+
+        if to_action:
+            if "shell_command" in to_action:
+                shell_cmd = to_action["shell_command"]
+                text_match = re.search(r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd)
+                if text_match:
+                    output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
+                else:
+                    output = desc.split("→")[-1].strip() if "→" in desc else desc
+            elif "key_code" in to_action:
+                key = to_action["key_code"]
+                modifiers = to_action.get("modifiers", [])
+                if modifiers:
+                    output = f"[{'+'.join(modifiers)}+{key}]"
+                else:
+                    output = f"[{key}]"
+            elif "set_variable" in to_action:
+                # This is a modifier definition, use tap action
+                output = tap_output or "modifier"
             else:
-                output = f"[{key}]"
+                output = desc
         else:
             output = desc
 
@@ -216,159 +208,191 @@ def extract_xbox_mappings(config_path: Path) -> list[dict]:
         button_name = button_info[0]
         label = button_info[1]
 
-        # Categorize
-        if label:
-            category = "labeled"
-        elif button in ["dpad_left", "dpad_right", "button13"]:
-            category = "utility"
-        else:
-            category = "workflow"
-
-        mappings.append({
+        mapping = {
             "button": button_name,
             "label": label,
             "output": output,
-            "category": category,
-            "category_name": XBOX_CATEGORIES[category],
-        })
+            "desc": desc,
+        }
 
-    # Sort: labeled first, then workflow, then utility
-    category_order = {"labeled": 0, "workflow": 1, "utility": 2}
-    return sorted(mappings, key=lambda x: (category_order[x["category"]], x["button"]))
+        if is_lb_combo:
+            lb_combos.append(mapping)
+        elif is_rb_combo:
+            rb_combos.append(mapping)
+        elif "set_variable" in (to_action or {}):
+            # Modifier button - add to standalone with tap action
+            mapping["output"] = tap_output or "modifier"
+            mapping["is_modifier"] = True
+            standalone.append(mapping)
+        else:
+            standalone.append(mapping)
+
+    # Read dictation config for DICT button
+    if dictation_path.exists():
+        with open(dictation_path) as f:
+            dictation_config = json.load(f)
+
+        for rule in dictation_config["rules"]:
+            desc = rule.get("description", "")
+            standalone.append({
+                "button": "Menu",
+                "label": "DICT",
+                "output": "SuperWhisper (dictation)",
+                "desc": desc,
+            })
+
+    return {
+        "standalone": standalone,
+        "lb_combos": lb_combos,
+        "rb_combos": rb_combos,
+    }
 
 
-def build_prompt(keyboard_shortcuts: list[dict], xbox_mappings: list[dict]) -> str:
-    """Build the prompt for Nano Banana Pro."""
+def build_keyboard_prompt(shortcuts: list[dict]) -> str:
+    """Build prompt for keyboard-only cheatsheet."""
 
-    # Group keyboard shortcuts by tier
+    # Group by tier
     tiers = {}
-    for s in keyboard_shortcuts:
+    for s in shortcuts:
         tier = s["tier"]
         if tier not in tiers:
             tiers[tier] = {"name": s["tier_name"], "shortcuts": []}
         tiers[tier]["shortcuts"].append(s)
 
-    # Build keyboard content - just key → output, no "Caps+" prefix on each line
-    keyboard_lines = ["KEYBOARD SHORTCUTS (all use Caps Lock + key):"]
+    # Build content with fuller text
+    content_lines = []
     for tier_num in sorted(tiers.keys()):
         tier = tiers[tier_num]
-        keyboard_lines.append(f"\n  {tier['name']}:")
+        content_lines.append(f"\n{tier['name']}:")
         for s in tier["shortcuts"]:
-            # Allow longer text - prioritize showing full content
-            output = s["output"][:60] + "..." if len(s["output"]) > 60 else s["output"]
-            keyboard_lines.append(f"    {s['key']} → {output}")
+            # Show more text - only truncate very long ones
+            output = s["output"][:80] + "..." if len(s["output"]) > 80 else s["output"]
+            content_lines.append(f"  [{s['key']}] → {output}")
 
-    # Group Xbox mappings by category
-    xbox_cats = {}
-    for m in xbox_mappings:
-        cat = m["category"]
-        if cat not in xbox_cats:
-            xbox_cats[cat] = {"name": m["category_name"], "mappings": []}
-        xbox_cats[cat]["mappings"].append(m)
+    content = "\n".join(content_lines)
 
-    # Build Xbox content
-    xbox_lines = ["\nXBOX CONTROLLER:"]
-    category_order = ["labeled", "workflow", "utility"]
-    for cat in category_order:
-        if cat in xbox_cats:
-            xbox_lines.append(f"\n  {xbox_cats[cat]['name']}:")
-            for m in xbox_cats[cat]["mappings"]:
-                btn = m["button"]
-                label = f" ({m['label']})" if m["label"] else ""
-                # Allow longer text - prioritize showing full content
-                output = m["output"][:55] + "..." if len(m["output"]) > 55 else m["output"]
-                xbox_lines.append(f"    {btn}{label} → {output}")
+    return f"""Create a CLEAN, READABLE keyboard shortcut reference card.
 
-    keyboard_content = "\n".join(keyboard_lines)
-    xbox_content = "\n".join(xbox_lines)
+ALL SHORTCUTS USE: Caps Lock + key (show this ONCE as a header, NOT on each line)
 
-    prompt = f"""Create a MINIMAL, REFINED synthwave-style infographic for workflow shortcuts.
+SHORTCUTS TO DISPLAY:
+{content}
 
-NO TITLE - maximize space for content.
-
-TWO SECTIONS - LEFT AND RIGHT:
-
-LEFT COLUMN - KEYBOARD SHORTCUTS:
-{keyboard_content}
-
-IMPORTANT FOR KEYBOARD SECTION:
-- State "Caps +" ONCE as a header/legend (e.g., "KEYBOARD (Caps + key)")
-- DO NOT repeat "Caps Lock" on each individual shortcut badge - wasteful!
-- Each shortcut should show just the key letter in a small badge, then the output text
-- Example: [u] → Ultrathink   (NOT [Caps Lock] [u] → Ultrathink)
-
-RIGHT COLUMN - XBOX CONTROLLER:
-{xbox_content}
-
-CRITICAL FOR XBOX SECTION:
-- MUST include a visual diagram/illustration of an Xbox controller
-- Show button positions on the actual controller shape
-- This controller diagram is REQUIRED - always include it
-
-DESIGN - INSPIRED BY KIMONO KITTENS DASHBOARD (minimalist synthwave):
-
-EXACT COLORS TO USE:
-- Background: Dark navy #1a1a2e
-- Card backgrounds: Subtle purple-tinted panels with fine 1px borders
-- Keyboard section accent: Coral/orange #ff8c42
-- Xbox section accent: Electric blue #00d4ff
-- Text: Clean white #eaeaea for content, muted #a0a0a0 for labels
-
-TYPOGRAPHY:
-- Section headers: Stylized scratchy/distressed synthwave font
-- Keys/buttons: Clean monospace in SMALL rounded badges with fine borders
-- Output text: Regular sans-serif, readable size
-- ALL TEXT MUST BE PERFECTLY LEGIBLE AND CORRECTLY SPELLED
+DESIGN REQUIREMENTS:
 
 LAYOUT:
-- Two-column layout: Keyboard (left), Xbox (right)
-- Clean card-based layout with subtle transparency
-- Fine lines, NOT thick neon borders
-- Subtle gradients, NOT intense glow effects
-- Group related items in subsections
+- Single column or two-column layout to fit all shortcuts
+- Group shortcuts by tier/category with subtle section dividers
+- Each shortcut: small key badge [x] followed by the output text
+- Show as much of each phrase as possible - minimize truncation!
 
-VISUAL REAL ESTATE PRIORITY:
-- Use saved space to show MORE of the shortcut output text
-- Minimize truncation - show as much of each phrase as possible
-- Compact key badges, generous space for output text
-- The user needs to see what each shortcut types BEFORE pressing it
+STYLE (minimalist synthwave):
+- Background: Dark navy #1a1a2e, edge-to-edge (NO white borders/margins)
+- Section headers: Coral/orange #ff8c42
+- Key badges: Small, rounded, subtle border
+- Text: Clean white #eaeaea, readable size
 
-VISUAL ELEMENTS:
-- NO sun/horizon motif, NO chrome effects, NO dripping/glitch effects
-- Subtle purple gradient swoosh in background
-- Fine hairline borders on cards
-- Small keyboard icon for left section header
-- Xbox controller diagram for right section (REQUIRED)
-
-Resolution: 2K quality
-Aspect ratio: 16:10 (landscape to fit both columns)
-
-CRITICAL - NO WHITE BORDERS:
-- The image must have NO white margins, borders, or padding around the edges
-- The dark navy background (#1a1a2e) must extend to ALL edges of the image
-- Content should go edge-to-edge (with reasonable internal padding)
-
-Think: Modern dashboard UI meets subtle synthwave aesthetic. Clean, functional, beautiful.
-CRITICAL: Every single shortcut must be readable. Prioritize legibility and content over decoration."""
-
-    return prompt
+CRITICAL:
+- NO white margins or borders - dark background to all edges
+- Show "Caps + key" ONCE at top, not repeated on each shortcut
+- Prioritize showing FULL shortcut text over decoration
+- Every shortcut must be legible
+- Aspect ratio: 16:10 landscape
+- Resolution: 2K quality"""
 
 
-def generate_infographic(prompt: str, output_path: Path) -> bool:
-    """Generate the infographic using Nano Banana Pro."""
+def build_xbox_prompt(mappings: dict) -> str:
+    """Build prompt for Xbox-only cheatsheet."""
+
+    standalone = mappings["standalone"]
+    lb_combos = mappings["lb_combos"]
+    rb_combos = mappings["rb_combos"]
+
+    # Build standalone list
+    standalone_lines = []
+    for m in standalone:
+        label = f" ({m['label']})" if m.get("label") else ""
+        modifier_note = " [MODIFIER]" if m.get("is_modifier") else ""
+        output = m["output"][:60] + "..." if len(m["output"]) > 60 else m["output"]
+        standalone_lines.append(f"  {m['button']}{label}{modifier_note} → {output}")
+
+    # Build combo tables
+    lb_lines = []
+    for m in lb_combos:
+        output = m["output"][:50] + "..." if len(m["output"]) > 50 else m["output"]
+        lb_lines.append(f"  LB+{m['button']} → {output}")
+
+    rb_lines = []
+    for m in rb_combos:
+        output = m["output"][:50] + "..." if len(m["output"]) > 50 else m["output"]
+        rb_lines.append(f"  RB+{m['button']} → {output}")
+
+    standalone_content = "\n".join(standalone_lines)
+    lb_content = "\n".join(lb_lines)
+    rb_content = "\n".join(rb_lines)
+
+    return f"""Create a CLEAN Xbox controller shortcut reference card.
+
+CONTROLLER PHYSICAL LAYOUT (for accurate button positions):
+- Face buttons (RIGHT SIDE, diamond): A=bottom green, B=right red, X=left blue, Y=top yellow
+- Shoulder buttons (TOP EDGE): LB=left bumper, RB=right bumper
+- D-pad (LEFT SIDE): directional pad with 4 directions
+- Center: View button (left), Xbox logo (center), Menu button (right)
+- Analog sticks: Left stick, Right stick (both clickable)
+
+STANDALONE BUTTON ACTIONS (press button alone):
+{standalone_content}
+
+LB+ MODIFIER COMBOS (hold LB, press button):
+{lb_content}
+
+RB+ MODIFIER COMBOS (hold RB, press button):
+{rb_content}
+
+DESIGN REQUIREMENTS:
+
+LAYOUT (top to bottom):
+1. Controller diagram at TOP - clear illustration of Xbox controller
+2. Draw simple lines from buttons to their STANDALONE action labels
+3. Below the diagram: Two tables side-by-side for LB+ and RB+ combos
+4. Lines should be SIMPLE and ACCURATE - go to correct button positions!
+
+CRITICAL FOR DIAGRAM:
+- Lines must connect to CORRECT physical button locations
+- LB/RB are shoulder buttons at TOP of controller
+- A/B/X/Y are face buttons on RIGHT side in diamond pattern
+- D-pad is on LEFT side
+- Do NOT draw lines for modifier combos - those go in tables below
+
+STYLE (minimalist synthwave):
+- Background: Dark navy #1a1a2e, edge-to-edge (NO white borders/margins)
+- Controller: Electric blue #00d4ff outline
+- Section headers: Electric blue accent
+- Text: Clean white #eaeaea
+
+CRITICAL:
+- NO white margins or borders - dark background to all edges
+- Controller diagram is REQUIRED
+- Keep lines minimal and ACCURATE
+- Modifier combos in TABLES, not as diagram lines
+- Aspect ratio: 16:10 landscape
+- Resolution: 2K quality"""
+
+
+def generate_image(prompt: str, output_path: Path, description: str) -> bool:
+    """Generate an infographic using Nano Banana Pro."""
 
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print("Error: GEMINI_API_KEY environment variable not set")
         return False
 
-    print("Connecting to Gemini API...")
-    client = genai.Client(api_key=api_key)
-
-    print("Generating infographic with Nano Banana Pro...")
+    print(f"\nGenerating {description}...")
+    print(f"Prompt length: {len(prompt)} chars")
     print("(This may take 30-60 seconds)")
 
     try:
+        client = genai.Client(api_key=api_key)
         response = client.models.generate_content(
             model="gemini-3-pro-image-preview",
             contents=prompt,
@@ -390,46 +414,47 @@ def generate_infographic(prompt: str, output_path: Path) -> bool:
                 print(f"Image size: {image.size[0]}x{image.size[1]}")
                 return True
 
-        # If no image found, check for text response
-        for part in response.candidates[0].content.parts:
-            if hasattr(part, "text") and part.text:
-                print(f"Model response: {part.text[:500]}...")
-
-        print("Error: No image was generated in the response")
+        print(f"Error: No image generated for {description}")
         return False
 
     except Exception as e:
-        print(f"Error generating image: {e}")
+        print(f"Error generating {description}: {e}")
         return False
 
 
 def main():
     print("=" * 60)
     print("Karabiner Cheatsheet Generator (Nano Banana Pro)")
+    print("Generating SEPARATE keyboard and Xbox cheatsheets")
     print("=" * 60)
 
     # Extract keyboard shortcuts
     print(f"\nReading keyboard config: {KEYBOARD_CONFIG_PATH}")
     keyboard_shortcuts = extract_keyboard_shortcuts(KEYBOARD_CONFIG_PATH)
-    print(f"Found {len(keyboard_shortcuts)} keyboard shortcuts across {len(KEYBOARD_TIER_NAMES)} tiers")
+    print(f"Found {len(keyboard_shortcuts)} keyboard shortcuts")
 
-    # Extract Xbox mappings
-    print(f"Reading Xbox config: {XBOX_CONFIG_PATH}")
-    xbox_mappings = extract_xbox_mappings(XBOX_CONFIG_PATH)
-    print(f"Found {len(xbox_mappings)} Xbox controller mappings")
+    # Extract Xbox mappings (including dictation)
+    print(f"Reading Xbox configs: {XBOX_CONFIG_PATH}, {DICTATION_CONFIG_PATH}")
+    xbox_mappings = extract_xbox_mappings(XBOX_CONFIG_PATH, DICTATION_CONFIG_PATH)
+    total_xbox = len(xbox_mappings["standalone"]) + len(xbox_mappings["lb_combos"]) + len(xbox_mappings["rb_combos"])
+    print(f"Found {total_xbox} Xbox mappings ({len(xbox_mappings['standalone'])} standalone, {len(xbox_mappings['lb_combos'])} LB+, {len(xbox_mappings['rb_combos'])} RB+)")
 
-    # Build combined prompt
-    prompt = build_prompt(keyboard_shortcuts, xbox_mappings)
-    print(f"\nPrompt length: {len(prompt)} chars")
+    # Generate keyboard cheatsheet
+    keyboard_prompt = build_keyboard_prompt(keyboard_shortcuts)
+    keyboard_success = generate_image(keyboard_prompt, OUTPUT_KEYBOARD, "keyboard cheatsheet")
 
-    success = generate_infographic(prompt, OUTPUT_PNG)
+    # Generate Xbox cheatsheet
+    xbox_prompt = build_xbox_prompt(xbox_mappings)
+    xbox_success = generate_image(xbox_prompt, OUTPUT_XBOX, "Xbox cheatsheet")
 
-    if success:
-        print("\nDone! Open the image with:")
-        print(f"  open {OUTPUT_PNG}")
+    print("\n" + "=" * 60)
+    if keyboard_success and xbox_success:
+        print("SUCCESS! Both cheatsheets generated.")
+        print(f"\nOpen with:")
+        print(f"  open {OUTPUT_KEYBOARD}")
+        print(f"  open {OUTPUT_XBOX}")
     else:
-        print("\nFailed to generate infographic.")
-        print("Check GEMINI_API_KEY and try again.")
+        print("Some cheatsheets failed to generate. Check errors above.")
 
 
 if __name__ == "__main__":

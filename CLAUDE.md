@@ -9,8 +9,9 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
 - `mods/xbox_zed_claude.json` - Xbox controller mappings (global)
 - `mods/dictation_toggle.json` - DICT button → SuperWhisper
-- `scripts/generate_cheatsheet_ai.py` - AI-generated synthwave-style cheat sheet (Gemini 3 Pro Image)
-- `docs/cheatsheet_ai.png` - Visual reference of all shortcuts (KK dashboard style)
+- `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
+- `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
+- `docs/cheatsheet_xbox.png` - Xbox controller mappings visual reference
 - `docs/superwhisper_integration.md` - SuperWhisper vocabulary/replacements reference
 - `docs/xbox_button_reference.md` - Xbox controller button mappings + technical details
 - `.claude/commands/analyze-shortcuts.md` - Slash command for analyzing message history
@@ -31,9 +32,9 @@ Svorak: . q j k x b m w v z
 QWERTY: z x c v b n m , . /
 ```
 
-## CRITICAL RULE: Regenerate Cheat Sheet After Changes
+## CRITICAL RULE: Regenerate Cheat Sheets After Changes
 
-**After ANY modification to `mods/keyboard_text_shortcuts.json`, you MUST regenerate the cheat sheet:**
+**After ANY modification to keyboard or Xbox configs, you MUST regenerate the cheat sheets:**
 
 ```bash
 .venv/bin/python scripts/generate_cheatsheet_ai.py
@@ -41,11 +42,9 @@ QWERTY: z x c v b n m , . /
 
 This ensures the visual documentation stays in sync with the actual shortcuts.
 
-The script:
-1. Reads all shortcuts from the JSON config
-2. Extracts key mappings and output text
-3. Groups by tier (Quick/Workflow/Combo/Testing/Semantic/Slash Commands)
-4. Generates `docs/cheatsheet_ai.png` using Gemini 3 Pro Image (Nano Banana Pro)
+The script generates TWO separate images:
+1. `docs/cheatsheet_keyboard.png` - Keyboard shortcuts (from `keyboard_text_shortcuts.json`)
+2. `docs/cheatsheet_xbox.png` - Xbox controller (from `xbox_zed_claude.json` + `dictation_toggle.json`)
 
 **Requires**: `GEMINI_API_KEY` environment variable
 

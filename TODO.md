@@ -45,7 +45,7 @@
     - [x] Final 3 shortcuts added (Dec 28): Caps+. (pull+push), Caps+v (research), Caps+z (/total-recap)
     - [ ] Test all shortcuts in Ghostty/Zed
 
-    **Full mapping**: See `docs/cheatsheet_ai.png` for visual reference
+    **Full mapping**: See `docs/cheatsheet_keyboard.png` and `docs/cheatsheet_xbox.png` for visual reference
 
     **Analysis reports created:**
     - `KEYBOARD_SHORTCUTS_REPORT.md` - Quantitative analysis (1,117 messages)
