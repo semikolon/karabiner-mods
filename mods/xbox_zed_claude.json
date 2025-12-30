@@ -175,11 +175,10 @@
                 },
                 {
                     "type": "basic",
-                    "description": "Menu (DICT) → SuperWhisper with trailing space",
+                    "description": "Menu (DICT) → SuperWhisper with prefix space",
                     "from": { "pointing_button": "button12" },
                     "to": [
                         { "key_code": "spacebar" },
-                        { "key_code": "left_arrow" },
                         { "key_code": "non_us_backslash" }
                     ],
                     "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
