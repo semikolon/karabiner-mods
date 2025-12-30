@@ -98,11 +98,16 @@ def extract_keyboard_shortcuts(config_path: Path) -> list[dict]:
 
         # Extract the actual text from shell command
         shell_cmd = m["to"][0].get("shell_command", "")
+        # Match text between "set the clipboard to" and the next osascript command
+        # Handle both "double quoted" and 'single quoted' with escaped apostrophes
         text_match = re.search(
-            r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd
+            r'set the clipboard to [\\\'"]+(.+?)[\\\'"]+\s*-e\s', shell_cmd
         )
         if text_match:
-            output_text = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\")
+            output_text = text_match.group(1)
+            # Clean up shell escape sequences and surrounding quotes
+            output_text = output_text.strip('"\'')
+            output_text = output_text.replace("'\\''", "'").replace("\\'", "'").replace('\\"', '"').replace("\\\\", "\\")
         else:
             output_text = name
 
