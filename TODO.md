@@ -1,11 +1,14 @@
 # TODO
 
-> **Session resumed December 20, 2025** - Last activity was September 8, 2025 (~3.5 months ago).
-> Context: Extensive development environment work done in ~/dotfiles during this time, including:
+> **Session resumed December 31, 2025** - Continued from Dec 20 session.
+> Major progress on DICT button, cheatsheet generation, and documentation.
+
+> **Context from Dec 20**: Last activity before that was September 8, 2025 (~3.5 months gap).
+> Extensive development environment work done in ~/dotfiles during this time, including:
 > - TTS daemon with Hammerspoon hotkeys (Ctrl+Cmd+Alt+N/S)
 > - Rich slash command ecosystem (`/total-recap`, `/docs-review`, `/significance`, etc.)
 > - MCP server integrations (Zen, Graphiti, Serena, Linear, etc.)
-> 
+>
 > **Integration opportunities identified:**
 > - Hammerspoon as fallback for keyboard shortcuts (if Fn key doesn't work via Karabiner)
 > - Text shortcuts for common AI prompts (Ultrathink, slash commands)
@@ -14,6 +17,21 @@
 ---
 
 ## Active / Recent
+
+14. **DICT Button Delayed Space** *(Dec 31, 2025)*
+    - [x] Identified issue: SuperWhisper transcription async, spaces not appearing between dictation and shortcuts
+    - [x] Tried multiple approaches: prefix space, left-arrow, delete_forward
+    - [x] Final solution: 1-second delayed clipboard+paste space (same pattern as working shortcuts)
+    - [ ] **TEST**: Verify delayed space works with SuperWhisper transcription
+
+15. **Cheatsheet Generation Improvements** *(Dec 31, 2025)* ✅ FIXED
+    - [x] Fixed escaped apostrophe regex (ä showing "Let'" instead of full text)
+    - [x] Removed brackets from key badges (show "u" not "[u]")
+    - [x] Removed [MODIFIER] tags from Xbox cheatsheet
+    - [x] Fixed DICT button not appearing (was filtered as "modifier")
+    - [x] Added explicit controller layout positions for AI accuracy
+    - [x] Created `docs/gemini_image_prompt_guide.md` with Google's best practices
+    - [ ] **TEST**: Verify L-Stick and Guide button positions are correct in new cheatsheet
 
 11. **Xbox Controller Modifier Combos** *(Dec 2025)* ✅ IMPLEMENTED
     - [x] Discovered: Xbox buttons CAN be used as modifiers (LB+A, RB+B, etc.)

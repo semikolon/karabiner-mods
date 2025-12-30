@@ -1,6 +1,6 @@
 # Karabiner Mods for macOS Development Workflows
 
-> **Last updated:** December 20, 2025
+> **Last updated:** December 31, 2025
 
 ## Overview
 This repository contains Karabiner-Elements configurations for supercharging development workflows on macOS. Originally focused on Xbox Wireless Controller mappings, it now also includes **keyboard text shortcuts** for AI-assisted development. The ultimate goal is to streamline and possibly minimize keyboard usage by mapping various controller inputs to shortcuts, shell scripts, or macros that control or automate typical tasks in IDEs like [Cursor](https://www.cursor.so/) and terminals like [Warp](https://www.warp.dev/). By integrating these configurations with Karabiner-Elements, we can remap controller inputs to keyboard events, scripts, or application launches.
@@ -42,7 +42,7 @@ This repository contains Karabiner-Elements configurations for supercharging dev
 | File | Description |
 |------|-------------|
 | `keyboard_text_shortcuts.json` | Caps+key shortcuts for typing common text (31 shortcuts) |
-| `xbox_zed_claude.json` | Xbox controller mappings - all in one rule (23 mappings incl. DICT) |
+| `xbox_zed_claude.json` | Xbox controller mappings - all in one rule (23 unique actions) |
 | `app_specific_actions.json` | *(deprecated)* Old Cursor-specific Xbox mappings |
 | `mouse_browser_navigation.json` | *(broken)* Mouse buttons for browser back/forward |
 | `mouse_safari_navigation.json` | *(broken)* Safari-specific mouse navigation |
@@ -240,8 +240,10 @@ All these mappings only trigger when Cursor is the active application.
 These mappings work in any application (now all in `mods/xbox_zed_claude.json`).
 
 1. **Dictation (Menu/DICT Button)**
-   - **Menu Button (button12)**: Triggers SuperWhisper with trailing space workaround
-   - Sequence: `space → left_arrow → non_us_backslash` so dictated text ends with a space
+   - **Menu Button (button12)**: Toggle SuperWhisper on/off with automatic trailing space
+   - First press: Starts dictation (sends `non_us_backslash` for ISO keyboard)
+   - Second press: Ends dictation + adds 1-second delayed space via clipboard+paste
+   - This ensures dictated text is separated from subsequent shortcuts
 
 ### Zed-Specific Actions (mods/xbox_zed_claude.json)
 All these mappings only trigger when Zed is the active application.

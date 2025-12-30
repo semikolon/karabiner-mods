@@ -155,7 +155,7 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 | Label | Button | Code | Action |
 |-------|--------|------|--------|
 | **YES** | View | button11 | " Ultrathink " (suffix) |
-| **DICT** | Menu | button12 | SuperWhisper (non_us_backslash) |
+| **DICT** | Menu | button12 | SuperWhisper toggle + delayed suffix space |
 | **NO** | Guide | button13 | Escape |
 | **SPECS** | B | button2 | "Sit rep. Ultrathink " |
 | **STANDUP** | A | button1 | "What's next according to the plan? Ultrathink " |
@@ -169,7 +169,7 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 | *(none)* | R-Stick | button15 | "Commit everything in logical groups. Then push." |
 
 ### Xbox Controller File
-- `mods/xbox_zed_claude.json` - All controller mappings in one rule (23 manipulators: standalone + LB/RB combos + DICT)
+- `mods/xbox_zed_claude.json` - All controller mappings in one rule (23 unique actions: 13 standalone + 10 combos)
 
 **Note**: D-pad uses `generic_desktop: dpad_left` syntax, not `pointing_button`. See `docs/xbox_button_reference.md` for details.
 

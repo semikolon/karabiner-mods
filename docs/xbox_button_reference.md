@@ -3,14 +3,14 @@
 > **Purpose**: Definitive mapping between physical controller buttons, their labels, and Karabiner codes.
 >
 > **Controller**: Xbox Wireless Controller (Vendor ID: 1118, Product ID: 2835)
-> **Last Updated**: December 28, 2025
+> **Last Updated**: December 31, 2025
 
 ## Complete Button Mapping
 
 | Physical Label | Physical Button | Icon/Description | Karabiner Code | Standalone Action | LB+ Combo | RB+ Combo |
 |----------------|-----------------|------------------|----------------|-------------------|-----------|-----------|
 | **YES** | View Button | Two overlapping rectangles | `button11` | " Ultrathink " (suffix) | - | - |
-| **DICT** | Menu Button | Three horizontal lines | `button12` | SuperWhisper | - | - |
+| **DICT** | Menu Button | Three horizontal lines | `button12` | SuperWhisper (toggle + delayed suffix space) | - | - |
 | **NO** | Guide Button | Glowing Xbox logo | `button13` | Escape | - | - |
 | **SPECS** | B Button | Red "B" on face | `button2` | "Sit rep. Ultrathink " | Research extensively | Key "2" (CC) |
 | **STANDUP** | A Button | Green "A" on face | `button1` | "What's next...?" | Zoom out/open loops | Key "1" (CC) |
@@ -28,16 +28,21 @@
 ```
                     [LB button7]              [RB button8]
                     MODIFIER + tap="Explore"  MODIFIER + tap="Subagent"
-                         ___________________________
-                        /  SPECS→[B]    [Y]←DocCheck\
-     DICT→[☰ button12] |       STANDUP→[A]  [X]←Refresh|
-          [ⓧ button13]←NO                             |
-    YES→[⧉ button11]   |                              |
-                       |   [Left Stick]  [Right Stick]|
-   /total-recap→(click)|      ↑              ↑←Git    |
-                       |DelWord←[D-pad]→Enter         |
-                        \     ↓ (avoid)              /
-                         ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+                             _____[ⓧ Guide]←Escape (NO)_____
+                            /                               \
+                           /  SPECS→[B]    [Y]←DocCheck      \
+                          |        STANDUP→[A]  [X]←Refresh   |
+      YES→[⧉ View]  [Share] [☰ Menu]←DICT                     |
+                ↑      ↑       ↑                              |
+            button11  N/A   button12                          |
+                       |                                      |
+                       |    [Left Stick]      [Right Stick]   |
+      /total-recap→(click)      ↑                  ↑←Git      |
+                       |  DelWord←[D-pad]→Enter               |
+                        \       ↓ (avoid)                    /
+                         ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+Center buttons (left to right): View (⧉) → Share (unmappable!) → Menu (☰)
 
 LB+ Combos: A=ZoomOut B=Research X=Fix Y=Summarize D←=PrevWin D→=NextWin
 RB+ Combos: A=Key1 B=Key2 X=Key3 Y=PullPush
@@ -117,6 +122,12 @@ Only use D-pad Left and D-pad Right for non-critical, recoverable actions.
 
 The Xbox Share button is **completely invisible to Karabiner-Elements**.
 
+### Physical Location
+The Share button is the **tiny button in the ABSOLUTE CENTER** of the controller, located **between** the View button (⧉ two squares, left) and the Menu button (☰ three lines, right). It's easy to confuse with neighboring buttons:
+- **View** (button11) = left of Share
+- **Share** = center, UNMAPPABLE
+- **Menu** (button12) = right of Share (this is the DICT button)
+
 ### Root Cause
 macOS captures the Share button at the system level via `gamecontrollerd` before it reaches user-space applications. This is a macOS limitation, not a Karabiner bug.
 
@@ -133,7 +144,7 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 ### Active Configuration Files
 | File | Purpose | Status |
 |------|---------|--------|
-| `mods/xbox_zed_claude.json` | All controller mappings (23 manipulators in one rule) | **ACTIVE** |
+| `mods/xbox_zed_claude.json` | All controller mappings (24 manipulators → 23 unique buttons) | **ACTIVE** |
 | `mods/keyboard_text_shortcuts.json` | Caps+key text shortcuts | **ACTIVE** |
 
 ### Deprecated/Disabled Files
@@ -229,8 +240,15 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 - **Root Cause 2**: Then tried `grave_accent_and_tilde`, but on ISO keyboards (Swedish), that's the wrong key!
 - **Solution**: SuperWhisper uses `carbonKeyCode: 50` which maps to `non_us_backslash` on ISO keyboards (the § key above Tab)
 - **Fix**: Now in `xbox_zed_claude.json` - sends `non_us_backslash`
-- **Trailing space workaround**: DICT button outputs `space → left_arrow → trigger` so dictated text ends up with a trailing space
 - **Config location**: `~/Library/Preferences/com.superduper.superwhisper.plist`
+
+### DICT Button Delayed Space (December 31, 2025)
+- **Issue**: Dictated text ran together with subsequent shortcuts (e.g., "textRead" instead of "text Read")
+- **Root Cause**: SuperWhisper transcription is async - outputs AFTER any immediate keypresses
+- **Failed Attempts**: prefix space, left-arrow positioning, delete_forward cleanup
+- **Solution**: 1-second delayed clipboard+paste space on dictation END
+- **Pattern**: Uses same clipboard+paste+restore pattern as all other text shortcuts
+- **Potential Risk**: Clipboard timing with SuperWhisper (both use clipboard) - needs testing
 
 ### ISO vs ANSI Keyboard Key Codes
 - On **ANSI** keyboards: key above Tab = `grave_accent_and_tilde` (backtick)
@@ -301,7 +319,9 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 
 | Before | After |
 |--------|-------|
-| 12 standalone actions | 12 standalone + 10 combos = **22 actions** |
+| 12 standalone actions | 13 standalone + 10 combos = **23 unique actions** |
+
+*Note: JSON has 24 manipulators but DICT button has 2 (start/end toggle), so 23 unique button mappings.*
 
 ### Testing Notes
 
