@@ -177,32 +177,47 @@ def extract_xbox_mappings(config_path: Path) -> dict:
             to_action = manipulator["to"][0] if manipulator.get("to") else None
             to_if_alone = manipulator.get("to_if_alone", [{}])[0] if manipulator.get("to_if_alone") else None
 
+            # Human-readable key names
+            KEY_NAMES = {
+                "delete_or_backspace": "Backspace",
+                "return_or_enter": "Enter",
+                "escape": "Escape",
+                "spacebar": "Space",
+                "grave_accent_and_tilde": "` (backtick)",
+                "non_us_backslash": "SuperWhisper",
+            }
+
+            def extract_text_from_shell(shell_cmd):
+                """Extract clipboard text from shell command, handling escaped quotes."""
+                text_match = re.search(r'set the clipboard to [\\\'"]+(.+?)[\\\'"]+\s*-e\s', shell_cmd)
+                if text_match:
+                    output = text_match.group(1).strip('"\'')
+                    output = output.replace("'\\''", "'").replace("\\'", "'").replace('\\"', '"').replace("\\\\", "\\")
+                    return output.strip()
+                return None
+
             # For modifier buttons, use to_if_alone for the tap action
             if to_if_alone and "shell_command" in to_if_alone:
-                shell_cmd = to_if_alone["shell_command"]
-                text_match = re.search(r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd)
-                if text_match:
-                    tap_output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
-                else:
+                tap_output = extract_text_from_shell(to_if_alone["shell_command"])
+                if not tap_output:
                     tap_output = desc.split("→")[-1].strip() if "→" in desc else desc
             else:
                 tap_output = None
 
             if to_action:
                 if "shell_command" in to_action:
-                    shell_cmd = to_action["shell_command"]
-                    text_match = re.search(r'set the clipboard to [\\"]+"?(.+?)[\\"]+"?\s*\'', shell_cmd)
-                    if text_match:
-                        output = text_match.group(1).replace('\\"', '"').replace("\\\\", "\\").strip()
-                    else:
+                    output = extract_text_from_shell(to_action["shell_command"])
+                    if not output:
                         output = desc.split("→")[-1].strip() if "→" in desc else desc
                 elif "key_code" in to_action:
                     key = to_action["key_code"]
+                    key_name = KEY_NAMES.get(key, key)
                     modifiers = to_action.get("modifiers", [])
                     if modifiers:
-                        output = f"[{'+'.join(modifiers)}+{key}]"
+                        mod_str = "+".join(m.title() for m in modifiers)
+                        output = f"{mod_str}+{key_name}"
                     else:
-                        output = f"[{key}]"
+                        output = key_name
                 elif "set_variable" in to_action:
                     # This is a modifier definition, use tap action
                     output = tap_output or "modifier"
@@ -308,13 +323,20 @@ def build_xbox_prompt(mappings: dict) -> str:
     lb_combos = mappings["lb_combos"]
     rb_combos = mappings["rb_combos"]
 
-    # Build standalone list
+    # Build standalone list - skip modifier buttons (they're shown via their combos)
     standalone_lines = []
     for m in standalone:
+        # Skip entries that just say "modifier" - not useful
+        if m.get("output") == "modifier":
+            continue
         label = f" ({m['label']})" if m.get("label") else ""
-        modifier_note = " [MODIFIER]" if m.get("is_modifier") else ""
+        # For modifier buttons with tap action, show as "LB (tap)" not "LB [MODIFIER]"
+        if m.get("is_modifier"):
+            button_display = f"{m['button']} (tap)"
+        else:
+            button_display = f"{m['button']}{label}"
         output = m["output"][:60] + "..." if len(m["output"]) > 60 else m["output"]
-        standalone_lines.append(f"  {m['button']}{label}{modifier_note} → {output}")
+        standalone_lines.append(f"  {button_display} → {output}")
 
     # Build combo tables
     lb_lines = []
@@ -331,52 +353,45 @@ def build_xbox_prompt(mappings: dict) -> str:
     lb_content = "\n".join(lb_lines)
     rb_content = "\n".join(rb_lines)
 
-    return f"""Create a CLEAN Xbox controller shortcut reference card.
+    return f"""Create an Xbox controller shortcut reference card infographic.
 
-CONTROLLER PHYSICAL LAYOUT (for accurate button positions):
-- Face buttons (RIGHT SIDE, diamond): A=bottom green, B=right red, X=left blue, Y=top yellow
-- Shoulder buttons (TOP EDGE): LB=left bumper, RB=right bumper
-- D-pad (LEFT SIDE): directional pad with 4 directions
-- Center: View button (left), Xbox logo (center), Menu button (right)
-- Analog sticks: Left stick, Right stick (both clickable)
+SUBJECT: Xbox wireless controller with labeled button mappings
+COMPOSITION: Top half = controller diagram with labels, bottom half = two side-by-side tables
+STYLE: Minimalist synthwave, dark navy background, cyan accents
 
-STANDALONE BUTTON ACTIONS (press button alone):
+CONTROLLER PHYSICAL LAYOUT (use this for accurate button positions):
+- Face buttons (RIGHT side, diamond pattern): Y=top yellow, X=left blue, B=right red, A=bottom green
+- Shoulder buttons (TOP edge): LB=left bumper, RB=right bumper
+- D-pad (LEFT side): directional cross
+- Center buttons: View (left, two squares), Xbox logo (center), Menu (right, three lines)
+- Analog sticks: L-Stick (left), R-Stick (right) - both clickable
+
+EXACT DATA TO DISPLAY:
+
+STANDALONE BUTTONS (show on diagram with labels pointing to correct positions):
 {standalone_content}
 
-LB+ MODIFIER COMBOS (hold LB, press button):
+LB COMBOS (left table, below diagram):
 {lb_content}
 
-RB+ MODIFIER COMBOS (hold RB, press button):
+RB COMBOS (right table, below diagram):
 {rb_content}
 
-DESIGN REQUIREMENTS:
+LAYOUT SPEC:
+- Top: Xbox controller outline with thin lines pointing from buttons to their action labels
+- Bottom: Two side-by-side tables for LB+ and RB+ combos
 
-LAYOUT (top to bottom):
-1. Controller diagram at TOP - clear illustration of Xbox controller
-2. Draw simple lines from buttons to their STANDALONE action labels
-3. Below the diagram: Two tables side-by-side for LB+ and RB+ combos
-4. Lines should be SIMPLE and ACCURATE - go to correct button positions!
-
-CRITICAL FOR DIAGRAM:
-- Lines must connect to CORRECT physical button locations
-- LB/RB are shoulder buttons at TOP of controller
-- A/B/X/Y are face buttons on RIGHT side in diamond pattern
-- D-pad is on LEFT side
-- Do NOT draw lines for modifier combos - those go in tables below
-
-STYLE (minimalist synthwave):
-- Background: Dark navy #1a1a2e, edge-to-edge (NO white borders/margins)
-- Controller: Electric blue #00d4ff outline
-- Section headers: Electric blue accent
+STYLE SPEC (minimalist synthwave):
+- Background: Dark navy #1a1a2e, edge-to-edge (NO white margins)
+- Controller outline: Electric blue/cyan #00d4ff
 - Text: Clean white #eaeaea
+- 16:10 landscape aspect ratio
 
-CRITICAL:
-- NO white margins or borders - dark background to all edges
-- Controller diagram is REQUIRED
-- Keep lines minimal and ACCURATE
-- Modifier combos in TABLES, not as diagram lines
-- Aspect ratio: 16:10 landscape
-- Resolution: 2K quality"""
+CONSTRAINTS:
+- Show ONLY the data listed above - no additions or "[MODIFIER]" tags
+- Each mapping appears EXACTLY once
+- Lines must connect to CORRECT physical button positions
+- Tables show combo shortcuts, diagram shows standalone buttons only"""
 
 
 def generate_image(prompt: str, output_path: Path, description: str) -> bool:
