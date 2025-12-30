@@ -257,7 +257,7 @@ def build_keyboard_prompt(shortcuts: list[dict]) -> str:
         for s in tier["shortcuts"]:
             # Show more text - only truncate very long ones
             output = s["output"][:80] + "..." if len(s["output"]) > 80 else s["output"]
-            content_lines.append(f"  [{s['key']}] → {output}")
+            content_lines.append(f"  {s['key']} → {output}")
 
     content = "\n".join(content_lines)
 
@@ -265,28 +265,33 @@ def build_keyboard_prompt(shortcuts: list[dict]) -> str:
 
 ALL SHORTCUTS USE: Caps Lock + key (show this ONCE as a header, NOT on each line)
 
-SHORTCUTS TO DISPLAY:
+SHORTCUTS TO DISPLAY (each shortcut appears EXACTLY ONCE):
 {content}
 
 DESIGN REQUIREMENTS:
 
 LAYOUT:
-- Single column or two-column layout to fit all shortcuts
-- Group shortcuts by tier/category with subtle section dividers
-- Each shortcut: small key badge [x] followed by the output text
+- Two-column layout to fit all shortcuts
+- Each category/tier appears ONLY ONCE (no duplicates!)
+- Each shortcut: key letter (no brackets) in slightly larger font, followed by → and output text
 - Show as much of each phrase as possible - minimize truncation!
+
+KEY BADGE STYLE:
+- Show just the letter/symbol (e.g., "u" not "[u]")
+- Key letter slightly larger than description text for visual hierarchy
+- Subtle rounded background or border around the key letter
 
 STYLE (minimalist synthwave):
 - Background: Dark navy #1a1a2e, edge-to-edge (NO white borders/margins)
 - Section headers: Coral/orange #ff8c42
-- Key badges: Small, rounded, subtle border
+- Key letters: Slightly larger, clean styling without brackets
 - Text: Clean white #eaeaea, readable size
 
 CRITICAL:
+- NO DUPLICATES - each section and shortcut appears exactly once
+- NO brackets around key letters
 - NO white margins or borders - dark background to all edges
 - Show "Caps + key" ONCE at top, not repeated on each shortcut
-- Prioritize showing FULL shortcut text over decoration
-- Every shortcut must be legible
 - Aspect ratio: 16:10 landscape
 - Resolution: 2K quality"""
 

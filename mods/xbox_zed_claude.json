@@ -193,7 +193,7 @@
                     "to": [
                         { "set_variable": { "name": "dictation_active", "value": 0 } },
                         { "key_code": "non_us_backslash" },
-                        { "shell_command": "sleep 1 && osascript -e 'tell application \"System Events\" to keystroke \" \"'" }
+                        { "shell_command": "/Users/fredrikbranstrom/Projects/karabiner-mods/scripts/delayed_space.sh" }
                     ],
                     "conditions": [
                         { "type": "variable_if", "name": "dictation_active", "value": 1 },
