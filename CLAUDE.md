@@ -67,10 +67,11 @@ ln -sf ~/Projects/karabiner-mods/mods/YOUR_FILE.json ~/.config/karabiner/assets/
 
 This allows:
 - Version control of all mappings in this repo
-- Immediate effect when editing files (no manual reimport)
 - Clean separation between mapping clusters (keyboard, mouse, controller)
 
 After creating the symlink, open Karabiner-Elements → Complex Modifications → Add rule → Enable the new rules.
+
+**IMPORTANT: Reloading after edits** - Karabiner does NOT auto-reload complex modifications when the JSON file changes. You must manually: Remove the rule(s) → Re-add from the file. Otherwise old mappings remain active.
 
 ### Current Symlinks (December 2025)
 ```

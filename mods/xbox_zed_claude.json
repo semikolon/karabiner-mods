@@ -175,13 +175,30 @@
                 },
                 {
                     "type": "basic",
-                    "description": "Menu (DICT) → SuperWhisper with prefix space",
+                    "description": "Menu (DICT) → Start SuperWhisper (no space)",
                     "from": { "pointing_button": "button12" },
                     "to": [
+                        { "set_variable": { "name": "dictation_active", "value": 1 } },
+                        { "key_code": "non_us_backslash" }
+                    ],
+                    "conditions": [
+                        { "type": "variable_unless", "name": "dictation_active", "value": 1 },
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "description": "Menu (DICT) → End SuperWhisper with prefix space",
+                    "from": { "pointing_button": "button12" },
+                    "to": [
+                        { "set_variable": { "name": "dictation_active", "value": 0 } },
                         { "key_code": "spacebar" },
                         { "key_code": "non_us_backslash" }
                     ],
-                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
+                    "conditions": [
+                        { "type": "variable_if", "name": "dictation_active", "value": 1 },
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                    ]
                 },
                 {
                     "type": "basic",

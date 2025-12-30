@@ -121,8 +121,10 @@ This repo complements the broader development environment in `~/dotfiles`:
    - Launch Karabiner-Elements.  
    - Open the "Complex Modifications" tab → click "Add rule".  
    - Enable the relevant modifications from your new `.json` files.  
-4. **Iterate & Refine**:  
+4. **Iterate & Refine**:
    - Test your mappings, gather feedback, and tweak them to fit your workflow.
+
+> **⚠️ Reloading after edits**: Karabiner does NOT auto-reload complex modifications when JSON files change. After editing, you must manually remove the rule(s) and re-add them from the file.
 
 ## References
 - **Karabiner-Elements Official Docs**:  
