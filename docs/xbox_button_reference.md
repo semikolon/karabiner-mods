@@ -248,7 +248,19 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 - **Failed Attempts**: prefix space, left-arrow positioning, delete_forward cleanup
 - **Solution**: **2-second** delayed clipboard+paste space on dictation END
 - **Pattern**: Uses same clipboard+paste+restore pattern as all other text shortcuts
-- **Tested**: Works reliably - 2s delay needed for longer transcriptions (1s was too short)
+- **Tested**: ✅ Works reliably - 2s delay handles even long transcriptions
+
+### Controller-Only Message Composition (December 31, 2025)
+**Successfully composed a full Claude Code message using only the Xbox controller:**
+
+1. **DICT** → Dictated opening sentence
+2. **DICT** → End dictation (space added ✓)
+3. **R-Stick** → Inserted "Commit everything in logical groups. Then push. Ultrathink "
+4. **RB+D-Left** → Word-navigated cursor back before the R-Stick text
+5. **DICT** → Dictated a long meandering paragraph mid-message
+6. **DICT** → End dictation (space added after long transcription ✓)
+
+**Result**: Seamless voice + shortcuts + navigation workflow. The 2-second delayed space worked perfectly even after a lengthy transcription. This validates the "couch-mode AI development" vision - full message composition without touching the keyboard.
 
 ### ISO vs ANSI Keyboard Key Codes
 - On **ANSI** keyboards: key above Tab = `grave_accent_and_tilde` (backtick)
