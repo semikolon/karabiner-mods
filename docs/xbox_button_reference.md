@@ -246,9 +246,9 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 - **Issue**: Dictated text ran together with subsequent shortcuts (e.g., "textRead" instead of "text Read")
 - **Root Cause**: SuperWhisper transcription is async - outputs AFTER any immediate keypresses
 - **Failed Attempts**: prefix space, left-arrow positioning, delete_forward cleanup
-- **Solution**: 1-second delayed clipboard+paste space on dictation END
+- **Solution**: **2-second** delayed clipboard+paste space on dictation END
 - **Pattern**: Uses same clipboard+paste+restore pattern as all other text shortcuts
-- **Potential Risk**: Clipboard timing with SuperWhisper (both use clipboard) - needs testing
+- **Tested**: Works reliably - 2s delay needed for longer transcriptions (1s was too short)
 
 ### ISO vs ANSI Keyboard Key Codes
 - On **ANSI** keyboards: key above Tab = `grave_accent_and_tilde` (backtick)
