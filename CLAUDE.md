@@ -169,7 +169,7 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 | *(none)* | R-Stick | button15 | "Commit everything in logical groups. Then push." |
 
 ### Xbox Controller File
-- `mods/xbox_zed_claude.json` - All controller mappings in one rule (23 unique actions: 13 standalone + 10 combos)
+- `mods/xbox_zed_claude.json` - All controller mappings in one rule (25 unique actions: 13 standalone + 12 combos)
 
 **Note**: D-pad uses `generic_desktop: dpad_left` syntax, not `pointing_button`. See `docs/xbox_button_reference.md` for details.
 

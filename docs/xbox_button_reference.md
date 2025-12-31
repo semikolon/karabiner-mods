@@ -45,7 +45,7 @@
 Center buttons (left to right): View (⧉) → Share (unmappable!) → Menu (☰)
 
 LB+ Combos: A=ZoomOut B=Research X=Fix Y=Summarize D←=PrevWin D→=NextWin
-RB+ Combos: A=Key1 B=Key2 X=Key3 Y=PullPush
+RB+ Combos: A=Key1 B=Key2 X=Key3 Y=PullPush D←=WordLeft D→=Shift+Enter
 ```
 
 ## Button Categories
@@ -144,7 +144,7 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 ### Active Configuration Files
 | File | Purpose | Status |
 |------|---------|--------|
-| `mods/xbox_zed_claude.json` | All controller mappings (24 manipulators → 23 unique buttons) | **ACTIVE** |
+| `mods/xbox_zed_claude.json` | All controller mappings (26 manipulators → 25 unique buttons) | **ACTIVE** |
 | `mods/keyboard_text_shortcuts.json` | Caps+key text shortcuts | **ACTIVE** |
 
 ### Deprecated/Disabled Files
@@ -314,14 +314,16 @@ Share button remains unmapped. D-pad Left provides Delete Word as a quick recove
 | RB+B | CC prompt 2 | Key "2" (allow + remember) |
 | RB+X | CC prompt 3 | Key "3" (custom response) |
 | RB+Y | Git sync | "Pull and push. Ultrathink " |
+| RB+D-Left | Word left | Opt+Left (cursor word navigation) |
+| RB+D-Right | New line | Shift+Enter (no submit) |
 
 ### Action Count
 
 | Before | After |
 |--------|-------|
-| 12 standalone actions | 13 standalone + 10 combos = **23 unique actions** |
+| 12 standalone actions | 13 standalone + 12 combos = **25 unique actions** |
 
-*Note: JSON has 24 manipulators but DICT button has 2 (start/end toggle), so 23 unique button mappings.*
+*Note: JSON has 26 manipulators but DICT button has 2 (start/end toggle), so 25 unique button mappings.*
 
 ### Testing Notes
 

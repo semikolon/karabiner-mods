@@ -124,6 +124,26 @@
                 },
                 {
                     "type": "basic",
+                    "description": "RB + D-pad Left → Word left (Opt+Left)",
+                    "from": { "generic_desktop": "dpad_left" },
+                    "to": [{ "key_code": "left_arrow", "modifiers": ["option"] }],
+                    "conditions": [
+                        { "type": "variable_if", "name": "rb_held", "value": 1 },
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "description": "RB + D-pad Right → New line (Shift+Enter)",
+                    "from": { "generic_desktop": "dpad_right" },
+                    "to": [{ "key_code": "return_or_enter", "modifiers": ["shift"] }],
+                    "conditions": [
+                        { "type": "variable_if", "name": "rb_held", "value": 1 },
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                    ]
+                },
+                {
+                    "type": "basic",
                     "description": "A (STANDUP) → What's next?",
                     "from": { "pointing_button": "button1" },
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
@@ -214,6 +234,7 @@
                     "to": [{ "key_code": "delete_or_backspace", "modifiers": ["option"] }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
+                        { "type": "variable_if", "name": "rb_held", "value": 0 },
                         { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
                     ]
                 },
@@ -224,6 +245,7 @@
                     "to": [{ "key_code": "return_or_enter" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
+                        { "type": "variable_if", "name": "rb_held", "value": 0 },
                         { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
                     ]
                 },

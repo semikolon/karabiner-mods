@@ -42,7 +42,7 @@ This repository contains Karabiner-Elements configurations for supercharging dev
 | File | Description |
 |------|-------------|
 | `keyboard_text_shortcuts.json` | Caps+key shortcuts for typing common text (31 shortcuts) |
-| `xbox_zed_claude.json` | Xbox controller mappings - all in one rule (23 unique actions) |
+| `xbox_zed_claude.json` | Xbox controller mappings - all in one rule (25 unique actions) |
 | `app_specific_actions.json` | *(deprecated)* Old Cursor-specific Xbox mappings |
 | `mouse_browser_navigation.json` | *(broken)* Mouse buttons for browser back/forward |
 | `mouse_safari_navigation.json` | *(broken)* Safari-specific mouse navigation |
