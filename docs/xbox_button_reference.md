@@ -203,10 +203,159 @@ To support both wired and Bluetooth, include BOTH Product IDs in device conditio
 3. **No pairing issues** - plug and play
 4. **Stable connection** - no interference from other Bluetooth devices
 
+### Why Wired USB Doesn't Work with Karabiner
+
+**Root Cause**: Xbox controllers use Microsoft's proprietary **GIP (Gaming Input Protocol)** over USB, NOT standard USB-HID.
+
+| Connection | Protocol | Karabiner Compatible? |
+|------------|----------|----------------------|
+| **Bluetooth** | Standard HID | ✅ YES - Karabiner sees all buttons |
+| **Wired USB** | GIP (proprietary) | ❌ NO - invisible to Karabiner |
+
+macOS routes GIP through `gamecontrollerd` → GameController framework. Only apps using Apple's GameController API can read wired Xbox input. Karabiner intercepts raw HID events, which GIP doesn't produce.
+
+**This is a protocol limitation, not a cable or driver issue.**
+
 ### Sources
 - [MacRumors: iOS 18, iPadOS 18, and macOS Sequoia Introduce Support for Wired Xbox Controllers](https://www.macrumors.com/2024/10/07/ios-18-wired-xbox-controllers/)
 - [Alvaro Trigo: How to Make Xbox Controller Not Turn Off](https://alvarotrigo.com/blog/xbox-controller-not-turn-off/)
 - [Xbox paroj/xpad GitHub Issue #181](https://github.com/paroj/xpad/issues/181) - Product ID differences confirmed
+- [SDL Issue #11002: Wired Xbox 360 broken on Sequoia](https://github.com/libsdl-org/SDL/issues/11002)
+
+---
+
+## Alternative Controller Mapping Tools (January 2026 Research)
+
+### Tool Comparison Matrix
+
+| Tool | macOS Support | Apple Silicon | Status | Use Case |
+|------|---------------|---------------|--------|----------|
+| **Karabiner-Elements** | ✅ Native | ✅ Yes | ✅ Active | Bluetooth Xbox (HID) |
+| **golden-narwhal12 driver** | ✅ Native | ✅ Yes | ✅ Active (Dec 2025) | Wired USB Xbox (GIP) |
+| **AntiMicroX** | ❌ No builds | N/A | ⚠️ Linux/Windows only | N/A |
+| **360Controller** | ❌ Dead | ❌ No | ❌ Abandoned (2019) | Legacy Intel Macs |
+| **Joystick Mapper** | ✅ Rosetta 2 | ⚠️ Rosetta | ✅ Active | Analog stick → keys |
+
+### golden-narwhal12 Xbox Controller Driver ⭐ RECOMMENDED FOR WIRED
+
+**Repositories:**
+- Driver: https://github.com/golden-narwhal12/xbox-controller-driver-macos
+- GUI: https://github.com/golden-narwhal12/xbox-controller-macos-gui (v1.0.0 released Dec 30, 2025)
+
+**What it does:** Userspace driver that implements GIP protocol via libusb, converts controller input to keyboard/mouse events via Core Graphics API.
+
+**Architecture:**
+```
+Xbox Controller (USB)
+      │
+      ▼ (GIP protocol)
+libusb (raw USB access)
+      │
+      ▼ (parsed input)
+GIP Protocol Parser
+      │
+      ▼ (button/stick states)
+Core Graphics API
+      │
+      ▼ (keyboard/mouse events)
+macOS Event System → Applications
+```
+
+**Key Features:**
+- Native Apple Silicon support (macOS 12.0+)
+- Tested on macOS Tahoe 26.1
+- No kernel extension needed (userspace only)
+- GUI with runtime configuration (JSON)
+- Configurable: button mappings, stick modes, mouse sensitivity, deadzone
+
+**Limitations:**
+- Only Model 1697 tested (other variants may need adjustments)
+- Simulates keyboard/mouse only (can't create virtual gamepad)
+- Requires sudo for USB access
+- Requires Accessibility permissions
+- No rumble/haptic feedback
+
+**Installation:**
+```bash
+# CLI Driver
+brew install libusb pkg-config
+git clone https://github.com/golden-narwhal12/xbox-controller-driver-macos.git
+cd xbox-controller-driver-macos
+make simulator
+sudo ./simulator
+
+# GUI App (from release)
+xattr -cr ~/Downloads/XboxController.app
+mv ~/Downloads/XboxController.app /Applications/
+```
+
+**Full analysis:** See `docs/xbox_driver_macos_analysis.md`
+
+---
+
+### AntiMicroX (Linux/Windows Only)
+
+**Repository:** https://github.com/AntiMicroX/antimicrox
+
+**Status:** ❌ **NOT AVAILABLE FOR macOS** despite website claims
+
+- Website (antimicrox.net) shows macOS download button with `href="#"` (broken)
+- GitHub releases only contain Windows/Linux builds
+- Homebrew tap doesn't exist (`repository not found`)
+- Last macOS attempt was incomplete branch, never merged
+
+**Why it doesn't work on macOS:**
+1. Relies on SDL2 + X.org APIs not available on macOS
+2. Uses Linux-specific input injection (uinput, evdev)
+3. Would require complete rewrite for Core Graphics
+4. Maintainers explicitly stated "would require a macOS developer"
+
+**Architecture (for reference):**
+- SDL2 for controller detection (cross-platform)
+- Qt GUI with XML-based profiles
+- Platform-specific event handlers (uinput on Linux, SendInput on Windows)
+- Layered design: SDL input → device abstraction → mapping → output
+
+**Full analysis:** See `docs/antimicrox_analysis.md`
+
+---
+
+### 360Controller (DEAD)
+
+**Repository:** https://github.com/360Controller/360Controller
+
+**Status:** ❌ **ABANDONED - DO NOT USE**
+
+- Last release: March 2019 (v0.16.11)
+- Explicitly states: "No plans to add Big Sur support, including Apple Silicon"
+- macOS Sequoia is far beyond supported range
+- Kernel extension approach deprecated by Apple
+
+---
+
+### Joystick Mapper ($4.99)
+
+**Website:** https://joystickmapper.com/
+
+**Status:** ✅ Works via Rosetta 2
+
+- Can map analog stick directions to keyboard keys
+- Supports Xbox controllers
+- $4.99 one-time purchase
+- Potential HID-level conflict with Karabiner (see Analog Stick section)
+
+---
+
+### Recommendation Summary
+
+| Scenario | Best Tool |
+|----------|-----------|
+| **Bluetooth Xbox + text shortcuts** | Karabiner-Elements (current setup) |
+| **Wired USB Xbox** | golden-narwhal12 driver + GUI |
+| **Analog stick → keyboard** | Joystick Mapper or golden-narwhal12 |
+| **Games expecting controller** | Use Bluetooth (native GameController) |
+
+**For our Claude Code use case:** Stick with Bluetooth + Karabiner. The wired USB path requires the golden-narwhal12 driver which adds complexity for minimal benefit (our text shortcuts work perfectly over Bluetooth).
 
 ## File Configuration
 
