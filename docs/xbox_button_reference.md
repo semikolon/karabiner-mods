@@ -2,7 +2,10 @@
 
 > **Purpose**: Definitive mapping between physical controller buttons, their labels, and Karabiner codes.
 >
-> **Controller**: Xbox Wireless Controller (Vendor ID: 1118, Product ID: 2835)
+> **Controller**: Xbox Wireless Controller (Vendor ID: 1118)
+>> - **Bluetooth**: Product ID 2835 (0x0B13)
+>> - **Wired USB**: Product ID 2834 (0x0B12)
+>
 > **Last Updated**: December 31, 2025
 
 ## Complete Button Mapping
@@ -138,6 +141,72 @@ macOS captures the Share button at the system level via `gamecontrollerd` before
 
 ### Current Status
 Share button remains unmapped. D-pad Left provides Delete Word as a quick recovery action.
+
+## Wired USB vs Bluetooth Connection (December 31, 2025)
+
+### Different Product IDs by Design
+The Xbox controller reports **different Product IDs** depending on connection method - this is intentional, not a bug:
+
+| Connection | Product ID (Hex) | Product ID (Decimal) |
+|------------|------------------|----------------------|
+| Bluetooth | 0x0B13 | 2835 |
+| USB Wired | 0x0B12 | 2834 |
+| Xbox Wireless Adapter | 0x02FF | 767 |
+
+**Vendor ID is always 1118 (0x045E - Microsoft)**
+
+### macOS Sequoia Wired Support (October 2024)
+- **macOS 15 Sequoia** added official wired Xbox controller support
+- Previously only Bluetooth Xbox controllers worked natively
+- Xbox uses a **custom USB protocol** that Apple now directly supports
+- Controller appears in System Settings → Game Controllers with Xbox logo
+- **Limitation**: "Identify" feature (vibration) doesn't work over wired
+
+### Auto-Shutoff Behavior
+
+**TL;DR**: Use a DATA-capable USB cable, not a charge-only cable.
+
+| Scenario | Shutoff? | Notes |
+|----------|----------|-------|
+| Charge-only cable | YES (15 min) | Controller only receives power, no data connection |
+| Data-capable cable | NO | Full USB connection keeps controller active |
+| Remove batteries + data cable | NO | Ensures pure wired mode |
+
+- The 15-minute idle timeout is **firmware-level** - no macOS setting to disable it
+- Most cheap cables are charge-only (not all pins connected)
+- Use cables that came with phones/devices (usually data-capable)
+- If shutoffs persist: remove batteries to force wired-only mode
+
+### Share Button Over Wired
+- Share button is **still captured by macOS `gamecontrollerd`** even over wired USB
+- No confirmed bypass method exists
+- Third-party tools (AntiMicroX) can remap it but still go through GameController framework
+
+### Karabiner Configuration for Both Connections
+To support both wired and Bluetooth, include BOTH Product IDs in device conditions:
+
+```json
+"conditions": [{
+    "type": "device_if",
+    "identifiers": [
+        { "vendor_id": 1118, "product_id": 2835 },
+        { "vendor_id": 1118, "product_id": 2834 }
+    ]
+}]
+```
+
+**Current Status**: Config updated to support both connection methods.
+
+### Wired Connection Advantages
+1. **No battery drain** - powered by USB
+2. **Zero input latency** - no Bluetooth overhead
+3. **No pairing issues** - plug and play
+4. **Stable connection** - no interference from other Bluetooth devices
+
+### Sources
+- [MacRumors: iOS 18, iPadOS 18, and macOS Sequoia Introduce Support for Wired Xbox Controllers](https://www.macrumors.com/2024/10/07/ios-18-wired-xbox-controllers/)
+- [Alvaro Trigo: How to Make Xbox Controller Not Turn Off](https://alvarotrigo.com/blog/xbox-controller-not-turn-off/)
+- [Xbox paroj/xpad GitHub Issue #181](https://github.com/paroj/xpad/issues/181) - Product ID differences confirmed
 
 ## File Configuration
 

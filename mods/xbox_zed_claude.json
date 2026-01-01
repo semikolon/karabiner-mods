@@ -11,7 +11,7 @@
                     "to": [{ "set_variable": { "name": "lb_held", "value": 1 } }],
                     "to_after_key_up": [{ "set_variable": { "name": "lb_held", "value": 0 } }],
                     "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
-                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
+                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
                     "type": "basic",
@@ -20,7 +20,7 @@
                     "to": [{ "set_variable": { "name": "rb_held", "value": 1 } }],
                     "to_after_key_up": [{ "set_variable": { "name": "rb_held", "value": 0 } }],
                     "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
-                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
+                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
                     "type": "basic",
@@ -29,7 +29,7 @@
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -39,7 +39,7 @@
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Research this extensively online. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -49,7 +49,7 @@
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Fix this. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -59,7 +59,7 @@
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Summarize briefly. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -69,7 +69,7 @@
                     "to": [{ "key_code": "grave_accent_and_tilde", "modifiers": ["command", "shift"] }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -79,7 +79,7 @@
                     "to": [{ "key_code": "grave_accent_and_tilde", "modifiers": ["command"] }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -89,7 +89,7 @@
                     "to": [{ "key_code": "1" }],
                     "conditions": [
                         { "type": "variable_if", "name": "rb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -99,7 +99,7 @@
                     "to": [{ "key_code": "2" }],
                     "conditions": [
                         { "type": "variable_if", "name": "rb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -109,7 +109,7 @@
                     "to": [{ "key_code": "3" }],
                     "conditions": [
                         { "type": "variable_if", "name": "rb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -119,7 +119,7 @@
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Pull and push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "rb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -129,7 +129,7 @@
                     "to": [{ "key_code": "left_arrow", "modifiers": ["option"] }],
                     "conditions": [
                         { "type": "variable_if", "name": "rb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -139,7 +139,7 @@
                     "to": [{ "key_code": "return_or_enter", "modifiers": ["shift"] }],
                     "conditions": [
                         { "type": "variable_if", "name": "rb_held", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -150,7 +150,7 @@
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -161,7 +161,7 @@
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -172,7 +172,7 @@
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -183,7 +183,7 @@
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -191,7 +191,7 @@
                     "description": "View (YES) → Ultrathink suffix",
                     "from": { "pointing_button": "button11" },
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \" Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
-                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
+                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
                     "type": "basic",
@@ -203,7 +203,7 @@
                     ],
                     "conditions": [
                         { "type": "variable_unless", "name": "dictation_active", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -217,7 +217,7 @@
                     ],
                     "conditions": [
                         { "type": "variable_if", "name": "dictation_active", "value": 1 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -225,7 +225,7 @@
                     "description": "Guide (NO) → Escape",
                     "from": { "pointing_button": "button13" },
                     "to": [{ "key_code": "escape" }],
-                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
+                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
                     "type": "basic",
@@ -235,7 +235,7 @@
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -246,7 +246,7 @@
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
-                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }
+                        { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
                     ]
                 },
                 {
@@ -254,14 +254,14 @@
                     "description": "L-Stick Click → /total-recap",
                     "from": { "pointing_button": "button14" },
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/total-recap \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
-                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
+                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
                     "type": "basic",
                     "description": "R-Stick Click → Commit + Push",
                     "from": { "pointing_button": "button15" },
                     "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in logical groups. Then push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
-                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }] }]
+                    "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 }
             ]
         }
