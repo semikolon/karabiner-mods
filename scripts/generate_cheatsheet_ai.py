@@ -369,55 +369,37 @@ def build_xbox_prompt(mappings: dict) -> str:
     lb_content = "\n".join(lb_lines)
     rb_content = "\n".join(rb_lines)
 
-    return f"""Create an Xbox controller shortcut reference card infographic.
+    return f"""Create an Xbox controller reference card.
 
-SUBJECT: Xbox wireless controller with labeled button mappings
-COMPOSITION: Top half = controller diagram with labels, bottom half = two side-by-side tables
-STYLE: Minimalist synthwave, dark navy background, cyan accents
+LAYOUT: Controller diagram on top, two tables below.
 
-CONTROLLER PHYSICAL LAYOUT (use this for accurate button positions):
-- Face buttons (RIGHT side, diamond pattern): Y=top yellow, X=left blue, B=right red, A=bottom green
-- Shoulder buttons (TOP edge of controller): LB=left bumper, RB=right bumper
-- D-pad (LEFT-LOWER area): the cross-shaped directional pad
-- L-Stick (LEFT-UPPER area): the LEFT ANALOG JOYSTICK - the round stick you push, ABOVE and LEFT of D-pad
-- R-Stick (RIGHT-LOWER area): the RIGHT ANALOG JOYSTICK - the round stick below the face buttons
-- View button (CENTER-LEFT of the three small center buttons): two overlapping squares icon
-- Share button (ABSOLUTE CENTER - the tiny button BETWEEN View and Menu): DO NOT LABEL THIS - it cannot be mapped!
-- Menu button (CENTER-RIGHT of the three small center buttons): three horizontal lines icon - THIS is where SuperWhisper/DICT goes
-- Guide button (TOP-CENTER): the large GLOWING XBOX LOGO "X" between LB and RB at the TOP of the controller
+CONTROLLER BUTTON POSITIONS (left to right):
+- LEFT SIDE: LB (shoulder), D-pad, L-Stick (joystick)
+- CENTER THREE BUTTONS (small, in a row): View (left) | [skip middle] | Menu (right)
+- RIGHT SIDE: RB (shoulder), face buttons (ABXY diamond), R-Stick (joystick)
+- TOP CENTER: Guide button (glowing Xbox logo)
 
-CRITICAL LABEL PLACEMENT:
-- The Share button in the absolute center is NOT mappable and should have NO label pointing to it!
-- "Ultrathink" MUST point to the VIEW button (the LEFT one of the 3 center buttons, with two overlapping squares icon)
-- "SuperWhisper" MUST point to the MENU button (the RIGHT one of the 3 center buttons, with three horizontal lines icon)
-- These two labels should NOT point to the analog sticks or anywhere else!
+LABEL PLACEMENT RULE: Labels go on the SAME SIDE as their button:
+- LEFT side buttons → labels on LEFT side of image
+- RIGHT side buttons → labels on RIGHT side of image
+- View button is CENTER-LEFT → label goes LEFT
+- Menu button is CENTER-RIGHT → label goes RIGHT
 
-EXACT DATA TO DISPLAY:
-
-STANDALONE BUTTONS (show on diagram with labels pointing to correct positions):
+STANDALONE BUTTON DATA:
 {standalone_content}
 
-LB COMBOS (left table, below diagram):
+LB COMBOS (left table):
 {lb_content}
 
-RB COMBOS (right table, below diagram):
+RB COMBOS (right table):
 {rb_content}
 
-LAYOUT SPEC:
-- Top: Xbox controller outline with thin lines pointing from buttons to their action labels
-- Bottom: Two side-by-side tables for LB+ and RB+ combos
+STYLE: Dark navy background #1a1a2e, cyan controller outline #00d4ff, white text, 16:10 landscape.
 
-STYLE SPEC (minimalist synthwave):
-- Background: Dark navy #1a1a2e, edge-to-edge (NO white margins)
-- Controller outline: Electric blue/cyan #00d4ff
-- Text: Clean white #eaeaea
-- 16:10 landscape aspect ratio
-
-CONSTRAINTS:
-- Show ONLY the data listed above - no additions or "[MODIFIER]" tags
-- Each mapping appears EXACTLY once
-- Lines must connect to CORRECT physical button positions
-- Tables show combo shortcuts, diagram shows standalone buttons only"""
+RULES:
+- Each button label appears exactly once
+- Draw thin lines from buttons to their labels
+- The tiny center button between View and Menu has no mapping (skip it)"""
 
 
 def generate_image(prompt: str, output_path: Path, description: str) -> bool:
