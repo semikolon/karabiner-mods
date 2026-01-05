@@ -179,7 +179,7 @@
                     "type": "basic",
                     "description": "Y → Doc coherence check",
                     "from": { "pointing_button": "button5" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress. Remember the documentation philosophy. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
@@ -260,7 +260,7 @@
                     "type": "basic",
                     "description": "R-Stick Click → Commit + Push",
                     "from": { "pointing_button": "button15" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in logical groups. Then push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in (chrono)logical groups. Then push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 }
             ]

@@ -386,7 +386,11 @@ CONTROLLER PHYSICAL LAYOUT (use this for accurate button positions):
 - Menu button (CENTER-RIGHT of the three small center buttons): three horizontal lines icon - THIS is where SuperWhisper/DICT goes
 - Guide button (TOP-CENTER): the large GLOWING XBOX LOGO "X" between LB and RB at the TOP of the controller
 
-CRITICAL: The Share button in the absolute center is NOT mappable and should have NO label pointing to it!
+CRITICAL LABEL PLACEMENT:
+- The Share button in the absolute center is NOT mappable and should have NO label pointing to it!
+- "Ultrathink" MUST point to the VIEW button (the LEFT one of the 3 center buttons, with two overlapping squares icon)
+- "SuperWhisper" MUST point to the MENU button (the RIGHT one of the 3 center buttons, with three horizontal lines icon)
+- These two labels should NOT point to the analog sticks or anywhere else!
 
 EXACT DATA TO DISPLAY:
 
