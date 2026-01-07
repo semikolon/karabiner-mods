@@ -373,17 +373,17 @@ def build_xbox_prompt(mappings: dict) -> str:
 
 LAYOUT: Controller diagram on top, two tables below.
 
-CONTROLLER BUTTON POSITIONS:
-- TOP ROW: LB (left shoulder), Guide (glowing Xbox logo, center), RB (right shoulder)
-- LEFT SIDE: L-Stick joystick (UPPER), D-pad cross (LOWER)
-- CENTER: View button (left), Menu button (right) - small buttons in a row
-- RIGHT SIDE: Face buttons ABXY diamond (UPPER), R-Stick joystick (LOWER)
+CONTROLLER BUTTON POSITIONS (left to right):
+- LEFT SIDE: LB (shoulder), L-Stick joystick (UPPER-LEFT), D-pad (LOWER-LEFT)
+- CENTER THREE BUTTONS (small, in a row): View (left) | [skip middle] | Menu (right)
+- RIGHT SIDE: RB (shoulder), face buttons (ABXY diamond), R-Stick joystick (LOWER-RIGHT)
+- TOP CENTER: Guide button (glowing Xbox logo)
 
-LABEL PLACEMENT RULE: Labels go on the SAME SIDE as their button:
-- LEFT side buttons → labels on LEFT side of image
-- RIGHT side buttons → labels on RIGHT side of image
-- View button is CENTER-LEFT → label goes LEFT
-- Menu button is CENTER-RIGHT → label goes RIGHT
+LABEL PLACEMENT RULE:
+- View (YES) + Ultrathink: label on LEFT, line points to left center button
+- Menu (DICT) + SuperWhisper: label on RIGHT, line points to right center button
+- L-Stick, D-pad, LB labels: LEFT side
+- R-Stick, face buttons (ABXY), RB labels: RIGHT side
 
 STANDALONE BUTTON DATA:
 {standalone_content}
