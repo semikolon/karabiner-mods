@@ -1,6 +1,6 @@
 # Karabiner Mods for macOS Development Workflows
 
-> **Last updated:** December 31, 2025
+> **Last updated:** January 7, 2026
 
 ## Overview
 This repository contains Karabiner-Elements configurations for supercharging development workflows on macOS. Originally focused on Xbox Wireless Controller mappings, it now also includes **keyboard text shortcuts** for AI-assisted development. The ultimate goal is to streamline and possibly minimize keyboard usage by mapping various controller inputs to shortcuts, shell scripts, or macros that control or automate typical tasks in IDEs like [Cursor](https://www.cursor.so/) and terminals like [Warp](https://www.warp.dev/). By integrating these configurations with Karabiner-Elements, we can remap controller inputs to keyboard events, scripts, or application launches.
@@ -76,7 +76,7 @@ The Caps Lock key serves two purposes:
 
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
-| **Caps+d** | `Make sure key docs are up to date and congruent with our progress. Ultrathink` | d | h |
+| **Caps+d** | `Make sure key docs are up to date and congruent with our progress. Remember the documentation philosophy. Ultrathink` | d | h |
 | **Caps+e** | `Don't make changes. Explore and report back. Ultrathink` | e | d |
 | **Caps+a** | `Put a subagent on researching this thoroughly. Report back with findings. Ultrathink` | a | a |
 

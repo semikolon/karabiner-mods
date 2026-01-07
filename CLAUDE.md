@@ -7,12 +7,14 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 ## Key Files
 
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
-- `mods/xbox_zed_claude.json` - Xbox controller mappings (all in one rule: standalone + LB/RB combos + DICT)
+- `mods/xbox_zed_claude.json` - Xbox controller mappings (25 actions: standalone + LB/RB combos + DICT)
 - `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
 - `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
 - `docs/cheatsheet_xbox.png` - Xbox controller mappings visual reference
 - `docs/superwhisper_integration.md` - SuperWhisper vocabulary/replacements reference
 - `docs/xbox_button_reference.md` - Xbox controller button mappings + technical details
+- `docs/xbox_driver_macos_analysis.md` - Wired USB driver research (golden-narwhal12)
+- `docs/antimicrox_analysis.md` - AntiMicroX architecture analysis
 - `.claude/commands/analyze-shortcuts.md` - Slash command for analyzing message history
 
 ## Keyboard Layout
@@ -166,12 +168,25 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 | *(none)* | D-pad Left | generic_desktop | Delete Word (Opt+Backspace) |
 | *(none)* | D-pad Right | generic_desktop | Enter key |
 | *(none)* | L-Stick | button14 | /total-recap (session recovery) |
-| *(none)* | R-Stick | button15 | "Commit everything in logical groups. Then push." |
+| *(none)* | R-Stick | button15 | "Commit everything in (chrono)logical groups. Then push." |
 
-### Xbox Controller File
-- `mods/xbox_zed_claude.json` - All controller mappings in one rule (25 unique actions: 13 standalone + 12 combos)
+### Xbox Controller Files
+- `mods/xbox_zed_claude.json` - All controller mappings (25 unique actions: 13 standalone + 12 combos)
+- `docs/xbox_button_reference.md` - Definitive button reference with technical details
+- `docs/xbox_driver_macos_analysis.md` - Wired USB driver research (golden-narwhal12)
+- `docs/antimicrox_analysis.md` - AntiMicroX architecture study (Linux/Windows only)
 
-**Note**: D-pad uses `generic_desktop: dpad_left` syntax, not `pointing_button`. See `docs/xbox_button_reference.md` for details.
+**Note**: D-pad uses `generic_desktop: dpad_left` syntax, not `pointing_button`.
+
+### Wired USB Support (January 2026)
+
+**Key finding**: Xbox controller uses different protocols depending on connection:
+- **Bluetooth**: Standard HID → Karabiner works ✅
+- **Wired USB**: GIP protocol → Karabiner cannot see buttons ❌
+
+Karabiner config includes both Product IDs (2834 wired, 2835 Bluetooth) but wired requires the golden-narwhal12 userspace driver for button input.
+
+**Driver location**: `~/Projects/xbox-controller-driver-macos/` (built, ready to test)
 
 ## SuperWhisper Integration
 

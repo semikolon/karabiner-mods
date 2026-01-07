@@ -1,22 +1,32 @@
 # TODO
 
-> **Session resumed December 31, 2025** - Continued from Dec 20 session.
-> Major progress on DICT button, cheatsheet generation, and documentation.
-
-> **Context from Dec 20**: Last activity before that was September 8, 2025 (~3.5 months gap).
-> Extensive development environment work done in ~/dotfiles during this time, including:
-> - TTS daemon with Hammerspoon hotkeys (Ctrl+Cmd+Alt+N/S)
-> - Rich slash command ecosystem (`/total-recap`, `/docs-review`, `/significance`, etc.)
-> - MCP server integrations (Zen, Graphiti, Serena, Linear, etc.)
->
-> **Integration opportunities identified:**
-> - Hammerspoon as fallback for keyboard shortcuts (if Fn key doesn't work via Karabiner)
-> - Text shortcuts for common AI prompts (Ultrathink, slash commands)
-> - Potential synergy between Karabiner controller mappings and Hammerspoon hotkeys
+> **Latest session: January 7, 2026** - Wired USB research, driver installation, doc cleanup.
 
 ---
 
 ## Active / Recent
+
+### January 2026
+
+16. **Wired USB Xbox Controller Research** *(Jan 5-7, 2026)*
+    - [x] Discovered: Wired USB uses Product ID 2834 (vs Bluetooth 2835)
+    - [x] Root cause: Xbox uses GIP protocol over USB, NOT HID (invisible to Karabiner)
+    - [x] Updated Karabiner config to include both Product IDs
+    - [x] Researched alternatives: AntiMicroX (dead on macOS), 360Controller (dead), golden-narwhal12 driver (active)
+    - [x] Created `docs/antimicrox_analysis.md` and `docs/xbox_driver_macos_analysis.md`
+    - [x] Cloned and built golden-narwhal12 driver at `~/Projects/xbox-controller-driver-macos/`
+    - [ ] **TEST**: Run driver with wired controller (`sudo ./simulator`)
+
+17. **Shortcut Updates** *(Jan 7, 2026)*
+    - [x] Caps+d / Y: Added "Remember the documentation philosophy" suffix
+    - [x] Caps+x / R-Stick: Changed "logical" to "(chrono)logical" groups
+
+18. **Cheatsheet Label Fix** *(Jan 7, 2026)*
+    - [x] Fixed SuperWhisper/Ultrathink pointing to wrong buttons
+    - [x] Solution: Rewrote prompt with positive-only framing (pink elephant problem)
+    - [x] Simplified prompt from 3799 to 2011 chars
+
+### December 2025
 
 14. **DICT Button Delayed Space** *(Dec 31, 2025)*
     - [x] Identified issue: SuperWhisper transcription async, spaces not appearing between dictation and shortcuts
