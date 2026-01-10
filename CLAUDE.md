@@ -121,24 +121,29 @@ When designing shortcut phrases, follow these principles:
 | **Verb-first** | Start with action | "Document this" not "This should be documented" |
 | **Single intent** | One action per shortcut | Composable, can combine multiple |
 | **Positive framing** | Say what to do | "Find best file" not "Don't create new files" |
-| **Scope constraint** | Bound the search/action | "20 recent .md files" limits scope |
+| **Scope constraint** | Bound the search/action | "30 recent .md files" limits scope |
 | **Flexibility clause** | Allow judgment | "or several if necessary" |
 | **Thinking trigger** | End with Ultrathink | Enables deep reasoning for complex ops |
 | **Trailing space** | Enable composition | "Ultrathink " allows appending |
 
 **Intent separation**: Keep distinct operations atomic:
-- **Input** (X): Load context → "Read up on relevant docs..."
-- **Audit** (Y): Check state → "Make sure docs are up to date..."
-- **Output** (j): Write insight → "Document this insight..."
+- **Enumerate** (r): List docs → "List 30 recent .md docs..."
+- **Read** (c): Load context → "Read the most relevant 2-3 ones..."
+- **Audit** (d): Check state → "Make sure docs are up to date with progress/reasoning..."
+- **Output** (j): Write insights → "Document insights where appropriate..."
+- **Challenge** (y): Examine assumptions → "Why are we going down this road?..."
 
 ## Current Shortcut Tiers
 
-1. **Quick Responses** - Single words/short confirmations (u, c, y, p, s, g)
+1. **Quick Responses** - Single words/short confirmations (u, p, s, g)
 2. **Workflow Patterns** - Documentation, exploration, delegation (d, e, a)
-3. **Combo Phrases** - Multi-step instructions (x, r, n)
+3. **Combo Phrases** - Multi-step instructions (x, r, c, n)
+   - r → Enumerate docs (list 30 recent .md files)
+   - c → Read relevant docs (most relevant 2-3)
 4. **Testing & Research** - Run tests, search online (t, ö)
-5. **Semantic Actions** - Wait, summarize, fix, explain, document (w, å, f, h, j)
-   - j → Document insight (find best .md file)
+5. **Semantic Actions** - Wait, summarize, fix, explain, document, challenge (w, å, f, h, j, y)
+   - j → Document insights where appropriate
+   - y → Challenge assumptions (deeper why)
 6. **Slash Commands** - Claude Code slash commands (m, k, i, b, l, o, q)
    - m → /recall (memory)
    - k → /capture (keep)

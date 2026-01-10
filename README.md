@@ -1,6 +1,6 @@
 # Karabiner Mods for macOS Development Workflows
 
-> **Last updated:** January 7, 2026
+> **Last updated:** January 10, 2026
 
 ## Overview
 This repository contains Karabiner-Elements configurations for supercharging development workflows on macOS. Originally focused on Xbox Wireless Controller mappings, it now also includes **keyboard text shortcuts** for AI-assisted development. The ultimate goal is to streamline and possibly minimize keyboard usage by mapping various controller inputs to shortcuts, shell scripts, or macros that control or automate typical tasks in IDEs like [Cursor](https://www.cursor.so/) and terminals like [Warp](https://www.warp.dev/). By integrating these configurations with Karabiner-Elements, we can remap controller inputs to keyboard events, scripts, or application launches.
@@ -66,19 +66,26 @@ The Caps Lock key serves two purposes:
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
 | **Caps+u** | `Ultrathink` | u | f |
-| **Caps+c** | `Continue. Ultrathink` | c | i |
-| **Caps+y** | `Yes! Ultrathink` | y | t |
 | **Caps+p** | `Proceed. Ultrathink` | p | r |
 | **Caps+s** | `Sit rep. Ultrathink` | s | ; |
 | **Caps+g** | `What's the git state? Ultrathink` | g | u |
 
-#### Tier 2: Workflow Patterns (Added Dec 21, 2025)
+#### Tier 2: Workflow Patterns
 
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
-| **Caps+d** | `Make sure key docs are up to date and congruent with our progress. Remember the documentation philosophy. Ultrathink` | d | h |
+| **Caps+d** | `Make sure key docs are up to date and congruent with our progress/reasoning. Ultrathink` | d | h |
 | **Caps+e** | `Don't make changes. Explore and report back. Ultrathink` | e | d |
 | **Caps+a** | `Put a subagent on researching this thoroughly. Report back with findings. Ultrathink` | a | a |
+
+#### Tier 3: Composable Doc Workflow (Jan 10, 2026)
+
+| Shortcut | Output | Svorak Key | QWERTY Physical |
+|----------|--------|------------|-----------------|
+| **Caps+r** | `List 30 recent .md docs related to this work/topic. Ultrathink` | r | o |
+| **Caps+c** | `Read the most relevant 2-3 ones. Ultrathink` | c | i |
+| **Caps+j** | `Document insights where appropriate. Ultrathink` | j | c |
+| **Caps+y** | `Why are we going down this road? Examine and challenge assumptions. Ultrathink` | y | t |
 
 > **Note**: This keyboard uses **Svorak 6** (Swedish Dvorak) layout. Karabiner uses QWERTY physical key codes, so the JSON file maps to the physical key positions, not the letters shown on keycaps.
 

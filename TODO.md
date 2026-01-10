@@ -1,12 +1,24 @@
 # TODO
 
-> **Latest session: January 7, 2026** - Wired USB research, driver installation, doc cleanup.
+> **Latest session: January 10, 2026** - Keyboard shortcut composability refactor.
 
 ---
 
 ## Active / Recent
 
 ### January 2026
+
+19. **Keyboard Shortcuts Composability Refactor** *(Jan 10, 2026)* ✅
+    - [x] Refactored r/c/j/y for atomic composability
+    - [x] r: "List 30 recent .md docs related to this work/topic"
+    - [x] c: "Read the most relevant 2-3 ones" (was: Continue)
+    - [x] j: "Document insights where appropriate" (decoupled from enumerate)
+    - [x] d: Updated to "progress/reasoning"
+    - [x] y: "Challenge assumptions" (was: Yes) - deeper why prompt
+    - [x] Cheatsheet: Strip "Ultrathink" suffix from display
+    - [x] Updated tier assignments in generate_cheatsheet_ai.py
+    - [x] Regenerated both cheatsheets
+    - [x] Updated CLAUDE.md and README.md
 
 16. **Wired USB Xbox Controller Research** *(Jan 5-7, 2026)*
     - [x] Discovered: Wired USB uses Product ID 2834 (vs Bluetooth 2835)
