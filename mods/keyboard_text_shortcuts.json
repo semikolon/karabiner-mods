@@ -81,7 +81,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+c → Continue. Ultrathink (Svorak c = QWERTY i)",
+          "description": "Caps+c → Read relevant docs (Svorak c = QWERTY i)",
           "from": {
             "key_code": "i",
             "modifiers": {
@@ -90,29 +90,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Continue. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "variable_if",
-              "name": "caps_lock_held",
-              "value": 1
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "description": "Caps+y → Yes! Ultrathink (Svorak y = QWERTY t)",
-          "from": {
-            "key_code": "t",
-            "modifiers": {
-              "optional": ["any"]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Yes! Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read the most relevant 2-3 ones. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -135,6 +113,28 @@
           "to": [
             {
               "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Proceed. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "description": "Caps+y → Challenge assumptions (Svorak y = QWERTY t)",
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Why are we going down this road? Examine and challenge our crucial assumptions - list them out first and then attack them with critical thinking. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -200,7 +200,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress. Remember the documentation philosophy. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress/reasoning. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -279,7 +279,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+r → Context refresh (Svorak r = QWERTY o)",
+          "description": "Caps+r → Enumerate docs (Svorak r = QWERTY o)",
           "from": {
             "key_code": "o",
             "modifiers": {
@@ -288,7 +288,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read up on the relevant docs to refresh your memory first. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"List 30 recent .md docs related to this work/topic. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -455,7 +455,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+j → Document insight (Svorak j = QWERTY c)",
+          "description": "Caps+j → Document insights (Svorak j = QWERTY c)",
           "from": {
             "key_code": "c",
             "modifiers": {
@@ -464,7 +464,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Document this insight in the best-fit file. List 20 recent related .md docs to pick from. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Document insights where appropriate. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
