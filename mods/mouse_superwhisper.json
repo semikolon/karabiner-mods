@@ -1,0 +1,19 @@
+{
+  "title": "Mouse SuperWhisper Toggle",
+  "rules": [
+    {
+      "description": "Mouse Button 4 (back/bottom thumb) → SuperWhisper toggle",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            { "key_code": "non_us_backslash" }
+          ]
+        }
+      ]
+    }
+  ]
+}
