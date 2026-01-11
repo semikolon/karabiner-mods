@@ -45,7 +45,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Continue based on what was done in last session above. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
+              "shell_command": "osascript -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Proceed. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
             }
           ],
           "conditions": [
