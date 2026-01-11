@@ -36,6 +36,28 @@
         },
         {
           "type": "basic",
+          "description": "Caps+3 → Resume from transcript (wraps clipboard in <before> tags)",
+          "from": {
+            "key_code": "3",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Continue based on what was done in last session above. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
           "description": "Caps+Enter → Shift+Enter (safety: prevent accidental submit)",
           "from": {
             "key_code": "return_or_enter",
