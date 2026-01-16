@@ -10,7 +10,7 @@
                     "from": { "pointing_button": "button7" },
                     "to": [{ "set_variable": { "name": "lb_held", "value": 1 } }],
                     "to_after_key_up": [{ "set_variable": { "name": "lb_held", "value": 0 } }],
-                    "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
@@ -19,14 +19,14 @@
                     "from": { "pointing_button": "button8" },
                     "to": [{ "set_variable": { "name": "rb_held", "value": 1 } }],
                     "to_after_key_up": [{ "set_variable": { "name": "rb_held", "value": 0 } }],
-                    "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
                     "type": "basic",
                     "description": "LB + A → Zoom out / open loops",
                     "from": { "pointing_button": "button1" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
                         { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
@@ -36,7 +36,7 @@
                     "type": "basic",
                     "description": "LB + B → Research extensively online",
                     "from": { "pointing_button": "button2" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Research this extensively online. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Research this extensively online. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
                         { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
@@ -46,7 +46,7 @@
                     "type": "basic",
                     "description": "LB + X → Fix this",
                     "from": { "pointing_button": "button4" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Fix this. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Fix this. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
                         { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
@@ -56,7 +56,7 @@
                     "type": "basic",
                     "description": "LB + Y → Summarize briefly",
                     "from": { "pointing_button": "button5" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Summarize briefly. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Summarize briefly. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 1 },
                         { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
@@ -116,7 +116,7 @@
                     "type": "basic",
                     "description": "RB + Y → Pull and push",
                     "from": { "pointing_button": "button5" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Pull and push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Pull and push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "rb_held", "value": 1 },
                         { "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }
@@ -146,7 +146,7 @@
                     "type": "basic",
                     "description": "A (STANDUP) → What's next?",
                     "from": { "pointing_button": "button1" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
@@ -157,7 +157,7 @@
                     "type": "basic",
                     "description": "B (SPECS) → Sit rep",
                     "from": { "pointing_button": "button2" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Sit rep. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Sit rep. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
@@ -168,7 +168,7 @@
                     "type": "basic",
                     "description": "X → Context refresh (read docs)",
                     "from": { "pointing_button": "button4" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read up on the relevant docs to refresh your memory first. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read up on the relevant docs to refresh your memory first. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
@@ -179,7 +179,7 @@
                     "type": "basic",
                     "description": "Y → Doc coherence check",
                     "from": { "pointing_button": "button5" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress. Remember the documentation philosophy. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress. Remember the documentation philosophy. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
@@ -188,9 +188,9 @@
                 },
                 {
                     "type": "basic",
-                    "description": "View (YES) → Ultrathink suffix",
+                    "description": "View (YES) → Proceed",
                     "from": { "pointing_button": "button11" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \" Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
@@ -260,7 +260,7 @@
                     "type": "basic",
                     "description": "R-Stick Click → Commit + Push",
                     "from": { "pointing_button": "button15" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in (chrono)logical groups. Then push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in (chrono)logical groups. Then push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 }
             ]
