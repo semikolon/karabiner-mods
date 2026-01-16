@@ -67,7 +67,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Proceed. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
+              "shell_command": "osascript -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
             }
           ],
           "conditions": [
@@ -134,7 +134,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read the most relevant 2-3 ones. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read the most relevant 2-3 ones. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -147,7 +147,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+p → Proceed. Ultrathink (Svorak p = QWERTY r)",
+          "description": "Caps+p → Proceed (Svorak p = QWERTY r)",
           "from": {
             "key_code": "r",
             "modifiers": {
@@ -156,7 +156,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Proceed. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -178,7 +178,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Why are we going down this road? Examine and challenge our crucial assumptions - list them out first and then attack them with critical thinking. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Why are we going down this road? Examine and challenge our crucial assumptions - list them out first and then attack them with critical thinking. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -191,7 +191,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+s → Sit rep. Ultrathink (Svorak s = QWERTY semicolon)",
+          "description": "Caps+s → Sit rep (Svorak s = QWERTY semicolon)",
           "from": {
             "key_code": "semicolon",
             "modifiers": {
@@ -200,7 +200,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Sit rep. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Sit rep. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -213,7 +213,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+g → What's the git state? Ultrathink (Svorak g = QWERTY u)",
+          "description": "Caps+g → Git state (Svorak g = QWERTY u)",
           "from": {
             "key_code": "u",
             "modifiers": {
@@ -222,7 +222,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's the git state? Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's the git state? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -244,7 +244,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress/reasoning. Remember the documentation philosophy/strategy. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress/reasoning. Remember the documentation philosophy/strategy. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -266,7 +266,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -288,7 +288,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -310,7 +310,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in (chrono)logical groups. Then push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in (chrono)logical groups. Then push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -332,7 +332,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"List 30 recent .md docs related to this work/topic. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"List 30 recent .md docs related to this work/topic. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -354,7 +354,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -376,7 +376,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Run the tests. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Run the tests. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -398,7 +398,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Search online for this. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Search online for this. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -420,7 +420,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't act on anything before I've made any important decisions that need to be made about where to go. Ultrathink \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't act on anything before I've made any important decisions that need to be made about where to go. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -442,7 +442,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Summarize briefly. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Summarize briefly. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -464,7 +464,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Fix this. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Fix this. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -486,7 +486,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Explain. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Explain. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -508,7 +508,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Document insights where appropriate. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Document insights where appropriate. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -684,7 +684,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -706,7 +706,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Pull and push. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Pull and push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -728,7 +728,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Research this extensively online. Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Research this extensively online. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
