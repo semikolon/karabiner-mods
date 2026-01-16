@@ -140,8 +140,9 @@ When designing shortcut phrases, follow these principles:
    - r → Enumerate docs (list 30 recent .md files)
    - c → Read relevant docs (most relevant 2-3)
 4. **Testing & Research** - Run tests, search online (t, ö, v)
-5. **Semantic Actions** - Examine, wait, summarize, fix, explain, document, challenge, zoom (u, w, å, f, h, j, y, ä)
+5. **Semantic Actions** - Examine, wait, summarize, fix, explain, document, challenge, zoom, ELI5 (u, w, å, f, h, j, y, ä, 5)
    - u → Unclear/examine assumptions (rank weakest to strongest)
+   - 5 → ELI5 / first principles (core mechanism + bridging analogy)
    - j → Document insights where appropriate
    - y → Challenge assumptions (deeper why)
    - ä → Zoom out (open loops check)

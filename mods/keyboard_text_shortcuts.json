@@ -58,6 +58,28 @@
         },
         {
           "type": "basic",
+          "description": "Caps+5 → ELI5 / first principles (Svorak 5 = QWERTY 5)",
+          "from": {
+            "key_code": "5",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"ELI5 this. First principles only—what's the core mechanism? One concrete analogy that bridges from the abstract to everyday experience. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
           "description": "Caps+3 → Resume from transcript (wraps clipboard in <before> tags)",
           "from": {
             "key_code": "3",

@@ -52,6 +52,7 @@ KEYBOARD_TIER_NAMES = {
     4: "Testing & Research",
     5: "Semantic Actions",
     6: "Slash Commands",
+    7: "Utility",
 }
 
 TIER_ASSIGNMENTS = {
@@ -59,8 +60,9 @@ TIER_ASSIGNMENTS = {
     "d": 2, "e": 2, "a": 2, ".": 2,  # Workflow Patterns
     "x": 3, "r": 3, "n": 3, "c": 3,  # Combo Phrases (c = "Read relevant 2-3")
     "t": 4, "ö": 4, "v": 4,  # Testing & Research
-    "u": 5, "w": 5, "å": 5, "f": 5, "h": 5, "j": 5, "ä": 5, "y": 5,  # Semantic Actions (u = "Unclear/assumptions")
+    "u": 5, "w": 5, "å": 5, "f": 5, "h": 5, "j": 5, "ä": 5, "y": 5, "5": 5,  # Semantic Actions (u = "Unclear", 5 = "ELI5")
     "m": 6, "k": 6, "i": 6, "b": 6, "l": 6, "o": 6, "q": 6, "z": 6,  # Slash Commands
+    "3": 7, "4": 7,  # Utility (transcript resume, paste joined)
 }
 
 
