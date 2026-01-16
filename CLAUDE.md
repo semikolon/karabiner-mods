@@ -15,7 +15,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `docs/xbox_button_reference.md` - Xbox controller button mappings + technical details
 - `docs/xbox_driver_macos_analysis.md` - Wired USB driver research (golden-narwhal12)
 - `docs/antimicrox_analysis.md` - AntiMicroX architecture analysis
-- `docs/eli5_shortcut_philosophy.md` - Design rationale for Caps+5 (Quine, Žižek, parallax gap)
+- `docs/eli5_shortcut_philosophy.md` - Design rationale for Caps+h clarity shortcut (Aristotle → Sellars → Quine → Žižek) ★
 - `.claude/commands/analyze-shortcuts.md` - Slash command for analyzing message history
 
 ## Keyboard Layout
@@ -143,7 +143,7 @@ When designing shortcut phrases, follow these principles:
 4. **Testing & Research** - Run tests, search online (t, ö, v)
 5. **Semantic Actions** - Examine, wait, summarize, fix, clarity, document, challenge, zoom (u, w, å, f, h, j, y, ä)
    - u → Unclear/examine assumptions (rank weakest to strongest)
-   - h → Clarity / load-bearing idea (analogy + perspectives + what's left out)
+   - h → Clarity / load-bearing idea (analogy + perspectives + what's left out) ★ favorite
    - j → Document insights where appropriate
    - y → Challenge assumptions (deeper why)
    - ä → Zoom out (open loops check)
