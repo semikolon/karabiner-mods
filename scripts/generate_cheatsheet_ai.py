@@ -55,14 +55,12 @@ KEYBOARD_TIER_NAMES = {
 }
 
 TIER_ASSIGNMENTS = {
-    "u": 1, "p": 1, "s": 1, "g": 1,
-    "d": 2, "e": 2, "a": 2,
-    "x": 3, "r": 3, "n": 3, "c": 3,  # c is now "Read relevant 2-3"
-    "t": 4, "ö": 4,
-    "w": 5, "å": 5, "f": 5, "h": 5, "j": 5, "ä": 5, "y": 5,  # y is "Challenge assumptions"
-    "m": 6, "k": 6, "i": 6, "b": 6, "l": 6, "o": 6, "q": 6,
-    # New shortcuts
-    ".": 2, "v": 4, "z": 6,
+    "p": 1, "s": 1, "g": 1,  # Quick Responses
+    "d": 2, "e": 2, "a": 2, ".": 2,  # Workflow Patterns
+    "x": 3, "r": 3, "n": 3, "c": 3,  # Combo Phrases (c = "Read relevant 2-3")
+    "t": 4, "ö": 4, "v": 4,  # Testing & Research
+    "u": 5, "w": 5, "å": 5, "f": 5, "h": 5, "j": 5, "ä": 5, "y": 5,  # Semantic Actions (u = "Unclear/assumptions")
+    "m": 6, "k": 6, "i": 6, "b": 6, "l": 6, "o": 6, "q": 6, "z": 6,  # Slash Commands
 }
 
 
@@ -108,8 +106,7 @@ def extract_keyboard_shortcuts(config_path: Path) -> list[dict]:
             # Clean up shell escape sequences and surrounding quotes
             output_text = output_text.strip('"\'')
             output_text = output_text.replace("'\\''", "'").replace("\\'", "'").replace('\\"', '"').replace("\\\\", "\\")
-            # Strip "Ultrathink" suffix for cleaner display (user knows it's always there)
-            output_text = re.sub(r'\s*Ultrathink\s*$', '', output_text)
+            # Note: Ultrathink suffix removed from shortcuts (Jan 2026 - no longer needed)
         else:
             output_text = name
 
@@ -196,8 +193,7 @@ def extract_xbox_mappings(config_path: Path) -> dict:
                 if text_match:
                     output = text_match.group(1).strip('"\'')
                     output = output.replace("'\\''", "'").replace("\\'", "'").replace('\\"', '"').replace("\\\\", "\\")
-                    # Strip "Ultrathink" suffix for cleaner display
-                    output = re.sub(r'\s*Ultrathink\s*$', '', output)
+                    # Note: Ultrathink suffix removed from shortcuts (Jan 2026 - no longer needed)
                     return output.strip()
                 return None
 
