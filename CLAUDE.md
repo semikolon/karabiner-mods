@@ -15,6 +15,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `docs/xbox_button_reference.md` - Xbox controller button mappings + technical details
 - `docs/xbox_driver_macos_analysis.md` - Wired USB driver research (golden-narwhal12)
 - `docs/antimicrox_analysis.md` - AntiMicroX architecture analysis
+- `docs/eli5_shortcut_philosophy.md` - Design rationale for Caps+5 (Quine, Žižek, parallax gap)
 - `.claude/commands/analyze-shortcuts.md` - Slash command for analyzing message history
 
 ## Keyboard Layout

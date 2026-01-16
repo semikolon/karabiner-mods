@@ -41,7 +41,7 @@ This repository contains Karabiner-Elements configurations for supercharging dev
 
 | File | Description |
 |------|-------------|
-| `keyboard_text_shortcuts.json` | Caps+key shortcuts for typing common text (33 shortcuts) |
+| `keyboard_text_shortcuts.json` | Caps+key shortcuts for typing common text (34 shortcuts) |
 | `xbox_zed_claude.json` | Xbox controller mappings - all in one rule (25 unique actions) |
 | `app_specific_actions.json` | *(deprecated)* Old Cursor-specific Xbox mappings |
 | `mouse_browser_navigation.json` | *(broken)* Mouse buttons for browser back/forward |
@@ -93,6 +93,7 @@ The Caps Lock key serves two purposes:
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
 | **Caps+u** | `What's unclear or not obvious? Critically examine assumptions...` | u | f |
+| **Caps+5** | `ELI5 this; what's the load-bearing idea/s here?...` | 5 | 5 |
 | **Caps+ä** | `Let's zoom out. How did we get here? Are there any open loops?` | ä | w |
 
 #### Tier 7: Utility (Clipboard/Transcript Helpers)
