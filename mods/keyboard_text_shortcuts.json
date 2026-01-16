@@ -36,6 +36,28 @@
         },
         {
           "type": "basic",
+          "description": "Caps+4 → Paste clipboard with lines joined (for clean prose)",
+          "from": {
+            "key_code": "4",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "bash -c 'pbpaste | tr \"\\n\" \" \" | tr -s \" \" | pbcopy' && osascript -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
           "description": "Caps+3 → Resume from transcript (wraps clipboard in <before> tags)",
           "from": {
             "key_code": "3",
