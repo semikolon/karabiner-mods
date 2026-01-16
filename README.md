@@ -93,14 +93,15 @@ The Caps Lock key serves two purposes:
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
 | **Caps+u** | `What's unclear or not obvious? Critically examine assumptions...` | u | f |
-| **Caps+5** | `ELI5 this; what's the load-bearing idea/s here?...` | 5 | 5 |
+| **Caps+h** | `Help me see this clearly: what's the load-bearing idea/s?...` | h | j |
 | **Caps+ä** | `Let's zoom out. How did we get here? Are there any open loops?` | ä | w |
 
-#### Tier 7: Utility (Clipboard/Transcript Helpers)
+#### Tier 7: Utility (Clipboard/Selection Helpers)
 
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
-| **Caps+3** | Wraps clipboard in `<before>` tags + "Proceed." | 3 | 3 |
+| **Caps+2** | Copies selection, wraps in `<quote>` tags | 2 | 2 |
+| **Caps+3** | Copies selection, wraps in `<before>` tags + "Proceed." | 3 | 3 |
 | **Caps+4** | Paste clipboard with lines joined (clean prose) | 4 | 4 |
 
 > **Note**: This keyboard uses **Svorak 6** (Swedish Dvorak) layout. Karabiner uses QWERTY physical key codes, so the JSON file maps to the physical key positions, not the letters shown on keycaps.

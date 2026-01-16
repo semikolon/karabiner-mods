@@ -58,16 +58,16 @@
         },
         {
           "type": "basic",
-          "description": "Caps+5 → ELI5 / load-bearing idea (Svorak 5 = QWERTY 5)",
+          "description": "Caps+2 → Quote selection (copies, wraps in <quote> tags)",
           "from": {
-            "key_code": "5",
+            "key_code": "2",
             "modifiers": {
               "optional": ["any"]
             }
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"ELI5 this; what's the load-bearing idea/s here? One bridging analogy. What tension does this simplification hide? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"c\" using command down' -e 'delay 0.2' -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<quote>\" & return & clipContent & return & \"</quote>\" & return & return' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
             }
           ],
           "conditions": [
@@ -80,7 +80,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+3 → Resume from transcript (wraps clipboard in <before> tags)",
+          "description": "Caps+3 → Resume from selection (copies, wraps in <before> tags)",
           "from": {
             "key_code": "3",
             "modifiers": {
@@ -89,7 +89,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
+              "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"c\" using command down' -e 'delay 0.2' -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
             }
           ],
           "conditions": [
@@ -266,7 +266,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress/reasoning. Remember the documentation philosophy/strategy. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our findings/progress/reasoning/decisions/ideas. Remember the documentation philosophy/strategy. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -499,7 +499,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+h → Explain (Svorak h = QWERTY j)",
+          "description": "Caps+h → Clarity / load-bearing idea (Svorak h = QWERTY j)",
           "from": {
             "key_code": "j",
             "modifiers": {
@@ -508,7 +508,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Explain. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Help me see this clearly: what's the load-bearing idea/s? One bridging analogy. Competing perspectives if relevant. And after you have answered that: what doesn't fit neatly into that view? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [

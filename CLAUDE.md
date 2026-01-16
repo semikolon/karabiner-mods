@@ -141,9 +141,9 @@ When designing shortcut phrases, follow these principles:
    - r → Enumerate docs (list 30 recent .md files)
    - c → Read relevant docs (most relevant 2-3)
 4. **Testing & Research** - Run tests, search online (t, ö, v)
-5. **Semantic Actions** - Examine, wait, summarize, fix, explain, document, challenge, zoom, ELI5 (u, w, å, f, h, j, y, ä, 5)
+5. **Semantic Actions** - Examine, wait, summarize, fix, clarity, document, challenge, zoom (u, w, å, f, h, j, y, ä)
    - u → Unclear/examine assumptions (rank weakest to strongest)
-   - 5 → ELI5 / load-bearing idea (bridging analogy + hidden tension)
+   - h → Clarity / load-bearing idea (analogy + perspectives + what's left out)
    - j → Document insights where appropriate
    - y → Challenge assumptions (deeper why)
    - ä → Zoom out (open loops check)
@@ -156,8 +156,9 @@ When designing shortcut phrases, follow these principles:
    - o → /consensus-consult (opinions)
    - q → /docs-review (quality)
    - z → /total-recap
-7. **Utility** - Clipboard/transcript helpers (3, 4)
-   - 3 → Resume from transcript (wraps clipboard in `<before>` tags)
+7. **Utility** - Clipboard/selection helpers (2, 3, 4)
+   - 2 → Quote selection (copies, wraps in `<quote>` tags)
+   - 3 → Resume from selection (copies, wraps in `<before>` tags)
    - 4 → Paste with lines joined (clean prose)
 
 ## Xbox Controller Integration
