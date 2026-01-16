@@ -1,6 +1,6 @@
 # Karabiner Mods for macOS Development Workflows
 
-> **Last updated:** January 10, 2026
+> **Last updated:** January 16, 2026
 
 ## Overview
 This repository contains Karabiner-Elements configurations for supercharging development workflows on macOS. Originally focused on Xbox Wireless Controller mappings, it now also includes **keyboard text shortcuts** for AI-assisted development. The ultimate goal is to streamline and possibly minimize keyboard usage by mapping various controller inputs to shortcuts, shell scripts, or macros that control or automate typical tasks in IDEs like [Cursor](https://www.cursor.so/) and terminals like [Warp](https://www.warp.dev/). By integrating these configurations with Karabiner-Elements, we can remap controller inputs to keyboard events, scripts, or application launches.
@@ -41,7 +41,7 @@ This repository contains Karabiner-Elements configurations for supercharging dev
 
 | File | Description |
 |------|-------------|
-| `keyboard_text_shortcuts.json` | Caps+key shortcuts for typing common text (31 shortcuts) |
+| `keyboard_text_shortcuts.json` | Caps+key shortcuts for typing common text (33 shortcuts) |
 | `xbox_zed_claude.json` | Xbox controller mappings - all in one rule (25 unique actions) |
 | `app_specific_actions.json` | *(deprecated)* Old Cursor-specific Xbox mappings |
 | `mouse_browser_navigation.json` | *(broken)* Mouse buttons for browser back/forward |
@@ -49,9 +49,11 @@ This repository contains Karabiner-Elements configurations for supercharging dev
 
 ---
 
-## Keyboard Text Shortcuts (December 2025)
+## Keyboard Text Shortcuts (January 2026)
 
 Quick keyboard shortcuts for typing common AI prompts and commands in Claude Code.
+
+> **Note:** "Ultrathink" suffix removed from all shortcuts (Jan 2026) - thinking budget is always max in latest Claude Code.
 
 ### Caps Lock Dual-Purpose Design
 
@@ -65,27 +67,40 @@ The Caps Lock key serves two purposes:
 
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
-| **Caps+u** | `Ultrathink` | u | f |
-| **Caps+p** | `Proceed. Ultrathink` | p | r |
-| **Caps+s** | `Sit rep. Ultrathink` | s | ; |
-| **Caps+g** | `What's the git state? Ultrathink` | g | u |
+| **Caps+p** | `Proceed.` | p | r |
+| **Caps+s** | `Sit rep.` | s | ; |
+| **Caps+g** | `What's the git state?` | g | u |
 
 #### Tier 2: Workflow Patterns
 
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
-| **Caps+d** | `Make sure key docs are up to date and congruent with our progress/reasoning. Ultrathink` | d | h |
-| **Caps+e** | `Don't make changes. Explore and report back. Ultrathink` | e | d |
-| **Caps+a** | `Put a subagent on researching this thoroughly. Report back with findings. Ultrathink` | a | a |
+| **Caps+d** | `Make sure key docs are up to date... Remember the documentation philosophy/strategy.` | d | h |
+| **Caps+e** | `Don't make changes. Explore and report back.` | e | d |
+| **Caps+a** | `Put a subagent on researching this thoroughly. Report back with findings.` | a | a |
 
-#### Tier 3: Composable Doc Workflow (Jan 10, 2026)
+#### Tier 3: Composable Doc Workflow
 
 | Shortcut | Output | Svorak Key | QWERTY Physical |
 |----------|--------|------------|-----------------|
-| **Caps+r** | `List 30 recent .md docs related to this work/topic. Ultrathink` | r | o |
-| **Caps+c** | `Read the most relevant 2-3 ones. Ultrathink` | c | i |
-| **Caps+j** | `Document insights where appropriate. Ultrathink` | j | c |
-| **Caps+y** | `Why are we going down this road? Examine and challenge assumptions. Ultrathink` | y | t |
+| **Caps+r** | `List 30 recent .md docs related to this work/topic.` | r | o |
+| **Caps+c** | `Read the most relevant 2-3 ones.` | c | i |
+| **Caps+j** | `Document insights where appropriate.` | j | c |
+| **Caps+y** | `Why are we going down this road? Examine and challenge assumptions...` | y | t |
+
+#### Tier 5: Semantic Actions
+
+| Shortcut | Output | Svorak Key | QWERTY Physical |
+|----------|--------|------------|-----------------|
+| **Caps+u** | `What's unclear or not obvious? Critically examine assumptions...` | u | f |
+| **Caps+ä** | `Let's zoom out. How did we get here? Are there any open loops?` | ä | w |
+
+#### Tier 7: Utility (Clipboard/Transcript Helpers)
+
+| Shortcut | Output | Svorak Key | QWERTY Physical |
+|----------|--------|------------|-----------------|
+| **Caps+3** | Wraps clipboard in `<before>` tags + "Proceed." | 3 | 3 |
+| **Caps+4** | Paste clipboard with lines joined (clean prose) | 4 | 4 |
 
 > **Note**: This keyboard uses **Svorak 6** (Swedish Dvorak) layout. Karabiner uses QWERTY physical key codes, so the JSON file maps to the physical key positions, not the letters shown on keycaps.
 

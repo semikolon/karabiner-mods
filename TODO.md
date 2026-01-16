@@ -1,12 +1,24 @@
 # TODO
 
-> **Latest session: January 10, 2026** - Keyboard shortcut composability refactor.
+> **Latest session: January 16, 2026** - Ultrathink removal, new shortcuts, assumption examination.
 
 ---
 
 ## Active / Recent
 
 ### January 2026
+
+20. **Ultrathink Removal & New Shortcuts** *(Jan 16, 2026)* ✅
+    - [x] Removed "Ultrathink" suffix from ALL 33 keyboard shortcuts
+    - [x] Removed "Ultrathink" suffix from ALL 25 Xbox controller mappings
+    - [x] Caps+u: Changed from "Ultrathink" to "Unclear/examine assumptions"
+    - [x] Caps+3: NEW - Resume from transcript (wraps clipboard in `<before>` tags)
+    - [x] Caps+4: NEW - Paste with lines joined (clean prose)
+    - [x] Xbox View (YES): Changed from "Ultrathink suffix" to "Proceed."
+    - [x] DICT button: Increased delay from 2s to 3s
+    - [x] Updated cheatsheet script (removed Ultrathink stripping, updated tiers)
+    - [x] Regenerated both cheatsheets
+    - [x] Updated CLAUDE.md, README.md, TODO.md
 
 19. **Keyboard Shortcuts Composability Refactor** *(Jan 10, 2026)* ✅
     - [x] Refactored r/c/j/y for atomic composability

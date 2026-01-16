@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project contains custom Karabiner-Elements keyboard modifications, primarily focused on text shortcuts that output common phrases for AI-assisted development (Claude Code with "Ultrathink" trigger).
+This project contains custom Karabiner-Elements keyboard modifications, primarily focused on text shortcuts that output common phrases for AI-assisted development with Claude Code.
 
 ## Key Files
 
@@ -123,8 +123,7 @@ When designing shortcut phrases, follow these principles:
 | **Positive framing** | Say what to do | "Find best file" not "Don't create new files" |
 | **Scope constraint** | Bound the search/action | "30 recent .md files" limits scope |
 | **Flexibility clause** | Allow judgment | "or several if necessary" |
-| **Thinking trigger** | End with Ultrathink | Enables deep reasoning for complex ops |
-| **Trailing space** | Enable composition | "Ultrathink " allows appending |
+| **Trailing space** | Enable composition | Allows chaining shortcuts |
 
 **Intent separation**: Keep distinct operations atomic:
 - **Enumerate** (r): List docs → "List 30 recent .md docs..."
@@ -135,16 +134,18 @@ When designing shortcut phrases, follow these principles:
 
 ## Current Shortcut Tiers
 
-1. **Quick Responses** - Single words/short confirmations (u, p, s, g)
-2. **Workflow Patterns** - Documentation, exploration, delegation (d, e, a)
+1. **Quick Responses** - Single words/short confirmations (p, s, g)
+2. **Workflow Patterns** - Documentation, exploration, delegation (d, e, a, .)
 3. **Combo Phrases** - Multi-step instructions (x, r, c, n)
    - r → Enumerate docs (list 30 recent .md files)
    - c → Read relevant docs (most relevant 2-3)
-4. **Testing & Research** - Run tests, search online (t, ö)
-5. **Semantic Actions** - Wait, summarize, fix, explain, document, challenge (w, å, f, h, j, y)
+4. **Testing & Research** - Run tests, search online (t, ö, v)
+5. **Semantic Actions** - Examine, wait, summarize, fix, explain, document, challenge, zoom (u, w, å, f, h, j, y, ä)
+   - u → Unclear/examine assumptions (rank weakest to strongest)
    - j → Document insights where appropriate
    - y → Challenge assumptions (deeper why)
-6. **Slash Commands** - Claude Code slash commands (m, k, i, b, l, o, q)
+   - ä → Zoom out (open loops check)
+6. **Slash Commands** - Claude Code slash commands (m, k, i, b, l, o, q, z)
    - m → /recall (memory)
    - k → /capture (keep)
    - i → /significance (important)
@@ -152,20 +153,24 @@ When designing shortcut phrases, follow these principles:
    - l → /ui-prototype (layout)
    - o → /consensus-consult (opinions)
    - q → /docs-review (quality)
+   - z → /total-recap
+7. **Utility** - Clipboard/transcript helpers (3, 4)
+   - 3 → Resume from transcript (wraps clipboard in `<before>` tags)
+   - 4 → Paste with lines joined (clean prose)
 
 ## Xbox Controller Integration
 
 See `docs/xbox_button_reference.md` for full documentation including visual layout and session learnings.
 
-### Current Mappings (December 2025)
+### Current Mappings (January 2026)
 
 | Label | Button | Code | Action |
 |-------|--------|------|--------|
-| **YES** | View | button11 | " Ultrathink " (suffix) |
-| **DICT** | Menu | button12 | SuperWhisper toggle + delayed suffix space |
+| **YES** | View | button11 | "Proceed." |
+| **DICT** | Menu | button12 | SuperWhisper toggle + delayed suffix space (3s) |
 | **NO** | Guide | button13 | Escape |
-| **SPECS** | B | button2 | "Sit rep. Ultrathink " |
-| **STANDUP** | A | button1 | "What's next according to the plan? Ultrathink " |
+| **SPECS** | B | button2 | "Sit rep." |
+| **STANDUP** | A | button1 | "What's next according to the plan?" |
 | *(none)* | X | button4 | "Read up on the relevant docs..." |
 | *(none)* | Y | button5 | "Make sure key docs are up to date..." |
 | *(none)* | LB | button7 | "Don't make changes. Explore..." |
