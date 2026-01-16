@@ -103,7 +103,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+u → Ultrathink (Svorak u = QWERTY f)",
+          "description": "Caps+u → Unclear/examine assumptions (Svorak u = QWERTY f)",
           "from": {
             "key_code": "f",
             "modifiers": {
@@ -112,7 +112,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Ultrathink \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's unclear or not obvious about this topic/situation/idea? Critically examine our assumptions and rank them from weakest to strongest, according to the evidence at hand, before proceeding. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
