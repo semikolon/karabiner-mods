@@ -44,25 +44,22 @@ OUTPUT_DIR = PROJECT_ROOT / "docs"
 OUTPUT_KEYBOARD = OUTPUT_DIR / "cheatsheet_keyboard.png"
 OUTPUT_XBOX = OUTPUT_DIR / "cheatsheet_xbox.png"
 
-# Tier configuration for keyboard shortcuts
+# Tier configuration for keyboard shortcuts (consolidated to 4 categories)
 KEYBOARD_TIER_NAMES = {
-    1: "Quick Responses",
-    2: "Workflow Patterns",
-    3: "Combo Phrases",
-    4: "Testing & Research",
-    5: "Semantic Actions",
-    6: "Slash Commands",
-    7: "Utility",
+    1: "Quick & Utility",
+    2: "Workflow & Research",
+    3: "Thinking",
+    4: "Slash Commands",
 }
 
 TIER_ASSIGNMENTS = {
     "p": 1, "s": 1, "g": 1,  # Quick Responses
+    "2": 1, "3": 1, "4": 1,  # Utility (quote selection, transcript resume, paste joined)
     "d": 2, "e": 2, "a": 2, ".": 2,  # Workflow Patterns
-    "x": 3, "r": 3, "n": 3, "c": 3,  # Combo Phrases (c = "Read relevant 2-3")
-    "t": 4, "ö": 4, "v": 4,  # Testing & Research
-    "u": 5, "w": 5, "å": 5, "f": 5, "h": 5, "j": 5, "ä": 5, "y": 5,  # Semantic Actions (u = "Unclear", h = "Clarity")
-    "m": 6, "k": 6, "i": 6, "b": 6, "l": 6, "o": 6, "q": 6, "z": 6,  # Slash Commands
-    "2": 7, "3": 7, "4": 7,  # Utility (quote selection, transcript resume, paste joined)
+    "x": 2, "r": 2, "n": 2, "c": 2,  # Combo Phrases (c = "Read relevant 2-3")
+    "t": 2, "ö": 2, "v": 2,  # Testing & Research
+    "u": 3, "w": 3, "å": 3, "f": 3, "h": 3, "j": 3, "ä": 3, "y": 3,  # Semantic Actions (u = "Unclear", h = "Clarity")
+    "m": 4, "k": 4, "i": 4, "b": 4, "l": 4, "o": 4, "q": 4, "z": 4,  # Slash Commands
 }
 
 
@@ -293,8 +290,8 @@ def build_keyboard_prompt(shortcuts: list[dict]) -> str:
         tier = tiers[tier_num]
         content_lines.append(f"\n{tier['name']}:")
         for s in tier["shortcuts"]:
-            # Show more text - only truncate very long ones
-            output = s["output"][:80] + "..." if len(s["output"]) > 80 else s["output"]
+            # Show full text - no truncation
+            output = s["output"]
             content_lines.append(f"  {s['key']} → {output}")
 
     content = "\n".join(content_lines)
@@ -353,18 +350,18 @@ def build_xbox_prompt(mappings: dict) -> str:
             button_display = f"{m['button']} (tap)"
         else:
             button_display = f"{m['button']}{label}"
-        output = m["output"][:60] + "..." if len(m["output"]) > 60 else m["output"]
+        output = m["output"]
         standalone_lines.append(f"  {button_display} → {output}")
 
     # Build combo tables
     lb_lines = []
     for m in lb_combos:
-        output = m["output"][:50] + "..." if len(m["output"]) > 50 else m["output"]
+        output = m["output"]
         lb_lines.append(f"  LB+{m['button']} → {output}")
 
     rb_lines = []
     for m in rb_combos:
-        output = m["output"][:50] + "..." if len(m["output"]) > 50 else m["output"]
+        output = m["output"]
         rb_lines.append(f"  RB+{m['button']} → {output}")
 
     standalone_content = "\n".join(standalone_lines)
