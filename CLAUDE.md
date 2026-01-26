@@ -16,6 +16,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `docs/xbox_driver_macos_analysis.md` - Wired USB driver research (golden-narwhal12)
 - `docs/antimicrox_analysis.md` - AntiMicroX architecture analysis
 - `docs/eli5_shortcut_philosophy.md` - Design rationale for Caps+h clarity shortcut (Aristotle → Sellars → Quine → Žižek) ★
+- `docs/shortcut_ideas.md` - Research and ideas for future shortcuts (XML wrapper family, workflow enhancers)
 - `.claude/commands/analyze-shortcuts.md` - Slash command for analyzing message history
 
 ## Keyboard Layout
@@ -33,6 +34,27 @@ QWERTY: a s d f g h j k l ;
 Svorak: . q j k x b m w v z
 QWERTY: z x c v b n m , . /
 ```
+
+### Unmapped Keys (January 2026)
+
+All 30 letter keys are mapped. Number row status:
+
+| Key | Status | Ergonomics | Notes |
+|-----|--------|------------|-------|
+| **1** | Available | ★☆☆☆☆ | Left pinky area - awkward |
+| **2** | Mapped | - | Quote selection (`<quote>` tags) |
+| **3** | Mapped | - | Resume from selection (`<before>` tags) |
+| **4** | Mapped | - | Paste with lines joined |
+| **5** | Mapped | - | ELI5 / load-bearing idea |
+| **6** | Available | ★★★★★ | Right index - best available |
+| **7** | Available | ★★★★☆ | Right index/middle |
+| **8** | Available | ★★★★☆ | Right middle |
+| **9** | Available | ★★★☆☆ | Right ring |
+| **0** | Available | ★★★☆☆ | Right pinky |
+
+*Ergonomics based on left pinky holding Caps Lock. Right-hand keys (6-0) avoid stretch conflicts.*
+
+**See**: `docs/shortcut_ideas.md` for future ideas (XML wrapper family: `<context>`, `<code>`, `<error>`, `<output>`).
 
 ## CRITICAL RULE: Regenerate Cheat Sheets After Changes
 
@@ -129,7 +151,7 @@ When designing shortcut phrases, follow these principles:
 **Intent separation**: Keep distinct operations atomic:
 - **Enumerate** (r): List docs → "List 30 recent .md docs..."
 - **Read** (c): Load context → "Read the most relevant 2-3 ones..."
-- **Audit** (d): Check state → "Make sure docs are up to date with progress/reasoning..."
+- **Audit** (d): Check state → "Make sure docs are up to date with findings/progress/reasoning/decisions/ideas..."
 - **Output** (j): Write insights → "Document insights where appropriate..."
 - **Challenge** (y): Examine assumptions → "Why are we going down this road?..."
 
