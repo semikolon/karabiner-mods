@@ -6,11 +6,11 @@
             "manipulators": [
                 {
                     "type": "basic",
-                    "description": "LB (button7) as modifier + tap → Explore",
+                    "description": "LB (button7) as modifier + tap → Wait/Hold",
                     "from": { "pointing_button": "button7" },
                     "to": [{ "set_variable": { "name": "lb_held", "value": 1 } }],
                     "to_after_key_up": [{ "set_variable": { "name": "lb_held", "value": 0 } }],
-                    "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to_if_alone": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't change or act on anything before I've made any important decisions that need to be made about where to go. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [{ "type": "device_if", "identifiers": [{ "vendor_id": 1118, "product_id": 2835 }, { "vendor_id": 1118, "product_id": 2834 }] }]
                 },
                 {
@@ -179,7 +179,7 @@
                     "type": "basic",
                     "description": "Y → Doc coherence check",
                     "from": { "pointing_button": "button5" },
-                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our progress. Remember the documentation philosophy. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
+                    "to": [{ "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our findings/progress/reasoning/decisions/ideas. Remember the documentation philosophy/strategy. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'" }],
                     "conditions": [
                         { "type": "variable_if", "name": "lb_held", "value": 0 },
                         { "type": "variable_if", "name": "rb_held", "value": 0 },
