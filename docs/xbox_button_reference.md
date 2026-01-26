@@ -6,7 +6,7 @@
 >> - **Bluetooth**: Product ID 2835 (0x0B13)
 >> - **Wired USB**: Product ID 2834 (0x0B12)
 >
-> **Last Updated**: December 31, 2025
+> **Last Updated**: January 26, 2026
 
 ## Complete Button Mapping
 
@@ -19,7 +19,7 @@
 | **STANDUP** | A Button | Green "A" on face | `button1` | "What's next...?" | Zoom out/open loops | Key "1" (CC) |
 | *(unlabeled)* | X Button | Blue "X" on face | `button4` | Context refresh | Fix this | Key "3" (CC) |
 | *(unlabeled)* | Y Button | Yellow "Y" on face | `button5` | Doc coherence check | Summarize briefly | Pull and push |
-| *(modifier)* | LB | Left Bumper | `button7` | "Explore..." (tap) | **MODIFIER** | - |
+| *(modifier)* | LB | Left Bumper | `button7` | Wait/hold (tap, matches Caps+w) | **MODIFIER** | - |
 | *(modifier)* | RB | Right Bumper | `button8` | "Subagent..." (tap) | - | **MODIFIER** |
 | *(unlabeled)* | D-pad Left | Left arrow on D-pad | `generic_desktop: dpad_left` | Delete Word | Prev window | - |
 | *(unlabeled)* | D-pad Right | Right arrow on D-pad | `generic_desktop: dpad_right` | Enter key | Next window | - |
@@ -30,7 +30,7 @@
 
 ```
                     [LB button7]              [RB button8]
-                    MODIFIER + tap="Explore"  MODIFIER + tap="Subagent"
+                    MODIFIER + tap="Wait"     MODIFIER + tap="Subagent"
                              _____[ⓧ Guide]←Escape (NO)_____
                             /                               \
                            /  SPECS→[B]    [Y]←DocCheck      \
@@ -67,7 +67,7 @@ RB+ Combos: A=Key1 B=Key2 X=Key3 Y=PullPush D←=WordLeft D→=Shift+Enter
 |--------|--------|----------|
 | X (button4) | Context refresh | Preparation |
 | Y (button5) | Doc coherence check | Documentation |
-| LB (button7) | Explore without changes | Research |
+| LB (button7) | Wait/hold before decisions | Thinking |
 | RB (button8) | Delegate to subagent | Delegation |
 | D-pad Left | Delete Word (Opt+Backspace) | Recovery |
 | D-pad Right | Enter key | Confirmation |
@@ -523,11 +523,11 @@ mv ~/Downloads/XboxController.app /Applications/
 - **Tap alone**: Fires original action
 - **Hold + other button**: Fires combo action
 
-### LB+ Layer (Exploration/Comprehension)
+### LB+ Layer (Thinking/Comprehension)
 
 | Combo | Action | Phrase/Key |
 |-------|--------|------------|
-| LB tap | Explore | "Don't make changes. Explore and report back. Ultrathink " |
+| LB tap | Wait/hold | "Don't change or act on anything before I've made any important decisions that need to be made about where to go." (matches Caps+w) |
 | LB+A | Zoom out | "Let's zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? Ultrathink " |
 | LB+B | Research | "Research this extensively online. Ultrathink " |
 | LB+X | Fix | "Fix this. Ultrathink " |
@@ -561,7 +561,7 @@ mv ~/Downloads/XboxController.app /Applications/
 
 ### Design Principles Applied
 
-1. **Semantic Grouping**: LB = comprehension/investigation, RB = action/execution
+1. **Semantic Grouping**: LB = thinking/comprehension, RB = action/execution
 2. **CC Prompt Navigation**: RB+A/B/X maps to 1/2/3 for quick permission responses
 3. **Couch Mode**: LB+D-pad enables window switching without keyboard
 4. **Complementarity**: Combos fill gaps, not duplicate existing shortcuts

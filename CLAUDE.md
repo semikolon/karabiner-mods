@@ -155,33 +155,23 @@ When designing shortcut phrases, follow these principles:
 - **Output** (j): Write insights → "Document insights where appropriate..."
 - **Challenge** (y): Examine assumptions → "Why are we going down this road?..."
 
-## Current Shortcut Tiers
+## Current Shortcut Categories
 
-1. **Quick Responses** - Single words/short confirmations (p, s, g)
-2. **Workflow Patterns** - Documentation, exploration, delegation (d, e, a, .)
-3. **Combo Phrases** - Multi-step instructions (x, r, c, n)
-   - r → Enumerate docs (list 30 recent .md files)
-   - c → Read relevant docs (most relevant 2-3)
-4. **Testing & Research** - Run tests, search online (t, ö, v)
-5. **Semantic Actions** - Examine, wait, summarize, fix, clarity, document, challenge, zoom (u, w, å, f, h, j, y, ä)
-   - u → Unclear/examine assumptions (rank weakest to strongest)
-   - h → Clarity / load-bearing idea (analogy + perspectives + what's left out) ★ favorite
-   - j → Document insights where appropriate
+1. **Quick & Utility** - Short confirmations + clipboard helpers (p, s, g, 2, 3, 4)
+   - p → Proceed | s → Sit rep | g → Git state
+   - 2 → Quote selection (`<quote>` tags) | 3 → Resume (`<before>` tags) | 4 → Paste joined
+2. **Workflow & Research** - Docs, delegation, testing (d, e, a, ., x, r, c, n, t, ö, v)
+   - r → Enumerate docs | c → Read relevant 2-3 | d → Doc audit
+   - a → Subagent delegation | e → Explore | t → Run tests | v → Research online
+3. **Thinking** - Deep reflection shortcuts (u, w, å, f, h, j, y, ä)
+   - u → Examine assumptions (rank weakest→strongest)
+   - w → Wait/hold before decisions
+   - h → Clarity / load-bearing idea ★ favorite
    - y → Challenge assumptions (deeper why)
-   - ä → Zoom out (open loops check)
-6. **Slash Commands** - Claude Code slash commands (m, k, i, b, l, o, q, z)
-   - m → /recall (memory)
-   - k → /capture (keep)
-   - i → /significance (important)
-   - b → /debug-session (bug)
-   - l → /ui-prototype (layout)
-   - o → /consensus-consult (opinions)
-   - q → /docs-review (quality)
-   - z → /total-recap
-7. **Utility** - Clipboard/selection helpers (2, 3, 4)
-   - 2 → Quote selection (copies, wraps in `<quote>` tags)
-   - 3 → Resume from selection (copies, wraps in `<before>` tags)
-   - 4 → Paste with lines joined (clean prose)
+   - ä → Zoom out (open loops)
+4. **Slash Commands** - Claude Code commands (m, k, i, b, l, o, q, z)
+   - m → /recall | k → /capture | i → /significance | b → /debug-session
+   - l → /ui-prototype | o → /consensus-consult | q → /docs-review | z → /total-recap
 
 ## Xbox Controller Integration
 
@@ -197,8 +187,8 @@ See `docs/xbox_button_reference.md` for full documentation including visual layo
 | **SPECS** | B | button2 | "Sit rep." |
 | **STANDUP** | A | button1 | "What's next according to the plan?" |
 | *(none)* | X | button4 | "Read up on the relevant docs..." |
-| *(none)* | Y | button5 | "Make sure key docs are up to date..." |
-| *(none)* | LB | button7 | "Don't make changes. Explore..." |
+| *(none)* | Y | button5 | Doc audit (matches Caps+d) |
+| *(none)* | LB | button7 | Wait/hold (matches Caps+w) |
 | *(none)* | RB | button8 | "Put a subagent on researching..." |
 | *(none)* | D-pad Left | generic_desktop | Delete Word (Opt+Backspace) |
 | *(none)* | D-pad Right | generic_desktop | Enter key |
