@@ -75,6 +75,17 @@ The script generates TWO separate images:
 
 **Python Environment**: Uses project venv at `.venv/` with `google-genai` installed. If missing: `python3 -m venv .venv && .venv/bin/pip install google-genai`
 
+## Rule Structure: One Rule Per File (MANDATORY)
+
+All manipulators in a Karabiner JSON file MUST be grouped into a **single rule** so they appear as one entry in the Complex Modifications UI. This allows deleting and re-adding all mappings in one click when reloading after edits. Use per-manipulator `description` fields for individual labels.
+
+**Pattern** (see `xbox_zed_claude.json` and `mouse_shortcuts.json`):
+```json
+{ "title": "...", "rules": [{ "description": "Group label", "manipulators": [...all mappings...] }] }
+```
+
+**Anti-pattern**: Multiple rules in `rules[]` → each shows as a separate row → tedious to reload.
+
 ## Adding New Shortcuts
 
 1. Choose an unmapped Svorak key
@@ -180,25 +191,41 @@ When designing shortcut phrases, follow these principles:
 
 **Device**: Razer Viper 8KHz (USB). Must have "Modify events" enabled on the **pointing device** entry in Karabiner → Devices (the mouse appears twice — keyboard + pointing device).
 
-| Button | In Ghostty/Zed | Global fallback |
-|--------|----------------|-----------------|
-| **button3** (scroll click) | Cycle windows (Cmd+`) | Cycle windows (Cmd+`) |
-| **button4** (back/thumb) | `<quote>` wrap (= Caps+2) | SuperWhisper toggle (§) |
-| **button5** (forward/thumb) | `<before>` wrap (= Caps+3) | Normal (unmapped) |
+| Button | In Ghostty/Zed | Elsewhere |
+|--------|----------------|-----------|
+| **button3** (scroll click) | Cross-Space window cycling | Cross-Space window cycling |
+| **button4** (back/thumb) | `<quote>` wrap (= Caps+2) | Native (browser back, etc.) |
+| **button5** (forward/thumb) | `<before>` wrap (= Caps+3) | Native (browser forward, etc.) |
 
-**Svorak + Cmd+` window cycling** (March 2026 deep investigation):
+### § Key Family (all on one physical key, differentiated by modifier)
+
+| Modifier | Action | Mechanism | Latency |
+|----------|--------|-----------|---------|
+| § alone | SuperWhisper toggle | Native app hotkey | instant |
+| Ctrl+§ | Voice assistant (Ruby) | Native app hotkey | instant |
+| Cmd+§ | Same-Space window cycling | Karabiner key_code remap → macOS system shortcut | instant |
+| Opt+§ | Cross-Space window cycling | Karabiner → Hammerspoon `hs.window.filter` | ~100ms |
+
+### Svorak + Cmd+` Window Cycling (deep investigation)
+
 - macOS system shortcuts match on **character produced under the Cmd-layer**, not raw key code
-- On Svorak, key code 24 (`equal_sign`) produces backtick `` ` `` normally, but `-` (hyphen) when Cmd is held → Cmd+minus triggers "Decrease Font Size" instead of window cycling
-- **No key on Svorak produces backtick with Cmd held** — this is why Cmd+` has never worked
+- On Svorak, key code 24 (`equal_sign`) produces backtick normally, but `-` (hyphen) when Cmd is held — **no key on Svorak produces backtick with Cmd held**. This is why Cmd+` never worked.
 - **Fix**: Rebound macOS symbolic hotkey 27 from `(96, 24, 1048576)` to `(167, 50, 1048576)` — expects § (char 167) + key code 50 + Cmd. Applied via `defaults write com.apple.symbolichotkeys` + `activateSettings -u`
-- **ISO key code swap** (Karabiner v15 bug #3984): Physical § key sends `non_us_backslash` (key code 10), but Karabiner's virtual keyboard sends key code 50 for `grave_accent_and_tilde`. Bridged with a Karabiner rule: Cmd+`non_us_backslash` → Cmd+`grave_accent_and_tilde`
-- **Result**: Both button3 (mouse) and Cmd+§ (keyboard) now cycle windows. § alone still triggers SuperWhisper, Ctrl+§ still triggers voice assistant — no conflicts
+- **ISO key code swap** (Karabiner v15 bug #3984): Physical § sends `non_us_backslash` (key code 10), virtual keyboard sends key code 50 for `grave_accent_and_tilde`. Bridged with a Karabiner rule: Cmd+`non_us_backslash` → Cmd+`grave_accent_and_tilde`
 
-**Ghostty middle-click paste**: Hardcoded behavior (Unix/X11 convention), cannot be disabled via config. Overridden at OS level by Karabiner intercepting button3 before it reaches Ghostty.
+### Cross-Space Cycling (Hammerspoon)
+
+**Dependency**: Function `cycleAppWindowsAcrossSpaces()` in `~/.hammerspoon/init.lua` (chezmoi-managed from `dotfiles/home/dot_hammerspoon/init.lua`). Uses `hs.window.filter` (only API that sees windows across all Spaces) + `hs.spaces.gotoSpace()` to explicitly switch Space before focusing, preventing macOS from dragging windows to the current Space.
+
+**Shell command gotcha**: Karabiner `shell_command` runs via launchd with minimal PATH. Must use full path `/opt/homebrew/bin/hs`, not bare `hs`. Pre-load `hs.window.filter` at startup (`require("hs.window.filter")`) to avoid 5+ second lazy-load penalty on first call.
+
+### Other Notes
+
+**Ghostty middle-click paste**: Hardcoded (Unix/X11 convention), cannot be disabled. Overridden by Karabiner intercepting button3 before Ghostty receives it.
 
 **App bundle IDs**: Ghostty = `com.mitchellh.ghostty`, Zed = `dev.zed.Zed`
 
-**Razer Viper 8KHz notes**: Ambidextrous design — side buttons on both sides send identical button4/button5. DPI button on underside (not useful mid-flow). Registers as both keyboard + pointing device over USB (gaming mouse convention).
+**Razer Viper 8KHz**: Ambidextrous — side buttons on both sides send identical button4/button5. DPI button on underside (not useful mid-flow). Registers as keyboard + pointing device over USB; must enable "Modify events" on the pointing device entry only.
 
 ## Xbox Controller Integration
 

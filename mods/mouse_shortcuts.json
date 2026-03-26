@@ -1,11 +1,12 @@
 {
-  "title": "Mouse Button Shortcuts",
+  "title": "Mouse & § Key Shortcuts",
   "rules": [
     {
-      "description": "Mouse Button 4 → Quote selection (<quote> tags) in Ghostty/Zed",
+      "description": "Mouse buttons + § key window cycling (button3/4/5 + Cmd/Opt+§)",
       "manipulators": [
         {
           "type": "basic",
+          "description": "Button 4 → <quote> wrap in Ghostty/Zed",
           "from": {
             "pointing_button": "button4"
           },
@@ -23,14 +24,10 @@
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "description": "Mouse Button 5 → Resume from selection (<before> tags) in Ghostty/Zed",
-      "manipulators": [
+        },
         {
           "type": "basic",
+          "description": "Button 5 → <before> wrap in Ghostty/Zed",
           "from": {
             "pointing_button": "button5"
           },
@@ -48,31 +45,37 @@
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "description": "Mouse Button 3 (scroll click) → Cycle windows (Cmd+`) global",
-      "manipulators": [
+        },
         {
           "type": "basic",
+          "description": "Button 3 → Cycle windows across all Spaces (Hammerspoon)",
           "from": {
             "pointing_button": "button3"
           },
           "to": [
             {
-              "key_code": "grave_accent_and_tilde",
-              "modifiers": ["left_command"]
+              "shell_command": "/opt/homebrew/bin/hs -c 'cycleAppWindowsAcrossSpaces()' &"
             }
           ]
-        }
-      ]
-    },
-    {
-      "description": "Cmd+§ (physical) → Cycle windows (ISO key code fix)",
-      "manipulators": [
+        },
         {
           "type": "basic",
+          "description": "Opt+§ → Cycle windows across all Spaces (Hammerspoon)",
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": ["option"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/opt/homebrew/bin/hs -c 'cycleAppWindowsAcrossSpaces()' &"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "description": "Cmd+§ → Same-Space window cycling (ISO key code fix)",
           "from": {
             "key_code": "non_us_backslash",
             "modifiers": {
@@ -84,20 +87,6 @@
               "key_code": "grave_accent_and_tilde",
               "modifiers": ["left_command"]
             }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "Mouse Button 4 → SuperWhisper toggle (global fallback)",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button4"
-          },
-          "to": [
-            { "key_code": "non_us_backslash" }
           ]
         }
       ]
