@@ -1,0 +1,106 @@
+{
+  "title": "Mouse Button Shortcuts",
+  "rules": [
+    {
+      "description": "Mouse Button 4 → Quote selection (<quote> tags) in Ghostty/Zed",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"c\" using command down' -e 'delay 0.2' -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<quote>\" & return & clipContent & return & \"</quote>\" & return & return' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.mitchellh\\.ghostty$",
+                "^dev\\.zed\\.Zed$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Mouse Button 5 → Resume from selection (<before> tags) in Ghostty/Zed",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"c\" using command down' -e 'delay 0.2' -e 'set clipContent to the clipboard' -e 'set the clipboard to \"<before>\" & return & clipContent & return & \"</before>\" & return & return & \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.mitchellh\\.ghostty$",
+                "^dev\\.zed\\.Zed$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Mouse Button 3 (scroll click) → Cycle windows (Cmd+`) global",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button3"
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": ["left_command"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Cmd+§ (physical) → Cycle windows (ISO key code fix)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": ["command"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": ["left_command"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Mouse Button 4 → SuperWhisper toggle (global fallback)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            { "key_code": "non_us_backslash" }
+          ]
+        }
+      ]
+    }
+  ]
+}

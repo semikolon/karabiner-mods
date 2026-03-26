@@ -7,6 +7,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 ## Key Files
 
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
+- `mods/mouse_shortcuts.json` - Mouse button mappings (button3/4/5 with app-specific and global rules)
 - `mods/xbox_zed_claude.json` - Xbox controller mappings (25 actions: standalone + LB/RB combos + DICT)
 - `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
 - `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
@@ -98,10 +99,11 @@ After creating the symlink, open Karabiner-Elements → Complex Modifications �
 
 **IMPORTANT: Reloading after edits** - Karabiner does NOT auto-reload complex modifications when the JSON file changes. You must manually: Remove the rule(s) → Re-add from the file. Otherwise old mappings remain active.
 
-### Current Symlinks (December 2025)
+### Current Symlinks (March 2026)
 ```
 ~/.config/karabiner/assets/complex_modifications/
 ├── keyboard_text_shortcuts.json → mods/keyboard_text_shortcuts.json
+├── mouse_shortcuts.json → mods/mouse_shortcuts.json
 └── xbox_zed_claude.json → mods/xbox_zed_claude.json
 ```
 
@@ -109,6 +111,7 @@ After creating the symlink, open Karabiner-Elements → Complex Modifications �
 - `app_specific_actions.json` - Old Cursor-specific mappings
 - `mouse_browser_navigation.json` - Broken
 - `mouse_safari_navigation.json` - Broken
+- `mouse_superwhisper.json` - Superseded by `mouse_shortcuts.json`
 
 ### Shell Command Pattern
 
@@ -172,6 +175,30 @@ When designing shortcut phrases, follow these principles:
 4. **Slash Commands** - Claude Code commands (m, k, i, b, l, o, q, z)
    - m → /recall | k → /capture | i → /significance | b → /debug-session
    - l → /ui-prototype | o → /consensus-consult | q → /docs-review | z → /total-recap
+
+## Mouse Button Shortcuts (March 2026)
+
+**Device**: Razer Viper 8KHz (USB). Must have "Modify events" enabled on the **pointing device** entry in Karabiner → Devices (the mouse appears twice — keyboard + pointing device).
+
+| Button | In Ghostty/Zed | Global fallback |
+|--------|----------------|-----------------|
+| **button3** (scroll click) | Cycle windows (Cmd+`) | Cycle windows (Cmd+`) |
+| **button4** (back/thumb) | `<quote>` wrap (= Caps+2) | SuperWhisper toggle (§) |
+| **button5** (forward/thumb) | `<before>` wrap (= Caps+3) | Normal (unmapped) |
+
+**Svorak + Cmd+` window cycling** (March 2026 deep investigation):
+- macOS system shortcuts match on **character produced under the Cmd-layer**, not raw key code
+- On Svorak, key code 24 (`equal_sign`) produces backtick `` ` `` normally, but `-` (hyphen) when Cmd is held → Cmd+minus triggers "Decrease Font Size" instead of window cycling
+- **No key on Svorak produces backtick with Cmd held** — this is why Cmd+` has never worked
+- **Fix**: Rebound macOS symbolic hotkey 27 from `(96, 24, 1048576)` to `(167, 50, 1048576)` — expects § (char 167) + key code 50 + Cmd. Applied via `defaults write com.apple.symbolichotkeys` + `activateSettings -u`
+- **ISO key code swap** (Karabiner v15 bug #3984): Physical § key sends `non_us_backslash` (key code 10), but Karabiner's virtual keyboard sends key code 50 for `grave_accent_and_tilde`. Bridged with a Karabiner rule: Cmd+`non_us_backslash` → Cmd+`grave_accent_and_tilde`
+- **Result**: Both button3 (mouse) and Cmd+§ (keyboard) now cycle windows. § alone still triggers SuperWhisper, Ctrl+§ still triggers voice assistant — no conflicts
+
+**Ghostty middle-click paste**: Hardcoded behavior (Unix/X11 convention), cannot be disabled via config. Overridden at OS level by Karabiner intercepting button3 before it reaches Ghostty.
+
+**App bundle IDs**: Ghostty = `com.mitchellh.ghostty`, Zed = `dev.zed.Zed`
+
+**Razer Viper 8KHz notes**: Ambidextrous design — side buttons on both sides send identical button4/button5. DPI button on underside (not useful mid-flow). Registers as both keyboard + pointing device over USB (gaming mouse convention).
 
 ## Xbox Controller Integration
 
