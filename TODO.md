@@ -51,8 +51,9 @@
     - [ ] **TEST**: Run driver with wired controller (`sudo ./simulator`)
 
 12. **Window Management & Couch Mode** *(Dec 2025)*
-    - [x] LB+D-pad Left/Right for window switching — **NOW FIXED** by Cmd+§ rebinding (Mar 2026)
-    - [ ] Consider Hammerspoon integration for complex window management — **PARTIALLY DONE** (cross-Space cycling implemented)
+    - [x] LB+D-pad Left/Right for window switching
+    - [ ] **BUG**: LB+D-pad window switching likely broken — Xbox config sends `grave_accent_and_tilde` directly, needs same ISO bridge fix as Cmd+§ keyboard binding (Svorak produces § not backtick)
+    - [x] Hammerspoon cross-Space cycling implemented (Mar 2026)
 
 ---
 
@@ -62,3 +63,9 @@
 - [ ] Clean up "Change grave accent (backtick) to..." rule still in Karabiner (disabled, historical)
 - [ ] Test golden-narwhal12 wired Xbox driver
 - [ ] D-pad Up/Down reliability investigation (known unreliable)
+
+## Exploration
+
+- [ ] Analog stick fine-tuning (deadzone, movement delay) — controller ergonomics
+- [ ] Multiple Karabiner profiles (browsing vs coding vs testing)
+- [ ] Screenshot automation (capture + attach to AI chat)
