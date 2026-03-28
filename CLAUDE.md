@@ -40,22 +40,7 @@ QWERTY: z x c v b n m , . /
 
 All 30 letter keys are mapped. Number row status:
 
-| Key | Status | Ergonomics | Notes |
-|-----|--------|------------|-------|
-| **1** | Available | ★☆☆☆☆ | Left pinky area - awkward |
-| **2** | Mapped | - | Quote selection (`<quote>` tags) |
-| **3** | Mapped | - | Resume from selection (`<before>` tags) |
-| **4** | Mapped | - | Paste with lines joined |
-| **5** | Mapped | - | ELI5 / load-bearing idea |
-| **6** | Available | ★★★★★ | Right index - best available |
-| **7** | Available | ★★★★☆ | Right index/middle |
-| **8** | Available | ★★★★☆ | Right middle |
-| **9** | Available | ★★★☆☆ | Right ring |
-| **0** | Available | ★★★☆☆ | Right pinky |
-
-*Ergonomics based on left pinky holding Caps Lock. Right-hand keys (6-0) avoid stretch conflicts.*
-
-**See**: `docs/shortcut_ideas.md` for future ideas (XML wrapper family: `<context>`, `<code>`, `<error>`, `<output>`).
+All number row keys are now mapped. See Current Shortcut Categories below for full list.
 
 ## CRITICAL RULE: Regenerate Cheat Sheets After Changes
 
@@ -171,12 +156,18 @@ When designing shortcut phrases, follow these principles:
 
 ## Current Shortcut Categories
 
-1. **Quick & Utility** - Short confirmations + clipboard helpers (p, s, g, 2, 3, 4)
+1. **Quick & Utility** - Short confirmations + clipboard helpers (p, s, g, 2, 3, 4, 0, 1)
    - p → Proceed | s → Sit rep | g → Git state
    - 2 → Quote selection (`<quote>` tags) | 3 → Resume (`<before>` tags) | 4 → Paste joined
-2. **Workflow & Research** - Docs, delegation, testing (d, e, a, ., x, r, c, n, t, ö, v)
-   - r → Enumerate docs | c → Read relevant 2-3 | d → Doc audit
+   - 0 → Acknowledge aspect needs design | 1 → README structure constraint
+2. **Workflow & Research** - Docs, delegation, testing, persistence (d, e, a, ., x, r, c, n, t, ö, v, 6, 7, 8, 9)
+   - r → Enumerate docs | c → Read relevant 2-3 | d → Doc audit (be thorough)
    - a → Subagent delegation | e → Explore | t → Run tests | v → Research online
+   - ö → Research that more (google searches)
+   - 6 → Persist session knowledge verbatim to disk
+   - 7 → Synthesize insights to overview docs (with references)
+   - 8 → Autonomous deep parallel research (explore + persist)
+   - 9 → Adversarial research (poke holes, synthesize threads)
 3. **Thinking** - Deep reflection shortcuts (u, w, å, f, h, j, y, ä)
    - u → Examine assumptions (rank weakest→strongest)
    - w → Wait/hold before decisions
