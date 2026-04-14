@@ -36,7 +36,7 @@ Svorak: . q j k x b m w v z
 QWERTY: z x c v b n m , . /
 ```
 
-### Unmapped Keys (January 2026)
+### Unmapped Keys (March 2026)
 
 All 30 letter keys are mapped. Number row status:
 
@@ -94,6 +94,8 @@ This allows:
 After creating the symlink, open Karabiner-Elements → Complex Modifications → Add rule → Enable the new rules.
 
 **IMPORTANT: Reloading after edits** - Karabiner does NOT auto-reload complex modifications when the JSON file changes. You must manually: Remove the rule(s) → Re-add from the file. Otherwise old mappings remain active.
+
+**Spontaneous staleness** (March 2026): Rules can also go stale without any file change — all Caps+number shortcuts stopped responding despite valid JSON, intact symlinks, and no config edits. Root cause unknown. Fix: same remove → re-add cycle. If shortcuts stop working, reload rules before debugging.
 
 ### Current Symlinks (March 2026)
 ```
@@ -156,13 +158,13 @@ When designing shortcut phrases, follow these principles:
 
 ## Current Shortcut Categories
 
-1. **Quick & Utility** - Short confirmations + clipboard helpers (p, s, g, 2, 3, 4, 0, 1)
+1. **Quick & Utility** - Short confirmations + clipboard helpers (p, s, g, 2, 3, 4, 5, 0, 1)
    - p → Proceed | s → Sit rep | g → Git state
    - 2 → Quote selection (`<quote>` tags) | 3 → Resume (`<before>` tags) | 4 → Paste joined
-   - 0 → Acknowledge aspect needs design | 1 → README structure constraint
+   - 5 → Ultrathink | 0 → Acknowledge aspect needs design | 1 → README structure constraint
 2. **Workflow & Research** - Docs, delegation, testing, persistence (d, e, a, ., x, r, c, n, t, ö, v, 6, 7, 8, 9)
    - r → Enumerate docs | c → Read relevant 2-3 | d → Doc audit (be thorough)
-   - a → Subagent delegation | e → Explore | t → Run tests | v → Research online
+   - a → Subagent delegation | e → Assess/diagnose (no changes) | t → Run tests | v → Research online
    - ö → Research that more (google searches)
    - 6 → Persist session knowledge verbatim to disk
    - 7 → Synthesize insights to overview docs (with references)
@@ -180,13 +182,15 @@ When designing shortcut phrases, follow these principles:
 
 ## Mouse Button Shortcuts (March 2026)
 
-**Device**: Razer Viper 8KHz (USB). Must have "Modify events" enabled on the **pointing device** entry in Karabiner → Devices (the mouse appears twice — keyboard + pointing device).
+**Device**: Razer Viper 8KHz (USB). **"Modify events" is disabled** on the pointing device entry (March 2026) — the 125Hz virtual HID bottleneck (see § Polling rate bottleneck) made the 8KHz mouse feel unacceptably sluggish. Side buttons use native/default behavior instead of Karabiner remapping.
 
-| Button | In Ghostty/Zed | Elsewhere |
-|--------|----------------|-----------|
-| **button3** (scroll click) | Cross-Space window cycling | Cross-Space window cycling |
-| **button4** (back/thumb) | `<quote>` wrap (= Caps+2) | Native (browser back, etc.) |
-| **button5** (forward/thumb) | `<before>` wrap (= Caps+3) | Native (browser forward, etc.) |
+**Status**: Mouse button remapping disabled (March 2026) — polling rate tradeoff not worth it. Use keyboard shortcuts (Caps+2, Caps+3) instead. Previous mappings preserved below for reference if re-enabled.
+
+| Button | Was (Ghostty/Zed) | Now | Elsewhere |
+|--------|-------------------|-----|-----------|
+| **button3** (scroll click) | Cross-Space window cycling | Default (middle-click paste) | Default |
+| **button4** (back/thumb) | `<quote>` wrap (= Caps+2) | Default (browser back) | Default |
+| **button5** (forward/thumb) | `<before>` wrap (= Caps+3) | Default (browser forward) | Default |
 
 ### § Key Family (all on one physical key, differentiated by modifier)
 
@@ -217,6 +221,8 @@ When designing shortcut phrases, follow these principles:
 **App bundle IDs**: Ghostty = `com.mitchellh.ghostty`, Zed = `dev.zed.Zed`
 
 **Razer Viper 8KHz**: Ambidextrous — side buttons on both sides send identical button4/button5. DPI button on underside (not useful mid-flow). Registers as keyboard + pointing device over USB; must enable "Modify events" on the pointing device entry only.
+
+**Polling rate bottleneck** (March 2026): Karabiner's VirtualHIDPointing device has `ReportInterval = 8000` (8000µs = 125Hz). The Viper 8KHz natively polls at 8000Hz — enabling "Modify events" causes a **64x polling rate reduction** (8000Hz → 125Hz). **Decision**: Disabled mouse interception; native 8KHz feel is worth more than button remapping. Use Caps+2/3 keyboard shortcuts instead.
 
 ## Xbox Controller Integration
 

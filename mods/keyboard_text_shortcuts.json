@@ -279,7 +279,7 @@
         },
         {
           "type": "basic",
-          "description": "Caps+e → Explore without changing (Svorak e = QWERTY d)",
+          "description": "Caps+e → Assess and diagnose, no changes (Svorak e = QWERTY d)",
           "from": {
             "key_code": "d",
             "modifiers": {
@@ -288,7 +288,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't make changes. Explore and report back. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Just curious - only assess, explore and diagnose - don't make changes until you have my approval. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
@@ -905,6 +905,28 @@
           "to": [
             {
               "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make the README maximum two paragraphs and the rest of the readme should be a table of contents including all documents. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "description": "Caps+5 → Ultrathink",
+          "from": {
+            "key_code": "5",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Ultrathink\"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
