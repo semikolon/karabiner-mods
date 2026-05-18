@@ -54,6 +54,7 @@ KEYBOARD_TIER_NAMES = {
 
 TIER_ASSIGNMENTS = {
     "p": 1, "s": 1, "g": 1,  # Quick Responses
+    "Shift+s": 1,  # Break-time deluxe sit rep (Caps+Shift+s) — sits next to s/Sit rep
     "2": 1, "3": 1, "4": 1,  # Utility (quote selection, transcript resume, paste joined)
     "d": 2, "e": 2, "a": 2, ".": 2,  # Workflow Patterns
     "x": 2, "r": 2, "n": 2, "c": 2,  # Combo Phrases (c = "Read relevant 2-3")

@@ -213,6 +213,29 @@
         },
         {
           "type": "basic",
+          "description": "Caps+Shift+s → Break review / deluxe sit rep (Svorak s = QWERTY semicolon)",
+          "from": {
+            "key_code": "semicolon",
+            "modifiers": {
+              "mandatory": ["shift"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Stop and gimme a sit rep. I have a break and would like to review progress. ELI5 what's been done and what's being built and what's planned. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "caps_lock_held",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
           "description": "Caps+s → Sit rep (Svorak s = QWERTY semicolon)",
           "from": {
             "key_code": "semicolon",
@@ -266,7 +289,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make sure key docs are up to date and congruent with our findings/progress/reasoning/decisions/ideas. Remember the documentation philosophy/strategy. Be thorough. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Make sure key docs are up to date and congruent with our findings/progress/reasoning/decisions/ideas. Remember the documentation philosophy/strategy. Be thorough. No need to chronicle and celebrate every thing we have done but just make sure the docs aren't lying and do contain what future agents need to do a good job and are supported in understanding the architecture and how it relates to the practical reality and what our/my preferences and goals are. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
             }
           ],
           "conditions": [
