@@ -134,7 +134,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's unclear or not obvious about this topic/situation/idea? Critically examine our assumptions and rank them from weakest to strongest, according to the evidence at hand, before proceeding. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"What's unclear or not obvious about this topic/situation/idea? Critically examine our assumptions and rank them from weakest to strongest, according to the evidence at hand, before proceeding. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -156,7 +156,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Read the most relevant 2-3 ones. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Read the most relevant 2-3 ones. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -178,7 +178,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Proceed. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -200,7 +200,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Why are we going down this road? Examine and challenge our crucial assumptions - list them out first and then attack them with critical thinking. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Why are we going down this road? Examine and challenge our crucial assumptions - list them out first and then attack them with critical thinking. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -223,7 +223,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Stop and gimme a sit rep. I have a break and would like to review progress. ELI5 what's been done and what's being built and what's planned. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Stop and gimme a sit rep. I have a break and would like to review progress. ELI5 what's been done and what's being built and what's planned. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -245,7 +245,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Sit rep. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Sit rep. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -267,7 +267,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's the git state? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"What's the git state? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -289,7 +289,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Make sure key docs are up to date and congruent with our findings/progress/reasoning/decisions/ideas. Remember the documentation philosophy/strategy. Be thorough. No need to chronicle and celebrate every thing we have done but just make sure the docs aren't lying and do contain what future agents need to do a good job and are supported in understanding the architecture and how it relates to the practical reality and what our/my preferences and goals are. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Make sure key docs are up to date and congruent with our findings/progress/reasoning/decisions/ideas. Remember the documentation philosophy/strategy. Be thorough. No need to chronicle and celebrate every thing we have done but just make sure the docs aren't lying and do contain what future agents need to do a good job and are supported in understanding the architecture and how it relates to the practical reality and what our/my preferences and goals are. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -311,7 +311,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Just curious - only assess, explore and diagnose - don't make changes until you have my approval. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Just curious - only assess, explore and diagnose - don't make changes until you have my approval. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -333,7 +333,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Put a subagent on researching this thoroughly. Report back with findings. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -355,7 +355,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Commit everything in (chrono)logical groups. Then push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Commit everything in (chrono)logical groups. Then push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -377,7 +377,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"List 30 recent .md docs related to this work/topic. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"List 30 recent .md docs related to this work/topic. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -399,7 +399,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next according to the plan? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"What's next according to the plan? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -421,7 +421,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Run the tests. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Run the tests. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -443,7 +443,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Super interesting, research that a bit more? Just do like a bunch of google searches yourself, that'd be enough. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Super interesting, research that a bit more? Just do like a bunch of google searches yourself, that'd be enough. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -465,7 +465,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Don't change or act on anything before I've made any important decisions that need to be made about where to go. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Don't change or act on anything before I've made any important decisions that need to be made about where to go. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -487,7 +487,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Summarize briefly. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Summarize briefly. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -509,7 +509,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Fix this. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Fix this. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -531,7 +531,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Help me see this clearly: what's the load-bearing idea/s? One bridging analogy. Competing perspectives if relevant. And after you have answered that: what doesn't fit neatly into that view? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Help me see this clearly: what's the load-bearing idea/s? One bridging analogy. Competing perspectives if relevant. And after you have answered that: what doesn't fit neatly into that view? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -553,7 +553,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Document insights where appropriate. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Document insights where appropriate. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -575,7 +575,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/recall \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/recall \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -597,7 +597,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/capture \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/capture \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -619,7 +619,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/significance \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/significance \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -641,7 +641,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/debug-session \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/debug-session \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -663,7 +663,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/ui-prototype \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/ui-prototype \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -685,7 +685,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/consensus-consult \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/consensus-consult \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -707,7 +707,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/docs-review \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/docs-review \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -729,7 +729,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Let'\\''s zoom out. How did we get here? What were we in the middle of? Are there any open loops we forgot about? \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -751,7 +751,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Pull and push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Pull and push. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -773,7 +773,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Research this extensively online. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Research this extensively online. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -795,7 +795,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"/total-recap \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"/total-recap \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -817,7 +817,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"I have found a lot of the reasoning and research insights and angles from this session to be highly valuable. Make sure that everything from this session — including all pedagogical examples and reasoning from both you and me — is pretty much verbatim persisted to disk in one of our documents, or in whatever document(s) is most appropriate. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"I have found a lot of the reasoning and research insights and angles from this session to be highly valuable. Make sure that everything from this session — including all pedagogical examples and reasoning from both you and me — is pretty much verbatim persisted to disk in one of our documents, or in whatever document(s) is most appropriate. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -839,7 +839,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Please mirror individual high-level crucial insights briefly into whichever higher level overview doc seems most appropriate and relevant to you, and have each insight reference the doc where they are explored more at length. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Please mirror individual high-level crucial insights briefly into whichever higher level overview doc seems most appropriate and relevant to you, and have each insight reference the doc where they are explored more at length. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -861,7 +861,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Do some deep parallel sub-agent research on your own favorite angles on what we've been working on. Feel free to look into closely related areas and any new creative angles you can think of. Make sure all research is persisted to disk afterwards. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Do some deep parallel sub-agent research on your own favorite angles on what we've been working on. Feel free to look into closely related areas and any new creative angles you can think of. Make sure all research is persisted to disk afterwards. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -883,7 +883,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Run a few more parallel sub-agent research threads to investigate and inform further synthesis between the various conceptual threads that we have covered thus far, and try to poke holes in this vision and reflect deeply. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Run a few more parallel sub-agent research threads to investigate and inform further synthesis between the various conceptual threads that we have covered thus far, and try to poke holes in this vision and reflect deeply. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -905,7 +905,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"Interesting, that's certainly one aspect that has to be solved / consciously designed. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e\"set the clipboard to \\\"Interesting, that's certainly one aspect that has to be solved / consciously designed. \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -927,7 +927,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Make the README maximum two paragraphs and the rest of the readme should be a table of contents including all documents. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Make the README maximum two paragraphs and the rest of the readme should be a table of contents including all documents. \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [
@@ -949,7 +949,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"Ultrathink\"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+              "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e'set the clipboard to \"Ultrathink\"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
             }
           ],
           "conditions": [

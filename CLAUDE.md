@@ -95,7 +95,9 @@ After creating the symlink, open Karabiner-Elements → Complex Modifications �
 
 **IMPORTANT: Reloading after edits** - Karabiner does NOT auto-reload complex modifications when the JSON file changes. You must manually: Remove the rule(s) → Re-add from the file. Otherwise old mappings remain active.
 
-**Spontaneous staleness** (March 2026): Rules can also go stale without any file change — all Caps+number shortcuts stopped responding despite valid JSON, intact symlinks, and no config edits. Root cause unknown. Fix: same remove → re-add cycle. If shortcuts stop working, reload rules before debugging.
+**Spontaneous staleness** (March 2026): Rules can also go stale without any file change — all Caps+number shortcuts stopped responding despite valid JSON, intact symlinks, and no config edits. Fix: same remove → re-add cycle. If shortcuts stop working, reload rules before debugging.
+
+**"Shortcut does nothing" is usually NOT staleness — check the clipboard first (root-caused 2026-07-10)**: A "no worky" shortcut is most often the clipboard-guard failure, not Karabiner. When the clipboard holds a non-text-coercible type, the old unguarded `set prev to the clipboard` threw `-1700` and aborted the paste (see § Shell Command Pattern → "Why the guard"). Diagnosis oracle: `tail ~/.local/share/karabiner/log/console_user_server.log` — repeated `shell_command stderr: ... -1700` at char-offset `12:25` (= `the clipboard`) is this bug, and it proves the grabber is *working* (it ran the command). Restarting Karabiner does NOT fix it. The guarded pattern (deployed 2026-07-10) makes it impossible. If the daemon genuinely isn't running: `launchctl kickstart -k gui/$(id -u)/org.pqrs.service.agent.Karabiner-Core-Service-rev2` (no sudo — these are user agents; `karabiner_grabber`/`karabiner_session_monitor` are pre-v14 names that no longer exist in v16).
 
 ### Current Symlinks (March 2026)
 ```
@@ -113,19 +115,21 @@ After creating the symlink, open Karabiner-Elements → Complex Modifications �
 
 ### Shell Command Pattern
 
-All shortcuts use clipboard+paste with restoration:
+All shortcuts use clipboard+paste with restoration. The save/restore is **guarded** (`missing value` default + `try` blocks) so a non-coercible clipboard never aborts the paste:
 ```json
 {
-  "shell_command": "osascript -e 'set prev to the clipboard' -e 'set the clipboard to \"YOUR TEXT \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+  "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e 'set the clipboard to \"YOUR TEXT \"' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
 }
 ```
 
 **Important**: All outputs should end with a trailing space for composability.
 
+**Why the guard (2026-07-10)**: The old unguarded `set prev to the clipboard` throws `errAECoercionFail (-1700)` when the clipboard holds a type with no default (text) representation, aborting the script *before* the paste — the shortcut silently does nothing. Karabiner has already swallowed the key, so it reads as "the shortcut is broken / went stale." It is clipboard-content-dependent, hence intermittent (this was the true cause of the "spontaneous staleness" noted above — not Karabiner). The `try`-wrapped form makes the abort impossible; the paste always fires. Restore is best-effort (text preserved; a rare image/file clipboard is clobbered — acceptable).
+
 For text with apostrophes, use double-quote escaping:
 ```json
 {
-  "shell_command": "osascript -e 'set prev to the clipboard' -e \"set the clipboard to \\\"What's next? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'set the clipboard to prev'"
+  "shell_command": "osascript -e 'set prev to missing value' -e 'try' -e 'set prev to (the clipboard as record)' -e 'end try' -e \"set the clipboard to \\\"What's next? \\\"\" -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 0.1' -e 'try' -e 'if prev is not missing value then set the clipboard to prev' -e 'end try'"
 }
 ```
 
