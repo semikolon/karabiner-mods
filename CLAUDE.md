@@ -12,6 +12,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
 - `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
 - `docs/cheatsheet_xbox.png` - Xbox controller mappings visual reference
+- `scripts/generate_cheatsheet_hotkeys.py` → `docs/cheatsheet_hotkeys.png` - mouse buttons, other Karabiner remaps and every Hammerspoon hotkey, rendered as exact text from the live configs (no API key)
 - `docs/superwhisper_integration.md` - SuperWhisper vocabulary/replacements reference
 - `docs/xbox_button_reference.md` - Xbox controller button mappings + technical details
 - `docs/xbox_driver_macos_analysis.md` - Wired USB driver research (golden-narwhal12)
@@ -57,6 +58,8 @@ The script generates TWO separate images:
 2. `docs/cheatsheet_xbox.png` - Xbox controller (from `xbox_zed_claude.json`)
 
 **Requires**: `GEMINI_API_KEY` environment variable
+
+**After any change to a mouse or § mapping, a simple or device remap in `karabiner.json`, or an `hs.hotkey` in `~/.hammerspoon`**, run `python3 scripts/generate_cheatsheet_hotkeys.py`. It reads the live configs and stops with an error on any mapping that has no line in its tables, so a new shortcut gets a description before it reaches the sheet. It renders HTML with headless Chrome, so every word is exact; an image model never draws words (global CLAUDE.md).
 
 **Python Environment**: Uses project venv at `.venv/` with `google-genai` installed. If missing: `python3 -m venv .venv && .venv/bin/pip install google-genai`
 

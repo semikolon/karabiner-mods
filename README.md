@@ -9,6 +9,7 @@ Beyond keyboard shortcuts, the project includes Xbox Wireless Controller mapping
 ### Visual References
 - [Keyboard Cheatsheet](docs/cheatsheet_keyboard.png) — All Caps+key shortcuts
 - [Xbox Controller Cheatsheet](docs/cheatsheet_xbox.png) — All controller mappings
+- [Mouse & Hotkeys Cheatsheet](docs/cheatsheet_hotkeys.png) — Mouse buttons, the other Karabiner key remaps, and every Hammerspoon hotkey (Ruby, Goodnight, VLC)
 
 ### Guides & Reference
 - [Xbox Button Reference](docs/xbox_button_reference.md) — Definitive button-to-code mapping with technical details
