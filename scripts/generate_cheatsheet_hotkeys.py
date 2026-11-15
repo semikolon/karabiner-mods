@@ -72,6 +72,9 @@ def karabiner_rows():
         if desc.startswith("Caps Lock"):
             keys.append(("Caps tap", "Escape (hold + key: the Caps Lock sheet)"))
             continue
+        if desc.startswith("Loft fan: the F6"):
+            keys.append(("F6 key (two quick Ctrl taps)", "Loft fan on / off"))
+            continue
         if desc.startswith("Xbox"):
             continue  # its own sheet
         for m in rule["manipulators"]:
