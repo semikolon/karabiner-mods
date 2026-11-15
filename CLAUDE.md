@@ -9,6 +9,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
 - `mods/mouse_shortcuts.json` - Mouse button mappings (button3/4/5 with app-specific and global rules)
 - `mods/xbox_zed_claude.json` - Xbox controller mappings (25 actions: standalone + LB/RB combos + DICT)
+- `mods/logitech_top_row.json` - Copy of the three MX Keys Mini top-row rules (loft fan on F6, Spotify volume, Spotify play/pause). **These rules are live in `~/.config/karabiner/karabiner.json`, which nit does not track**; the file is the rebuild copy (re-adding it in the UI duplicates the live rules, so remove them first). Details and the key table: § Logitech MX Keys Mini top row.
 - `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
 - `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
 - `docs/cheatsheet_xbox.png` - Xbox controller mappings visual reference
@@ -239,9 +240,9 @@ Method: EventViewer needs Input Monitoring enabled by hand (System Settings → 
 |---|---|---|
 | Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up: yes, bound to Spotify (works); mute: a rule never fired (see below); play/pause: bound to Spotify only (`spotify-playpause`) |
 | Screenshot | Cmd+Shift+4 chord | only as that chord |
-| Emoji | Cmd+Ctrl+Space chord | only as that chord (also fires on a hand-typed chord) |
+| F7 (emoji) | Cmd+Ctrl+Space chord | only as that chord (also fires on a hand-typed chord) |
 | F6 (dictation icon) | two bare left Ctrl taps, about 75 ms apart | yes, as a double tap within 250 ms (in use, works) |
-| F7 is the emoji key above; one more key | a bare left Ctrl tap | no (same as a real Ctrl) |
+| Other top-row keys (e.g. mic mute) | not measured | unknown |
 | F1–F3 (Easy-Switch) | nothing; the keyboard switches Bluetooth device itself | no |
 | Backlight | nothing seen | no |
 
