@@ -78,6 +78,9 @@ def karabiner_rows():
         if desc.startswith("Spotify volume"):
             keys.append(("Volume keys", "Spotify volume down / up by 5"))
             continue
+        if desc.startswith("Spotify play/pause"):
+            keys.append(("Play/pause key", "Spotify only (never Chrome or VLC)"))
+            continue
         if desc.startswith("Xbox"):
             continue  # its own sheet
         for m in rule["manipulators"]:

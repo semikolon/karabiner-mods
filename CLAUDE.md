@@ -237,7 +237,7 @@ Method: EventViewer needs Input Monitoring enabled by hand (System Settings → 
 
 | Key | Karabiner sees | Bindable |
 |---|---|---|
-| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up: yes, bound to Spotify (works); mute: a rule never fired (see below); play/pause: untested |
+| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up: yes, bound to Spotify (works); mute: a rule never fired (see below); play/pause: bound to Spotify only (`spotify-playpause`) |
 | Screenshot | Cmd+Shift+4 chord | only as that chord |
 | Emoji | Cmd+Ctrl+Space chord | only as that chord (also fires on a hand-typed chord) |
 | F6 (dictation icon) | two bare left Ctrl taps, about 75 ms apart | yes, as a double tap within 250 ms (in use, works) |
