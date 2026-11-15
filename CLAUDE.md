@@ -238,15 +238,16 @@ Method: EventViewer needs Input Monitoring enabled by hand (System Settings → 
 
 | Key | Karabiner sees | Bindable |
 |---|---|---|
-| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up and play/pause: bound to Spotify by Hammerspoon (`media_keys.lua`, works); mute: a rule never fired (see below) |
+| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | all four bound to Spotify by Hammerspoon (`media_keys.lua`; verified 2026-11-15); mute toggles Spotify to 0 and back |
 | Screenshot | Cmd+Shift+4 chord | only as that chord |
 | F7 (emoji) | Cmd+Ctrl+Space chord | only as that chord (also fires on a hand-typed chord) |
 | F6 (dictation icon) | two bare left Ctrl taps, about 75 ms apart | yes, as a double tap within 250 ms (in use, works) |
-| Other top-row keys (e.g. mic mute) | not measured | unknown |
+| Mic mute | nothing shown in EventViewer (2026-11-15) | not bindable from here: handled in the keyboard's firmware or by Logitech software |
+| Other top-row keys | not measured | unknown |
 | F1–F3 (Easy-Switch) | nothing; the keyboard switches Bluetooth device itself | no |
 | Backlight | nothing seen | no |
 
-In use: the volume keys step Spotify's volume by 5 and play/pause controls only Spotify (`~/.local/bin/spotify-volume`, `spotify-playpause`, called from Hammerspoon's `~/.hammerspoon/media_keys.lua`, an event tap on the system media events; verified 2026-11-15; the desk's digital output ignores the macOS volume). They were Karabiner rules first and worked once, then stopped firing for no cause found (EventViewer still showed `volume_decrement`; setting "Ignore vendor events" on or off, a receiver replug and restarting Karabiner's user server made no difference), so they moved to Hammerspoon, which fired on the first press. F6 toggles the loft fan (`~/.local/bin/loft-fan`, rule "Loft fan: the F6 key (two quick Ctrl taps) toggles it" in `karabiner.json`; verified 2026-11-15). A rule on `mute` never fired (removed 2026-11-15): EventViewer shows the key as `consumer_key_code` `mute`, volume up/down on the same keyboard fire, and the shell path works, so the cause is unknown. Tried: closing EventViewer, restarting the core service, Modify events on the receiver's mouse-type entry (volume keys work without it), a distinct log marker (no line written). Karabiner's own Logitech page says `fn_function_keys` remaps can swallow Logitech function keys; not needed here.
+In use: the volume keys step Spotify's volume by 5, mute toggles it to 0 and back, and play/pause controls only Spotify (`~/.local/bin/spotify-volume`, `spotify-playpause`, called from Hammerspoon's `~/.hammerspoon/media_keys.lua`, an event tap on the system media events; verified 2026-11-15; the desk's digital output ignores the macOS volume). They were Karabiner rules first and worked once, then stopped firing for no cause found (EventViewer still showed `volume_decrement`; setting "Ignore vendor events" on or off, a receiver replug and restarting Karabiner's user server made no difference), so they moved to Hammerspoon, which fired on the first press. F6 toggles the loft fan (`~/.local/bin/loft-fan`, rule "Loft fan: the F6 key (two quick Ctrl taps) toggles it" in `karabiner.json`; verified 2026-11-15). A Karabiner rule on `mute` never fired (removed 2026-11-15), the same failure the volume rules later showed; the Hammerspoon tap catches it. Tried against the Karabiner failure: closing EventViewer, restarting the core service, Modify events on the receiver's mouse-type entry (volume keys work without it), a distinct log marker (no line written). Karabiner's own Logitech page says `fn_function_keys` remaps can swallow Logitech function keys; not needed here.
 
 ## Xbox Controller Integration
 

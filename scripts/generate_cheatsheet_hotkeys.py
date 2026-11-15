@@ -81,8 +81,6 @@ def karabiner_rows():
             frm = m["from"]
             if "pointing_button" in frm:
                 mouse.append(MOUSE[frm["pointing_button"]])
-            elif frm.get("consumer_key_code") == "mute":
-                keys.append(("Mute key", "Loft fan on / off"))
             elif frm.get("key_code") == "non_us_backslash":
                 mod = frm["modifiers"]["mandatory"][0]
                 keys.append(SECTION_KEY[mod])
@@ -95,6 +93,7 @@ def karabiner_rows():
             keys.append(DEVICE[sm["from"]["key_code"]])
     # These two are Hammerspoon's (~/.hammerspoon/media_keys.lua), not Karabiner rules.
     keys.append(("Volume keys", "Spotify volume down / up by 5"))
+    keys.append(("Mute key", "Spotify to 0 and back"))
     keys.append(("Play/pause key", "Spotify only (never Chrome or VLC)"))
     return mouse, keys
 
