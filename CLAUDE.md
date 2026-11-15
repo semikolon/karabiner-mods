@@ -9,7 +9,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
 - `mods/mouse_shortcuts.json` - Mouse button mappings (button3/4/5 with app-specific and global rules)
 - `mods/xbox_zed_claude.json` - Xbox controller mappings (25 actions: standalone + LB/RB combos + DICT)
-- Rules for the MX Keys Mini top row (loft fan on F6, Spotify volume, Spotify play/pause) are not in a mods file: they were added straight to `~/.config/karabiner/karabiner.json`, which nit tracks (a plain file, deliberately not on `always_commit`). Details and the key table: § Logitech MX Keys Mini top row.
+- Rules for the MX Keys Mini top row (loft fan on F6) is not in a mods file: it was added straight to `~/.config/karabiner/karabiner.json`, which nit tracks (a plain file, deliberately not on `always_commit`). Details and the key table: § Logitech MX Keys Mini top row.
 - `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
 - `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
 - `docs/cheatsheet_xbox.png` - Xbox controller mappings visual reference
@@ -238,7 +238,7 @@ Method: EventViewer needs Input Monitoring enabled by hand (System Settings → 
 
 | Key | Karabiner sees | Bindable |
 |---|---|---|
-| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up: yes, bound to Spotify (works); mute: a rule never fired (see below); play/pause: bound to Spotify only (`spotify-playpause`) |
+| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up and play/pause: bound to Spotify by Hammerspoon (`media_keys.lua`, works); mute: a rule never fired (see below) |
 | Screenshot | Cmd+Shift+4 chord | only as that chord |
 | F7 (emoji) | Cmd+Ctrl+Space chord | only as that chord (also fires on a hand-typed chord) |
 | F6 (dictation icon) | two bare left Ctrl taps, about 75 ms apart | yes, as a double tap within 250 ms (in use, works) |
@@ -246,7 +246,7 @@ Method: EventViewer needs Input Monitoring enabled by hand (System Settings → 
 | F1–F3 (Easy-Switch) | nothing; the keyboard switches Bluetooth device itself | no |
 | Backlight | nothing seen | no |
 
-In use: the volume keys step Spotify's volume by 5 (`~/.local/bin/spotify-volume`, rule "Spotify volume"; verified 2026-11-15, the desk's digital output ignores the macOS volume). F6 toggles the loft fan (`~/.local/bin/loft-fan`, rule "Loft fan: the F6 key (two quick Ctrl taps) toggles it" in `karabiner.json`; verified 2026-11-15). A rule on `mute` never fired (removed 2026-11-15): EventViewer shows the key as `consumer_key_code` `mute`, volume up/down on the same keyboard fire, and the shell path works, so the cause is unknown. Tried: closing EventViewer, restarting the core service, Modify events on the receiver's mouse-type entry (volume keys work without it), a distinct log marker (no line written). Karabiner's own Logitech page says `fn_function_keys` remaps can swallow Logitech function keys; not needed here.
+In use: the volume keys step Spotify's volume by 5 and play/pause controls only Spotify (`~/.local/bin/spotify-volume`, `spotify-playpause`, called from Hammerspoon's `~/.hammerspoon/media_keys.lua`, an event tap on the system media events; verified 2026-11-15; the desk's digital output ignores the macOS volume). They were Karabiner rules first and worked once, then stopped firing for no cause found (EventViewer still showed `volume_decrement`; setting "Ignore vendor events" on or off, a receiver replug and restarting Karabiner's user server made no difference), so they moved to Hammerspoon, which fired on the first press. F6 toggles the loft fan (`~/.local/bin/loft-fan`, rule "Loft fan: the F6 key (two quick Ctrl taps) toggles it" in `karabiner.json`; verified 2026-11-15). A rule on `mute` never fired (removed 2026-11-15): EventViewer shows the key as `consumer_key_code` `mute`, volume up/down on the same keyboard fire, and the shell path works, so the cause is unknown. Tried: closing EventViewer, restarting the core service, Modify events on the receiver's mouse-type entry (volume keys work without it), a distinct log marker (no line written). Karabiner's own Logitech page says `fn_function_keys` remaps can swallow Logitech function keys; not needed here.
 
 ## Xbox Controller Integration
 

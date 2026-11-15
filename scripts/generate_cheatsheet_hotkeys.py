@@ -75,12 +75,6 @@ def karabiner_rows():
         if desc.startswith("Loft fan: the F6"):
             keys.append(("F6 key (two quick Ctrl taps)", "Loft fan on / off"))
             continue
-        if desc.startswith("Spotify volume"):
-            keys.append(("Volume keys", "Spotify volume down / up by 5"))
-            continue
-        if desc.startswith("Spotify play/pause"):
-            keys.append(("Play/pause key", "Spotify only (never Chrome or VLC)"))
-            continue
         if desc.startswith("Xbox"):
             continue  # its own sheet
         for m in rule["manipulators"]:
@@ -99,6 +93,9 @@ def karabiner_rows():
     for dev in profile.get("devices", []):
         for sm in dev.get("simple_modifications", []):
             keys.append(DEVICE[sm["from"]["key_code"]])
+    # These two are Hammerspoon's (~/.hammerspoon/media_keys.lua), not Karabiner rules.
+    keys.append(("Volume keys", "Spotify volume down / up by 5"))
+    keys.append(("Play/pause key", "Spotify only (never Chrome or VLC)"))
     return mouse, keys
 
 
