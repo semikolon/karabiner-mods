@@ -9,7 +9,7 @@ This project contains custom Karabiner-Elements keyboard modifications, primaril
 - `mods/keyboard_text_shortcuts.json` - Main Karabiner config with all Caps+key shortcuts
 - `mods/mouse_shortcuts.json` - Mouse button mappings (button3/4/5 with app-specific and global rules)
 - `mods/xbox_zed_claude.json` - Xbox controller mappings (25 actions: standalone + LB/RB combos + DICT)
-- `mods/logitech_top_row.json` - Copy of the three MX Keys Mini top-row rules (loft fan on F6, Spotify volume, Spotify play/pause). **These rules are live in `~/.config/karabiner/karabiner.json`, which nit does not track**; the file is the rebuild copy (re-adding it in the UI duplicates the live rules, so remove them first). Details and the key table: § Logitech MX Keys Mini top row.
+- Rules for the MX Keys Mini top row (loft fan on F6, Spotify volume, Spotify play/pause) are not in a mods file: they were added straight to `~/.config/karabiner/karabiner.json`, which nit tracks (a plain file, deliberately not on `always_commit`). Details and the key table: § Logitech MX Keys Mini top row.
 - `scripts/generate_cheatsheet_ai.py` - AI-generated cheat sheets (Gemini 3 Pro Image)
 - `docs/cheatsheet_keyboard.png` - Keyboard shortcuts visual reference
 - `docs/cheatsheet_xbox.png` - Xbox controller mappings visual reference
