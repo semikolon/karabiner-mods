@@ -75,6 +75,9 @@ def karabiner_rows():
         if desc.startswith("Loft fan: the F6"):
             keys.append(("F6 key (two quick Ctrl taps)", "Loft fan on / off"))
             continue
+        if desc.startswith("Spotify volume"):
+            keys.append(("Volume keys", "Spotify volume down / up by 5"))
+            continue
         if desc.startswith("Xbox"):
             continue  # its own sheet
         for m in rule["manipulators"]:
