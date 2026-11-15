@@ -51,7 +51,10 @@ HAMMERSPOON_KEYS = {  # function bound to the key → (section, what it does)
     "summarizeAndNarrate": ("Ruby & narration", "Summarise the selection, then read it aloud"),
     "toggleConversationMode": ("Ruby & narration", "Conversation mode on / off"),
     "toggleRubySleepMode": ("Ruby & narration", "Ruby asleep / awake"),
-    "M.toggle": ("Screen", "Goodnight: black screen, desk lights off, Ruby asleep (also 🌙 in the menu bar)"),
+    "M.toggle": ("Screen", "Goodnight: black screen, desk lights off, Ruby asleep"),
+    "M.saveTab": ("Screen", "Save the page in front to the lankar link inbox"),
+    "M.saveWindow": ("Screen", "Save every tab of the front Chrome or Safari window to lankar, then close it"),
+    "M.showResume": ("Screen", "List what you were in the middle of (lankar resume)"),
     'open("next")': ("VLC (spela)", "Next episode"),
     'open("home")': ("VLC (spela)", "spela's home page"),
 }
@@ -75,6 +78,8 @@ def karabiner_rows():
             frm = m["from"]
             if "pointing_button" in frm:
                 mouse.append(MOUSE[frm["pointing_button"]])
+            elif frm.get("consumer_key_code") == "mute":
+                keys.append(("Mute key", "Loft fan on / off"))
             elif frm.get("key_code") == "non_us_backslash":
                 mod = frm["modifiers"]["mandatory"][0]
                 keys.append(SECTION_KEY[mod])

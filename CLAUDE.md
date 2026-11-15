@@ -231,6 +231,21 @@ When designing shortcut phrases, follow these principles:
 
 **Polling rate bottleneck** (March 2026): Karabiner's VirtualHIDPointing device has `ReportInterval = 8000` (8000µs = 125Hz). The Viper 8KHz natively polls at 8000Hz — enabling "Modify events" causes a **64x polling rate reduction** (8000Hz → 125Hz). **Decision**: Disabled mouse interception; native 8KHz feel is worth more than button remapping. Use Caps+2/3 keyboard shortcuts instead.
 
+## Logitech MX Keys Mini top row (measured 2026-11-15, Karabiner-EventViewer, receiver 1133/50504)
+
+Method: EventViewer needs Input Monitoring enabled by hand (System Settings → Privacy & Security; the one-time dialog does not return once dismissed), then Capture Input Events with the key pressed. Fn is handled in the keyboard's firmware, so Karabiner never sees it.
+
+| Key | Karabiner sees | Bindable |
+|---|---|---|
+| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | yes, cleanly |
+| Screenshot | Cmd+Shift+4 chord | only as that chord |
+| Emoji | Cmd+Ctrl+Space chord | only as that chord (also fires on a hand-typed chord) |
+| Two other keys | a bare left Ctrl tap | no (same as a real Ctrl) |
+| F1–F3 (Easy-Switch) | nothing; the keyboard switches Bluetooth device itself | no |
+| Backlight | nothing seen | no |
+
+In use: `mute` toggles the loft fan (`~/.local/bin/loft-fan`, rule "Loft fan: mute key toggles it" in `karabiner.json`). Karabiner's own Logitech page says `fn_function_keys` remaps can swallow Logitech function keys; not needed here.
+
 ## Xbox Controller Integration
 
 See `docs/xbox_button_reference.md` for full documentation including visual layout and session learnings.
