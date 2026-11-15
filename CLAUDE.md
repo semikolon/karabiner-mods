@@ -237,7 +237,7 @@ Method: EventViewer needs Input Monitoring enabled by hand (System Settings → 
 
 | Key | Karabiner sees | Bindable |
 |---|---|---|
-| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up: yes, bound to Spotify (works); mute: a rule did not fire (see below); play/pause: untested |
+| Play/pause, mute, volume down, volume up | `consumer_key_code` `play_or_pause`, `mute`, `volume_decrement`, `volume_increment` | volume down/up: yes, bound to Spotify (works); mute: a rule never fired (see below); play/pause: untested |
 | Screenshot | Cmd+Shift+4 chord | only as that chord |
 | Emoji | Cmd+Ctrl+Space chord | only as that chord (also fires on a hand-typed chord) |
 | F6 (dictation icon) | two bare left Ctrl taps, about 75 ms apart | yes, as a double tap within 250 ms (in use, works) |
@@ -245,7 +245,7 @@ Method: EventViewer needs Input Monitoring enabled by hand (System Settings → 
 | F1–F3 (Easy-Switch) | nothing; the keyboard switches Bluetooth device itself | no |
 | Backlight | nothing seen | no |
 
-In use: the volume keys step Spotify's volume by 5 (`~/.local/bin/spotify-volume`, rule "Spotify volume"; verified 2026-11-15, the desk's digital output ignores the macOS volume). F6 toggles the loft fan (`~/.local/bin/loft-fan`, rule "Loft fan: the F6 key (two quick Ctrl taps) toggles it" in `karabiner.json`; verified 2026-11-15). A rule on `mute` ("Loft fan: mute key toggles it") is loaded but did not fire, though EventViewer shows the key and the shell path works; cause unknown. Tried: closing EventViewer, restarting the core service, enabling Modify events on the receiver's mouse-type entry. Karabiner's own Logitech page says `fn_function_keys` remaps can swallow Logitech function keys; not needed here.
+In use: the volume keys step Spotify's volume by 5 (`~/.local/bin/spotify-volume`, rule "Spotify volume"; verified 2026-11-15, the desk's digital output ignores the macOS volume). F6 toggles the loft fan (`~/.local/bin/loft-fan`, rule "Loft fan: the F6 key (two quick Ctrl taps) toggles it" in `karabiner.json`; verified 2026-11-15). A rule on `mute` never fired (removed 2026-11-15): EventViewer shows the key as `consumer_key_code` `mute`, volume up/down on the same keyboard fire, and the shell path works, so the cause is unknown. Tried: closing EventViewer, restarting the core service, Modify events on the receiver's mouse-type entry (volume keys work without it), a distinct log marker (no line written). Karabiner's own Logitech page says `fn_function_keys` remaps can swallow Logitech function keys; not needed here.
 
 ## Xbox Controller Integration
 
